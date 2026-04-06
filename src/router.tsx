@@ -1,17 +1,22 @@
-import { createBrowserRouter } from "react-router-dom"
+import { lazy } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { RootLayout } from "./layouts/RootLayout";
-import { HomePage } from "./pages/HomePage";
-import { AboutPage } from "./pages/AboutPage/index.tsx";
-import { FavoritesPage } from "./pages/FavoritesPage";
-import { LotPage } from "./pages/LotPage";
+import { ErrorPage } from "./pages/ErrorPage";
 
-export const router = createBrowserRouter([{
+const HomePage = lazy(() => import("./pages/HomePage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const FavoritesPage = lazy(() => import("./pages/FavoritesPage"));
+const LotPage = lazy(() => import("./pages/LotPage"));
+
+const router = createBrowserRouter([{
   path: '/',
   element: <RootLayout />,
   children: [
     {
       index: true,
       element: <HomePage />,
+      errorElement: <ErrorPage />,
+      // loader: TODO
     },
     {
       path: 'about',
@@ -24,6 +29,11 @@ export const router = createBrowserRouter([{
     {
       path: 'lot/:id',
       element: <LotPage />,
+      // loader: TODO
     },
   ],
 }]);
+
+export function Router() {
+  return <RouterProvider router={router} />;
+}

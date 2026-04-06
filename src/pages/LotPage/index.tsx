@@ -1,3 +1,5 @@
-export const LotPage = () => {
+const LotPage = () => {
   return <>Lot PAGE</>
 }
+
+export default LotPage;
