@@ -35,7 +35,7 @@ npm run dev
 
 ## Documentation
 
-Check out this project's documentation [here](./src/doc/README.md)
+Check out this project's documentation [here](./src/docs/README.md)
 
 ## Usefull links / references:
 
