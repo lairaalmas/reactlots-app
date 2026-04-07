@@ -29,16 +29,18 @@ This project was created for portfolio and educational purpuses. This documentat
   - [3 Folder Structures in React I’ve Used — And Why Feature-Based Is My Favorite (2025)](https://asrulkadir.medium.com/3-folder-structures-in-react-ive-used-and-why-feature-based-is-my-favorite-e1af7c8e91ec)
 
 ```
-src/
-├── app
-├── docs
+app/
 ├── components
+├── docs
 ├── hooks
 ├── layouts
 ├── pages
 ├── services
 ├── types
 └── utils
+
+api/
+└── TBD
 ```
 
 - `app`: global config, routes, providers
@@ -55,10 +57,7 @@ src/
 - `utils`: pure helpers
 
 ```
-src/
-├── app/
-│   ├── routes.tsx
-│   └── paths.ts
+app/
 ├── components/
 │   ├── Footer/index.tsx ✅
 │   ├── Header/index.tsx ✅
