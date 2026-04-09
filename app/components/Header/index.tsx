@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 
-export const Header = () => {
+export const Header = () => {;
   return <>
     <header>Header COMPONENT</header>
     <nav>
-      <Link to="/">Home</Link>
-      <Link to="/favorites">Favorites</Link>
-      <Link to="/about">About</Link>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/favorites">Favorites</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/lots/1">Mock search lot</Link></li>
+      </ul>
     </nav>
   </>;
 }
