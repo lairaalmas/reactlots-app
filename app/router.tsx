@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import { RootLayout } from "./layouts/RootLayout";
 import { ErrorPage } from "./pages/ErrorPage";
+import { getLotById } from "../api/requests/getLots";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -27,9 +28,15 @@ const router = createBrowserRouter([{
       element: <FavoritesPage />,
     },
     {
-      path: 'lot/:id',
+      path: 'lots/:id',
       element: <LotPage />,
-      // loader: TODO
+      loader: async ({ params }) => {
+        const { id } = params;
+        if (!id) {
+          throw new Response("Lot id is required", { status: 400 });
+        }
+        return getLotById(id);
+      }
     },
   ],
 }]);
