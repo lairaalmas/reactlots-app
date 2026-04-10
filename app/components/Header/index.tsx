@@ -12,7 +12,6 @@ export const Header = () => {;
           <Link className="nav-link" to="/">Home</Link>
           <Link className="nav-link" to="/favorites">Favorites</Link>
           <Link className="nav-link" to="/contact">Contact</Link>
-          <Link className="nav-link" to="/lots/1">Mock search lot</Link>
         </nav>
       </div>
     </header>
