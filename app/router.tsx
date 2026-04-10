@@ -5,7 +5,7 @@ import { ErrorPage } from "./pages/ErrorPage";
 import { getLotById } from "../api/requests/getLots";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
-const AboutPage = lazy(() => import("./pages/AboutPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 const FavoritesPage = lazy(() => import("./pages/FavoritesPage"));
 const LotPage = lazy(() => import("./pages/LotPage"));
 
@@ -20,8 +20,8 @@ const router = createBrowserRouter([{
       // loader: TODO
     },
     {
-      path: 'about',
-      element: <AboutPage />,
+      path: 'contact',
+      element: <ContactPage />,
     },
     {
       path: 'favorites',
