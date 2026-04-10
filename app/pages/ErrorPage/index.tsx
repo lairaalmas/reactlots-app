@@ -1,6 +1,10 @@
+import { useRouteError } from "react-router-dom";
+
 export const ErrorPage = () => {
-  return <div>
-    <h2>Oops! Something is not right <span className="bi bi-wrench-adjustable text-danger"></span></h2>
+  const error = useRouteError();
+
+  return <div className="d-flex flex-column align-items-center">
+    <h2>Woops! An error occured :(</h2>
     <p>We're so sorry!</p>
   </div>;
 };
