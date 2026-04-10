@@ -23,6 +23,12 @@ export type Lot = {
     floors: number;
   },
   imageUrl: string;
-  worldTitle: string;
-  neighborhoodTitle: string;
+  world: {
+    id: string;
+    title: string;
+  },
+  neighborhood: {
+    id: string;
+    title: string;
+  }
 };

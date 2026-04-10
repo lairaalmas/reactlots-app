@@ -20,8 +20,14 @@ export const mapLot = (dto: LotDTO): Lot => {
         floors: dto.lot_details.floors,
     },
     imageUrl: dto.image_url,
-    worldTitle: dto.world_title,
-    neighborhoodTitle: dto.neighborhood_title,
+    world: {
+      id: dto.world.id,
+      title: dto.world.title,
+    },
+    neighborhood: {
+      id: dto.neighborhood.id,
+      title: dto.neighborhood.title,
+    }
   };
 };
 
