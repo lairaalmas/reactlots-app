@@ -1,3 +1,3 @@
 export const PageLoader = () => {
-  return <span>Loading... COMPONENT</span>;
+  return <span>Loading...</span>;
 };

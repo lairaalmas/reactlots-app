@@ -1,17 +1,11 @@
-import { Outlet } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import { Suspense } from "react";
-import { PageLoader } from "../../components/PageLoader";
+import { PageContent } from "../../components/PageContent";
 
 export const RootLayout = () => {
-  return <div>
+  return <div className="d-flex flex-column min-vh-100">
     <Header />
-    <main>
-      <Suspense fallback={<PageLoader />}>
-        <Outlet/>
-      </Suspense>
-    </main>
+    <PageContent />
     <Footer />
   </div>;
 }
