@@ -12,29 +12,21 @@
   --color-white-200: #E0DEDD;
   --color-white-400: #6D747A;
 }
-
 body {
   color: var(--color-brand-blue);
 }
-
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, .rl-header, .sims-font {
   font-family: 'Phudu', sans-serif;
 }
+.sims-green {
+  color: var(--color-brand-green-light)
+}
 
-footer {
+.rl-footer {
   font-family: 'Arial', sans-serif;
   background: var(--color-brand-blue);
 }
-footer a {
-  color: var(--color-white);
-}
 
-.material-symbols-rounded,
-.material-symbols-outlined,
-.material-symbols-sharp {
+.material-symbols-rounded{
   font-size: inherit;
-}
-
-.sims-green {
-  color: var(--color-brand-green-light)
 }

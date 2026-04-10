@@ -6,9 +6,9 @@ const LotPage = () => {
   const lot = useLoaderData() as Lot;
 
   const infoList = [
-    {icon: 'hotel', value: lot.lotDetails.bedrooms, title: 'Bedrooms'},
-    {icon: 'shower', value: lot.lotDetails.bathrooms, title: 'Bathrooms'},
-    {icon: 'layers', value: lot.lotDetails.floors, title: 'Floors'},
+    {icon: 'hotel', value: lot.lotDetails.bedrooms, ariaLabel: 'Bedrooms'},
+    {icon: 'shower', value: lot.lotDetails.bathrooms, ariaLabel: 'Bathrooms'},
+    {icon: 'layers', value: lot.lotDetails.floors, ariaLabel: 'Floors'},
   ];
 
   return <section className="d-flex flex-column">
@@ -19,7 +19,7 @@ const LotPage = () => {
           <span className="material-symbols-rounded">location_on</span>{lot.neighborhood} ({lot.world})
         </small>
       </div>
-      <span className="h1">
+      <span className="h1 sims-font">
         <span className="sims-green">{CURRENCY_SYMBOL}</span> {lot.price}</span>
     </header>
 
@@ -27,12 +27,12 @@ const LotPage = () => {
       <img className="img-fluid" src={lot.imageUrl} alt={lot.title}/>
     </div>
 
-    <div>
+    <div className="sims-font">
       <ul className="list-inline d-flex gap-2 justify-content-between align-items-center">
         <div className="d-flex gap-3 list-unstyled">
           {infoList.map((info) => (
             <li key={info.icon} className="d-flex align-items-center gap-1">
-              <span className="material-symbols-rounded">{info.icon}</span>
+              <span className="material-symbols-rounded" title={info.ariaLabel} aria-label={info.ariaLabel}>{info.icon}</span>
               <span>{info.value}</span>
             </li>
           ))}
@@ -43,7 +43,7 @@ const LotPage = () => {
 
     {/* <p>{lot.type} lot</p> */}
 
-    <p>{lot.description}</p>
+    <p><strong>About lot:</strong> {lot.description}</p>
   </section>
 }
 

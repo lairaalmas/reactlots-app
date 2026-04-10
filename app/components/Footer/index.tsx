@@ -1,10 +1,10 @@
 export const Footer = () => {
-  return <footer className="border-top text-white">
+  return <footer className="rl-footer border-top text-white">
     <div className="container py-3">
       <div className="border-bottom pb-3">
         <span className="d-flex gap-2">
           <span className="bi bi-house-fill sims-green"></span>
-          REACTLOTS
+          <span className="sims-font">REACTLOTS</span>
         </span>
       </div>
       <div className="pt-3">
