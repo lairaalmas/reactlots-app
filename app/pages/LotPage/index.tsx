@@ -16,7 +16,7 @@ const LotPage = () => {
       <div className="d-flex flex-column mb-2">
         <h2>{lot.title}</h2>
         <small className="d-flex align-items-center">
-          <span className="material-symbols-rounded">location_on</span>{lot.neighborhood} ({lot.world})
+          <span className="material-symbols-rounded">location_on</span>{lot.neighborhoodTitle} ({lot.worldTitle})
         </small>
       </div>
       <span className="h1 sims-font">

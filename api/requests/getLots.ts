@@ -1,5 +1,5 @@
 import { mockGetLotsResponse, mockGetLotByIdResponse } from "../mocks/lots";
-import { mapLots, mapLot } from "../mapper/lot";
+import { mapLots, mapLot } from "../mappers/lot";
 
 const mockDelay = (ms: number) => {
   new Promise((resolve) => setTimeout(resolve, ms));

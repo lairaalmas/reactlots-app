@@ -18,8 +18,8 @@ const mockData: LotDTO = {
     floors: 1,
   },
   image_url: 'https://static.wikia.nocookie.net/sims/images/6/6c/Daisy_Hovel.png/revision/latest?cb=20140913000538',
-  world: 'Willow Creek',
-  neighborhood: 'Foundry cove',
+  world_title: 'Willow Creek',
+  neighborhood_title: 'Foundry cove',
 };
 
 export const mockGetLotsResponse: { data: LotDTO[] } = {
