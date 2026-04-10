@@ -16,7 +16,7 @@ const router = createBrowserRouter([{
     {
       index: true,
       element: <HomePage />,
-      errorElement: <ErrorPage />,
+      // errorElement: <ErrorPage />,
       // loader: TODO
     },
     {
@@ -36,8 +36,13 @@ const router = createBrowserRouter([{
           throw new Response("Lot id is required", { status: 400 });
         }
         return getLotById(id);
-      }
+      },
+      errorElement: <ErrorPage />,
     },
+    {
+      path: '*',
+      element: <ErrorPage/>
+    }
   ],
 }]);
 
