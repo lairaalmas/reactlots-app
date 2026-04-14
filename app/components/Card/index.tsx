@@ -5,14 +5,14 @@ export const Card = ({ lot }: any) => {
   return <div className="row my-4">
     <div className="col-4">
       <Link to={`/lots/${lot?.id}`}>
-       <img className="rlt-search-list__item__thumb" src={lot.imageUrl} alt={`${lot?.title} lot picture`}/>
+        <img className="rlt-search-list__item__thumb" src={lot.imageUrl} alt={`${lot?.title} lot picture`}/>
       </Link>
     </div>
     <div className="col-8">
       <header className="container">
         <small>{lot?.isEmptyLot ? 'Empty lot' : lot?.type}</small>
         <h3>
-          <Link to={`/lots/${lot?.id}`}>
+          <Link className="link-underline link-underline-opacity-0" to={`/lots/${lot?.id}`}>
             {lot?.title}  
           </Link>
         </h3>

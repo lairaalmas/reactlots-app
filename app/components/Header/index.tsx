@@ -11,9 +11,9 @@ export const Header = () => {;
           </Link>
         </h1>
         <nav className="nav">
-          <Link className="nav-link" to="/">Home</Link>
-          <Link className="nav-link" to="/favorites">Favorites</Link>
-          <Link className="nav-link" to="/contact">Contact</Link>
+          <Link className="nav-link link-secondary" to="/">Home</Link>
+          <Link className="nav-link link-secondary" to="/favorites">Favorites</Link>
+          <Link className="nav-link link-secondary" to="/contact">Contact</Link>
         </nav>
       </div>
     </header>
