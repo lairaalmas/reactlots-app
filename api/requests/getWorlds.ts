@@ -10,9 +10,3 @@ export const getWorlds = async () => {
   const response = mockGetWorldsResponse();
   return mapWorlds(response.data);
 }
-
-// export const getWorldById = async (id: string) => {
-//   await mockDelay(300);
-//   const response = mockGetWorldByIdResponse(id);
-//   return mapWorld(response.data);
-// }

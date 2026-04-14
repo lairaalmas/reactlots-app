@@ -50,6 +50,6 @@ export type Lot = {
 };
 
 export type LotSearchFilters = {
-  world: string;
-  neighborhood: string;
+  worldId: string;
+  neighborhoodId: string;
 }

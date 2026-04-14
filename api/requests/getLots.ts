@@ -1,12 +1,11 @@
 import { mockGetLotsResponse, mockGetLotByIdResponse } from "../mocks/utils";
 import { mapLots, mapLot } from "../mappers/lot";
-import type { LotSearchFilters } from "../../app/types/lot";
 
 const mockDelay = (ms: number) => {
   new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export const getLots = async ({ world = '', neighborhood = '' }: LotSearchFilters) => {
+export const getLots = async ({ world = '', neighborhood = '' }: any) => {
   await mockDelay(200);
   // mock all
   // mock filtered lots

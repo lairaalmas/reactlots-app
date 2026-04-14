@@ -26,16 +26,17 @@ export const homePageLoader = async ({ request, params }: any): Promise<HomePage
   // read params 
   const url = new URL(request.url);
   const filters: LotSearchFilters = {
-    world: url.searchParams.get('world') || '',
-    neighborhood: url.searchParams.get('neighborhood') || '',
+    worldId: url.searchParams.get('world') || '',
+    neighborhoodId: url.searchParams.get('neighborhood') || '',
   };
     
-  // extract worlds and neighborhoods
+  // get all worlds
   const worlds: World[] = await getWorlds();
-  const neighborhoods: Neighborhood[] = await getNeighborhoods();
+  // get all OR neighborhoods from world
+  const neighborhoods: Neighborhood[] = await getNeighborhoods({ world: filters.worldId }); 
   
   // get filtered lots
-  const lots: Lot[] = await getLots({ world: filters.world, neighborhood: filters.neighborhood });
+  const lots: Lot[] = await getLots({ world: filters.worldId, neighborhood: filters.neighborhoodId });
 
   // return all + filter
   return {

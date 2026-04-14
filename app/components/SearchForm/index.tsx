@@ -1,97 +1,81 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import type { Neighborhood } from "../../types/neighborhood";
 import type { World } from "../../types/world";
-
-type FilterDataSelectionFields = {
-  label: string;
-  defaultSelection: string;
-  items: World[] | Neighborhood[] | [];
-}
-type FilterData = {
-  world: FilterDataSelectionFields,
-  neighborhood: FilterDataSelectionFields,
-}
 
 export const SearchForm = () => {
   const { worlds, neighborhoods, filters } = useLoaderData();
   const navigate = useNavigate();
 
-  const [selectedWorld, setSelectedWorld] = useState(filters?.world ?? '');
-  const [selectedNeighborhood, setSelectedNeighborhood] = useState(filters?.neighborhood ?? '');
+  const [selectedWorldId, setSelectedWorldId] = useState(filters?.worldId ?? '');
+  const [selectedNeighborhoodId, setSelectedNeighborhoodId] = useState(filters?.neighborhoodId ?? '');
 
-  const filterData: FilterData = {
-    world: {
-      label: 'World',
-      defaultSelection: 'All',
-      items: worlds || [],
-    },
-    neighborhood: { 
-      label: "Neighbordhood",
-      defaultSelection: 'All',
-      items: neighborhoods || [],
-    }
-  };
+  const defaultSelection = 'All';
 
-  const { world, neighborhood: neigh } = filterData;
+  const filteredNeighborhood = useMemo(() => {
+    if (!selectedWorldId) return neighborhoods;
+    return neighborhoods.filter((item: Neighborhood) => item.world.id === selectedWorldId)
+  }, [selectedWorldId, neighborhoods])
 
   const handleWorldChange = (id: string) => {
-    setSelectedWorld(id);
-    setSelectedNeighborhood('');
+    setSelectedWorldId(id);
+    setSelectedNeighborhoodId(''); 
   }
   const handleNeighborgoodChange = (id: string) => {
-    setSelectedNeighborhood(id);
+    setSelectedNeighborhoodId(id);
   }
-  const handleClear = () => {
-    setSelectedWorld('');
-    setSelectedNeighborhood('');
-    navigate('/');
-  }
+  // const handleClear = () => {
+  //   setSelectedWorldId('');
+  //   setSelectedNeighborhoodId('');
+  //   navigate('/');
+  // }
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const params = new URLSearchParams();
 
-    if (selectedWorld) params.set('world', selectedWorld);
-    if (selectedNeighborhood) params.set('neighborhood', selectedNeighborhood);
+    if (selectedWorldId) params.set('world', selectedWorldId);
+    if (selectedNeighborhoodId) params.set('neighborhood', selectedNeighborhoodId);
 
     const queryString = params.toString();
     navigate(queryString ? `/?${queryString}` : '/');
   }
 
-  return <form className="sims-font d-flex flex-column gap-3" onSubmit={handleSubmit}>
-    <div>
-      <label htmlFor={world.label}>{world.label}</label>
-      
-      <select className="form-select" id={world.label} value={selectedWorld || ''} onChange={(event) => handleWorldChange(event.target.value)}>
-        <option value="">{world.defaultSelection}</option>
+  return <form className="sims-font" onSubmit={handleSubmit}>
+    <div className="row">
+      <div className="col-4">
+        <label htmlFor="field-world">World</label>
+        
+        <select className="form-select" id="field-world" value={selectedWorldId || ''} onChange={(event) => handleWorldChange(event.target.value)}>
+          <option value="">{defaultSelection}</option>
 
-        {world.items.map((item) => (
-          <option key={item.id} value={item.id}>{item.title}</option>
-        ))}
-      </select>
+          {(worlds || [])?.map((item: World) => (
+            <option key={item.id} value={item.id}>{item.title}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="col-4">
+        <label htmlFor="field-neigh">Neighborhood</label>
+
+        <select className="form-select" id="Neighborhood" value={selectedNeighborhoodId || ''} onChange={(event) => handleNeighborgoodChange(event.target.value)}>
+          <option value="">{defaultSelection}</option>
+
+          {(filteredNeighborhood || [])?.map((item: Neighborhood) => (
+            <option key={item.id} value={item.id}>{item.title} ({item.world.id})</option>
+          ))}
+        </select>
+      </div>
     </div>
 
-    <div>
-      <label htmlFor={neigh.label}>{neigh.label}</label>
-
-      <select className="form-select" id={neigh.label} value={selectedNeighborhood || ''} onChange={(event) => handleNeighborgoodChange(event.target.value)}>
-        <option value="">{neigh.defaultSelection}</option>
-
-        {neigh.items.map((item) => (
-          <option key={item.id} value={item.id}>{item.title}</option>
-        ))}
-      </select>
-    </div>
-
-    <div>
+    <div className="d-flex justify-content-center mt-3">
       <button type="submit" className="btn bg-info me-2">Search</button>
-      <button
+      {/* <button
         type="button"
         className="btn btn-outline-secondary"
         onClick={handleClear}
       >
         Clear
-      </button>
+      </button> */}
     </div>
   </form>
 };

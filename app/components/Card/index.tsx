@@ -10,7 +10,7 @@ export const Card = ({ lot }: any) => {
         </li>
       </div>
       <div className="col-8">
-        <li>{lot?.type}</li>
+        <li>{lot?.isEmptyLot ? 'Empty lot' : lot?.type}</li>
         <h3>
           <Link to={`/lots/${lot?.id}`}>
             {lot?.title}  
@@ -20,18 +20,20 @@ export const Card = ({ lot }: any) => {
         <li className="mt-3"><small><strong>Description:</strong> {lot?.description}</small></li>
         <li className="mt-3">{CURRENCY_SYMBOL} {lot?.price}</li>
         <div className="mt-3 d-flex gap-3">
-          <li className="d-flex gap-1 align-items-center">
-            <span className="material-symbols-rounded" title='Bedrooms' aria-label="Bedrooms">hotel</span>
-            {lot?.lotDetails?.bedrooms}
-          </li> 
-          <li className="d-flex gap-1 align-items-center">
-            <span className="material-symbols-rounded" title='Bathrooms' aria-label="Bathrooms">shower</span>
-            {lot?.lotDetails?.bathrooms}
-          </li> 
-          <li className="d-flex gap-1 align-items-center">
-            <span className="material-symbols-rounded" title='Floors' aria-label="Floors">layers</span>
-            {lot?.lotDetails?.floors}
-          </li>
+          {!lot?.isEmptyLot && <>
+            <li className="d-flex gap-1 align-items-center">
+              <span className="material-symbols-rounded" title='Bedrooms' aria-label="Bedrooms">hotel</span>
+              {lot?.lotDetails?.bedrooms}
+            </li> 
+            <li className="d-flex gap-1 align-items-center">
+              <span className="material-symbols-rounded" title='Bathrooms' aria-label="Bathrooms">shower</span>
+              {lot?.lotDetails?.bathrooms}
+            </li> 
+            <li className="d-flex gap-1 align-items-center">
+              <span className="material-symbols-rounded" title='Floors' aria-label="Floors">layers</span>
+              {lot?.lotDetails?.floors}
+            </li>
+          </>}
           <li>
             {lot?.lotDetails?.dimensions?.width} &times; {lot?.lotDetails?.dimensions?.depth}
           </li>
