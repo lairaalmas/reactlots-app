@@ -19,6 +19,12 @@ export type LotDTO = {
     floors: number;
   },
   image_url: string;
-  world: string;
-  neighborhood: string;
+  world: {
+    id: string;
+    title: string;
+  };
+  neighborhood: {
+    id: string;
+    title: string;
+  };
 };

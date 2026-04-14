@@ -1,13 +1,16 @@
-const HomePage = () => <>
-  <section>
-    <h2>Banner</h2>
+import { Banner } from "../../components/Banner";
+import { SearchForm } from "../../components/SearchForm";
+import { SearchResults } from "../../components/SearchResults";
+
+const HomePage = () => <div className="d-flex flex-column">
+  <Banner world='wc' aria-hidden="true"/>
+  <section className="container-flex rlt-search__container">
+    <SearchForm />
   </section>
-  <section>
-    <h2>Search</h2>
+  <section className="container my-5">
+    <h2>Search Results</h2>
+    <SearchResults />
   </section>
-  <section>
-    <h2>Results</h2>
-  </section>
-</>;
+</div>;
 
 export default HomePage;
