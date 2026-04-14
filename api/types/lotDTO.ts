@@ -1,4 +1,4 @@
-import type { LotType } from "../../app/types/lot";
+import type { LotType } from '../../app/types/lot';
 
 // DTO (Data Transfer Object) - represent the shape returned by the API (snake_case)
 export type LotDTO = {
@@ -13,11 +13,11 @@ export type LotDTO = {
     dimensions: {
       width: number;
       depth: number;
-    }
+    };
     bedrooms: number;
     bathrooms: number;
     floors: number;
-  },
+  };
   image_url: string;
   world: {
     id: string;

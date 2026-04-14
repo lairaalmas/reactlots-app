@@ -38,7 +38,7 @@ const mockData: NeighborhoodDTO[] = [
       id: 'oasis-springs',
       title: 'Oasis Springs',
     },
-  }
+  },
 ];
 
 export default mockData;

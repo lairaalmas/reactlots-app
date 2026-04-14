@@ -1,3 +1,3 @@
-import type { Neighborhood } from "../../app/types/neighborhood";
+import type { Neighborhood } from '../../app/types/neighborhood';
 
 export type NeighborhoodDTO = Neighborhood;
