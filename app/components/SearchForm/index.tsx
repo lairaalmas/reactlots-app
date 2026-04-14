@@ -65,18 +65,6 @@ export const SearchForm = () => {
           ))}
         </select>
       </div>
-
-      <div className="col-4">
-        <label htmlFor="field-">Label</label>
-
-        <select className="form-select" id="" value={selectedNeighborhoodId || ''} onChange={(event) => console.log('handleChange')}>
-          <option value="">{defaultSelection}</option>
-
-          {([])?.map((item: any) => (
-            <option key={item.id} value={item.id}>{item.title} ({item.world.id})</option>
-          ))}
-        </select>
-      </div>
     </div>
 
     <div className="d-flex justify-content-center">
