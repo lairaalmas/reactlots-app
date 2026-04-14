@@ -1,6 +1,7 @@
 import type { NeighborhoodDTO } from '../types/neighborhoodDTO';
 
 const mockData: NeighborhoodDTO[] = [
+  // fc
   {
     id: 'foundry-cove',
     title: 'Foundry cove',
@@ -19,6 +20,7 @@ const mockData: NeighborhoodDTO[] = [
       title: 'Willow Creek',
     },
   },
+  // os
   {
     id: 'bedrock-strait',
     title: 'Bedrock Strait',

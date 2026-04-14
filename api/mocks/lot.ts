@@ -1,6 +1,7 @@
 import type { LotDTO } from '../types/lotDTO';
 
 const mockData: LotDTO[] = [
+  // os
   {
     id: 'daisy-hovel',
     title: 'Daisy Hovel',
@@ -28,7 +29,8 @@ const mockData: LotDTO[] = [
       title: 'Vista Quarry',
     },
   },
-    {
+  // wc
+  {
     id: 'vista-quarry',
     title: 'Vista Quarry',
     description: 'Vista Quarry is an uninhabited lot in Parched Prospect. It is a one-story building, featuring two bedrooms, one bathroom and a study.',
