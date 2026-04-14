@@ -1,5 +1,5 @@
-import type { Lot } from "../../app/types/lot";
-import type { LotDTO } from "../types/lotDTO";
+import type { Lot } from '../../app/types/lot';
+import type { LotDTO } from '../types/lotDTO';
 
 export const mapLot = (dto: LotDTO): Lot => {
   return {
@@ -11,13 +11,13 @@ export const mapLot = (dto: LotDTO): Lot => {
     isEmptyLot: dto.is_empty_lot,
     isAvailable: dto.is_available,
     lotDetails: {
-        dimensions: {
-            width: dto.lot_details.dimensions.width,
-            depth: dto.lot_details.dimensions.depth,
-        },
-        bedrooms: dto.lot_details.bedrooms,
-        bathrooms: dto.lot_details.bathrooms,
-        floors: dto.lot_details.floors,
+      dimensions: {
+        width: dto.lot_details.dimensions.width,
+        depth: dto.lot_details.dimensions.depth,
+      },
+      bedrooms: dto.lot_details.bedrooms,
+      bathrooms: dto.lot_details.bathrooms,
+      floors: dto.lot_details.floors,
     },
     imageUrl: dto.image_url,
     world: {
@@ -27,10 +27,10 @@ export const mapLot = (dto: LotDTO): Lot => {
     neighborhood: {
       id: dto.neighborhood.id,
       title: dto.neighborhood.title,
-    }
+    },
   };
 };
 
 export const mapLots = (lots: LotDTO[]): Lot[] => {
-    return lots.map(mapLot);
-}
+  return lots.map(mapLot);
+};

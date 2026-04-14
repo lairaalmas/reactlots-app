@@ -12,9 +12,9 @@ This project was created for portfolio and educational purpuses. This documentat
 
 ## Repositories
 
-- [reactlots-app](https://github.com/lairaalmas/reactlots-app) → Frontend + BFF layer 
+- [reactlots-app](https://github.com/lairaalmas/reactlots-app) → Frontend + BFF layer
   - 📍 You are here!
-- [reactlots-api](https://github.com/lairaalmas/reactlots-api) → Static data API 
+- [reactlots-api](https://github.com/lairaalmas/reactlots-api) → Static data API
   - ⚠️ WIP
 
 ## The innitial scaffolding of the project was built with [vite](https://vite.dev/)
@@ -23,7 +23,7 @@ This project was created for portfolio and educational purpuses. This documentat
 
 ## Folder structure (Folder by type)
 
-- About folder structures: 
+- About folder structures:
   - [React folder strucutre in 5 steps (2025)](https://www.robinwieruch.de/react-folder-structure/)
   - [The Complete Guide to Folder Structures in React (2025 video)](https://www.youtube.com/watch?v=_bIJoOriBxA)
   - [3 Folder Structures in React I’ve Used — And Why Feature-Based Is My Favorite (2025)](https://asrulkadir.medium.com/3-folder-structures-in-react-ive-used-and-why-feature-based-is-my-favorite-e1af7c8e91ec)
