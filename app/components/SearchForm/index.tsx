@@ -72,7 +72,7 @@ export const SearchForm = () => {
         className="rlt-search__btn rlt-search__btn--primary" 
         type="submit"
       >
-        <span className="material-symbols-rounded" title='Bedrooms' aria-label="Bedrooms">search</span>
+        <span className="material-symbols-rounded" title='Search lots' aria-label="Search lots">search</span>
       </button>
 
       <button
@@ -80,7 +80,7 @@ export const SearchForm = () => {
         type="button"
         onClick={handleClear}
       >
-        <span className="material-symbols-rounded" title='Bedrooms' aria-label="Bedrooms">close</span>
+        <span className="material-symbols-rounded" title='Clear filters' aria-label="Clear filters">close</span>
       </button>
     </div>
   </form>

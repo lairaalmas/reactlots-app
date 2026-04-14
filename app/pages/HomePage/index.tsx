@@ -3,9 +3,7 @@ import { SearchForm } from "../../components/SearchForm";
 import { SearchResults } from "../../components/SearchResults";
 
 const HomePage = () => <div className="d-flex flex-column">
-  <section className="container-flex">
-    <Banner world='wc' />
-  </section>
+  <Banner world='wc' aria-hidden="true"/>
   <section className="container-flex rlt-search__container">
     <SearchForm />
   </section>
