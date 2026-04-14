@@ -1,19 +1,18 @@
-import { Link } from "react-router-dom";
+import { SearchForm } from "../../components/SearchForm";
+import { SearchResults } from "../../components/SearchResults";
 
-const HomePage = () => <>
+const HomePage = () => <div className="d-flex flex-column gap-5">
   <section>
     <h2>Banner</h2>
   </section>
   <section>
     <h2>Search Fields</h2>
-    <div>
-      <button className="btn my-3">mock click search</button>
-    </div>
+    <SearchForm />
   </section>
   <section>
     <h2>Search Results</h2>
-    <Link className="nav-link my-3 px-3" to="/lots/1">go to mocked lot</Link>
+    <SearchResults />
   </section>
-</>;
+</div>;
 
 export default HomePage;

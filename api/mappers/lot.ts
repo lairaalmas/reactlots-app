@@ -31,6 +31,6 @@ export const mapLot = (dto: LotDTO): Lot => {
   };
 };
 
-export const mapLots = (dtos: LotDTO[]): Lot[] => {
-    return dtos.map(mapLot);
+export const mapLots = (lots: LotDTO[]): Lot[] => {
+    return lots.map(mapLot);
 }
