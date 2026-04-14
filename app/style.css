@@ -93,6 +93,12 @@ h1, h2, h3, h4, h5, h6, .sims-font {
   height: 100%;
   object-fit: cover;
 }
+.rlt-search-list__item__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
 
 /* Banner */
 .rlt-banner {

@@ -23,7 +23,7 @@ export const Card = ({ lot }: any) => {
           <span className="material-symbols-rounded">location_on</span> {lot?.neighborhood?.title}, {lot?.world?.title}
         </li>
         <li className="mt-3">
-          <p><strong>Description:</strong> {lot?.description}</p>
+          <p className="rlt-search-list__item__description"><strong>Description:</strong> {lot?.description}</p>
         </li>
         <li>
           <ul className="list-unstyled mt-3">
