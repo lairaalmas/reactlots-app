@@ -1,15 +1,15 @@
+import { Banner } from "../../components/Banner";
 import { SearchForm } from "../../components/SearchForm";
 import { SearchResults } from "../../components/SearchResults";
 
-const HomePage = () => <div className="d-flex flex-column gap-5">
+const HomePage = () => <div className="d-flex flex-column">
   <section>
-    <h2>Banner</h2>
+    <Banner world='wc' />
   </section>
-  <section>
-    <h2>Search Fields</h2>
+  <section className="rlt-search__container">
     <SearchForm />
   </section>
-  <section>
+  <section className="container my-5 py-5">
     <h2>Search Results</h2>
     <SearchResults />
   </section>

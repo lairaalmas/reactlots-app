@@ -24,11 +24,11 @@ export const SearchForm = () => {
   const handleNeighborgoodChange = (id: string) => {
     setSelectedNeighborhoodId(id);
   }
-  // const handleClear = () => {
-  //   setSelectedWorldId('');
-  //   setSelectedNeighborhoodId('');
-  //   navigate('/');
-  // }
+  const handleClear = () => {
+    setSelectedWorldId('');
+    setSelectedNeighborhoodId('');
+    navigate('/');
+  }
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const params = new URLSearchParams();
@@ -40,7 +40,7 @@ export const SearchForm = () => {
     navigate(queryString ? `/?${queryString}` : '/');
   }
 
-  return <form className="sims-font" onSubmit={handleSubmit}>
+  return <form className="sims-font rlt-search container" onSubmit={handleSubmit}>
     <div className="row">
       <div className="col-4">
         <label htmlFor="field-world">World</label>
@@ -65,17 +65,35 @@ export const SearchForm = () => {
           ))}
         </select>
       </div>
+
+      <div className="col-4">
+        <label htmlFor="field-">Label</label>
+
+        <select className="form-select" id="" value={selectedNeighborhoodId || ''} onChange={(event) => console.log('handleChange')}>
+          <option value="">{defaultSelection}</option>
+
+          {([])?.map((item: any) => (
+            <option key={item.id} value={item.id}>{item.title} ({item.world.id})</option>
+          ))}
+        </select>
+      </div>
     </div>
 
-    <div className="d-flex justify-content-center mt-3">
-      <button type="submit" className="btn bg-info me-2">Search</button>
-      {/* <button
+    <div className="d-flex justify-content-center">
+      <button 
+        className="rlt-search__btn rlt-search__btn--primary" 
+        type="submit"
+      >
+        <span className="material-symbols-rounded" title='Bedrooms' aria-label="Bedrooms">search</span>
+      </button>
+
+      <button
+        className="rlt-search__btn rlt-search__btn--secondary"
         type="button"
-        className="btn btn-outline-secondary"
         onClick={handleClear}
       >
-        Clear
-      </button> */}
+        <span className="material-symbols-rounded" title='Bedrooms' aria-label="Bedrooms">close</span>
+      </button>
     </div>
   </form>
 };

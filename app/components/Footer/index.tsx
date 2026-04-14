@@ -1,6 +1,6 @@
 export const Footer = () => {
-  return <footer className="rl-footer border-top text-white">
-    <div className="container py-3">
+  return <footer className="rlt-footer border-top text-white">
+    <div className="container py-4">
       <div className="border-bottom pb-3">
         <span className="d-flex gap-2">
           <span className="bi bi-house-fill sims-green"></span>

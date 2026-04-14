@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const Header = () => {;
   return <>
-    <header className="rl-header border-bottom py-3">
+    <header className="rlt-header border-bottom py-3">
       <div className="container d-flex align-items-center justify-content-between">
         <h1>
           <Link className="nav-link d-flex gap-2" to="/">

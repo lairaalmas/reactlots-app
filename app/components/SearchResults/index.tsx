@@ -7,7 +7,7 @@ export const SearchResults = () => {
 
   return <div>
     <ul className="list-unstyled">
-      {lots.map((lot: any) => <li className="border p-2" key={`card-${lot.id}`}>
+      {lots.map((lot: any) => <li className="border-bottom" key={`card-${lot.id}`}>
         <Card lot={lot} />
       </li>)}
     </ul>

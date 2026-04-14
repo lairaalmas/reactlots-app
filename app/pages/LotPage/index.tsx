@@ -11,7 +11,7 @@ const LotPage = () => {
     {icon: 'layers', value: lot.lotDetails.floors, ariaLabel: 'Floors'},
   ];
 
-  return <section className="d-flex flex-column">
+  return <section className="d-flex flex-column container my-5">
     <header className="d-flex justify-content-between align-items-top">
       <div className="d-flex flex-column mb-2">
         <h2>{lot.title}</h2>
