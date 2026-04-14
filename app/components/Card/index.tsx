@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import type { Lot } from "../../types/lot";
 import { CURRENCY_SYMBOL } from "../../utils/constants";
 
-export const Card = ({ lot }: any) => {
+export const Card = ({ lot }: { lot: Lot }) => {
   return <div className="row my-4">
     <div className="col-4">
       <Link to={`/lots/${lot?.id}`}>
@@ -35,18 +36,19 @@ export const Card = ({ lot }: any) => {
             </li>
             <li className="d-flex">
               <strong className="me-2">Caracteristics:</strong>
-              <ul className="list-unstyled d-flex gap-3">
+              
+              <ul className="list-unstyled d-flex gap-2">
                 <li className="d-flex gap-1 align-items-center">
                   <span className="material-symbols-rounded" title='Bedrooms' aria-label="Bedrooms">hotel</span>
-                  {lot?.lotDetails?.bedrooms}
+                  {lot?.lotDetails?.bedrooms || "-"}
                 </li> 
                 <li className="d-flex gap-1 align-items-center">
                   <span className="material-symbols-rounded" title='Bathrooms' aria-label="Bathrooms">shower</span>
-                  {lot?.lotDetails?.bathrooms}
+                  {lot?.lotDetails?.bathrooms || "-"}
                 </li> 
                 <li className="d-flex gap-1 align-items-center">
                   <span className="material-symbols-rounded" title='Floors' aria-label="Floors">layers</span>
-                  {lot?.lotDetails?.floors}
+                  {lot?.lotDetails?.floors || "-"}
                 </li> 
               </ul>
             </li>
