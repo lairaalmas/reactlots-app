@@ -1,8 +1,9 @@
 {
   "name": "reactlots-app",
-  "description": "Fictional diegetic real state app for The Sims 4",
+  "description": "Fictional, fan-made real state app for The Sims 4",
+  "author": "lairaalmas",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
