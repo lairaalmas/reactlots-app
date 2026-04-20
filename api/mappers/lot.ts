@@ -7,9 +7,6 @@ export const mapLot = (dto: LotDTO): Lot => {
     title: dto.title,
     description: dto.description,
     price: dto.price,
-    type: dto.type,
-    isEmptyLot: dto.is_empty_lot,
-    isAvailable: dto.is_available,
     lotDetails: {
       dimensions: {
         width: dto.lot_details.dimensions.width,
@@ -19,6 +16,9 @@ export const mapLot = (dto: LotDTO): Lot => {
       bathrooms: dto.lot_details.bathrooms,
       floors: dto.lot_details.floors,
     },
+    lotType: dto.lot_type,
+    buildingType: dto.building_type,
+    status: dto.status,
     imageUrl: dto.image_url,
     world: {
       id: dto.world.id,

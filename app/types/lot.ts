@@ -1,20 +1,20 @@
 // Readonly tuples of literal values (const assertion)
 export const LOT_TYPES = [
-  'Residential',
-  'Bar',
-  'Generic',
-  'Gym',
-  'Library',
-  'Lounge',
+  'residential',
+  'bar',
+  'generic',
+  'gym',
+  'library',
+  'lounge',
   'museum',
-  'National Park',
-  'Nightclub',
-  'Park',
-  'Playground',
-  'Pool',
-  'Vacation rental',
-  'Veterinary Clinic',
-  'Wedding Venue',
+  'national Park',
+  'nightclub',
+  'park',
+  'playground',
+  'pool',
+  'vacation rental',
+  'veterinary Clinic',
+  'wedding Venue',
 ] as const;
 
 // Union type derived from a tuple (indexed access type)
@@ -26,9 +26,6 @@ export type Lot = {
   title: string;
   description: string;
   price: number;
-  type: LotType;
-  isEmptyLot: boolean;
-  isAvailable: boolean;
   lotDetails: {
     dimensions: {
       width: number;
@@ -38,6 +35,9 @@ export type Lot = {
     bathrooms: number;
     floors: number;
   };
+  lotType: LotType;
+  buildingType: string;
+  status: string;
   imageUrl: string;
   world: {
     id: string;

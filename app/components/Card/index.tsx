@@ -12,7 +12,7 @@ export const Card = ({ lot }: { lot: Lot }) => {
       </div>
       <div className="col-8">
         <header className="container">
-          <small>{lot?.isEmptyLot ? 'Empty lot' : lot?.type}</small>
+          <small>{`${lot?.lotType} ${lot?.buildingType === 'empty_lot' ? `(${lot.buildingType})` : ''}`}</small>
           <h3>
             <Link className="link-underline link-underline-opacity-0" to={`/lots/${lot?.id}`}>
               {lot?.title}

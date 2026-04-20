@@ -6,9 +6,6 @@ export type LotDTO = {
   title: string;
   description: string;
   price: number;
-  type: LotType;
-  is_empty_lot: boolean;
-  is_available: boolean;
   lot_details: {
     dimensions: {
       width: number;
@@ -18,6 +15,9 @@ export type LotDTO = {
     bathrooms: number;
     floors: number;
   };
+  lot_type: LotType;
+  building_type: string;
+  status: string;
   image_url: string;
   world: {
     id: string;
