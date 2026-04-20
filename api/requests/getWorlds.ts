@@ -1,12 +1,18 @@
-import { mockGetWorldsResponse } from '../mocks/utils';
-import { mapWorlds } from '../mappers/world';
+import type { WorldDTO } from '../types/worldDTO';
+import { ENV } from '../config/env';
 
-const mockDelay = (ms: number) => {
-  new Promise((resolve) => setTimeout(resolve, ms));
-};
+export const getWorlds = async (): Promise<WorldDTO[]> => {
+  if (!ENV.BASE_URL) {
+    throw new Error('Missing BASE_URL');
+  }
 
-export const getWorlds = async () => {
-  await mockDelay(200);
-  const response = mockGetWorldsResponse();
-  return mapWorlds(response.data);
+  const url = `${ENV.BASE_URL}/worlds`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch worlds');
+  }
+
+  return response.json();
 };

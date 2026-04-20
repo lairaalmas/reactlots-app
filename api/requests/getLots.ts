@@ -1,21 +1,44 @@
-import { mockGetLotsResponse, mockGetLotByIdResponse } from '../mocks/utils';
-import { mapLots, mapLot } from '../mappers/lot';
+import type { LotDTO } from '../types/lotDTO';
+import { ENV } from '../config/env';
 
-const mockDelay = (ms: number) => {
-  new Promise((resolve) => setTimeout(resolve, ms));
+type GetLotsParams = {
+  world?: string;
+  neighborhood?: string;
 };
 
-export const getLots = async ({ world = '', neighborhood = '' }: any) => {
-  await mockDelay(200);
-  // mock all
-  // mock filtered lots
-  const response = mockGetLotsResponse();
-  return mapLots(response.data);
+export const getLots = async (params?: GetLotsParams): Promise<LotDTO[]> => {
+  const searchParams = new URLSearchParams();
+
+  if (params?.world) searchParams.append('world', params.world);
+  if (params?.neighborhood) searchParams.append('neighborhood', params.neighborhood);
+
+  if (!ENV.BASE_URL) {
+    throw new Error('Missing BASE_URL');
+  }
+
+  const url = `${ENV.BASE_URL}/lots?${searchParams.toString()}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch lots');
+  }
+
+  return response.json();
 };
 
 export const getLotById = async (id: string) => {
-  await mockDelay(300);
-  // mock selected lot
-  const response = mockGetLotByIdResponse(id);
-  return mapLot(response.data);
+  if (!ENV.BASE_URL) {
+    throw new Error('Missing BASE_URL');
+  }
+
+  const url = `${ENV.BASE_URL}/lots/${id}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch lot');
+  }
+
+  return response.json();
 };

@@ -1,15 +1,20 @@
 import type { Lot } from '../../app/types/lot';
 import type { LotDTO } from '../types/lotDTO';
 
+export const setFirstUpperCase = (txt: string) => {
+  if (!txt || typeof txt !== 'string') {
+    return '';
+  }
+
+  return txt.charAt(0).toUpperCase() + txt.slice(1);
+};
+
 export const mapLot = (dto: LotDTO): Lot => {
   return {
     id: dto.id,
     title: dto.title,
     description: dto.description,
     price: dto.price,
-    type: dto.type,
-    isEmptyLot: dto.is_empty_lot,
-    isAvailable: dto.is_available,
     lotDetails: {
       dimensions: {
         width: dto.lot_details.dimensions.width,
@@ -19,6 +24,9 @@ export const mapLot = (dto: LotDTO): Lot => {
       bathrooms: dto.lot_details.bathrooms,
       floors: dto.lot_details.floors,
     },
+    lotType: setFirstUpperCase(dto.lot_type),
+    buildingType: setFirstUpperCase(dto.building_type),
+    status: dto.status,
     imageUrl: dto.image_url,
     world: {
       id: dto.world.id,
