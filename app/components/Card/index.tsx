@@ -12,7 +12,6 @@ export const Card = ({ lot }: { lot: Lot }) => {
       </div>
       <div className="col-8">
         <header className="container">
-          <small>{`${lot?.lotType} ${lot?.buildingType === 'empty_lot' ? `(${lot.buildingType})` : ''}`}</small>
           <h3>
             <Link className="link-underline link-underline-opacity-0" to={`/lots/${lot?.id}`}>
               {lot?.title}
@@ -26,42 +25,44 @@ export const Card = ({ lot }: { lot: Lot }) => {
             {lot?.world?.title}
           </li>
           <li className="mt-3">
-            <p className="rlt-search-list__item__description">
-              <strong>Description:</strong> {lot?.description}
+            <p className="rlt-search-list__item__description m-0">
+              <strong>Description:</strong> {lot?.description || '-'}
             </p>
           </li>
           <li>
-            <ul className="list-unstyled mt-3">
-              <li className="d-flex gap-1 align-items-center">
-                <strong>Price:</strong> {CURRENCY_SYMBOL} {lot?.price}
-              </li>
-              <li>
-                <strong>Dimesions:</strong> {lot?.lotDetails?.dimensions?.width} &times;{' '}
-                {lot?.lotDetails?.dimensions?.depth}
-              </li>
-              <li className="d-flex">
-                <strong className="me-2">Caracteristics:</strong>
+            <strong>Lot type:</strong> {lot?.lotType}
+          </li>
+          <li>
+            <strong>Building type:</strong> {lot?.buildingType}
+          </li>
+          <li className="d-flex gap-1 align-items-center">
+            <strong>Price:</strong> {CURRENCY_SYMBOL} {lot?.price}
+          </li>
+          <li>
+            <strong>Dimensions:</strong> {lot?.lotDetails?.dimensions?.width} &times;{' '}
+            {lot?.lotDetails?.dimensions?.depth}
+          </li>
+          <li className="d-flex">
+            <strong className="me-2">Caracteristics:</strong>
 
-                <ul className="list-unstyled d-flex gap-2">
-                  <li className="d-flex gap-1 align-items-center">
-                    <span className="material-symbols-rounded" title="Bedrooms" aria-label="Bedrooms">
-                      hotel
-                    </span>
-                    {lot?.lotDetails?.bedrooms || '-'}
-                  </li>
-                  <li className="d-flex gap-1 align-items-center">
-                    <span className="material-symbols-rounded" title="Bathrooms" aria-label="Bathrooms">
-                      shower
-                    </span>
-                    {lot?.lotDetails?.bathrooms || '-'}
-                  </li>
-                  <li className="d-flex gap-1 align-items-center">
-                    <span className="material-symbols-rounded" title="Floors" aria-label="Floors">
-                      layers
-                    </span>
-                    {lot?.lotDetails?.floors || '-'}
-                  </li>
-                </ul>
+            <ul className="list-unstyled d-flex gap-2">
+              <li className="d-flex gap-1 align-items-center">
+                <span className="material-symbols-rounded" title="Bedrooms" aria-label="Bedrooms">
+                  hotel
+                </span>
+                {lot?.lotDetails?.bedrooms || '-'}
+              </li>
+              <li className="d-flex gap-1 align-items-center">
+                <span className="material-symbols-rounded" title="Bathrooms" aria-label="Bathrooms">
+                  shower
+                </span>
+                {lot?.lotDetails?.bathrooms || '-'}
+              </li>
+              <li className="d-flex gap-1 align-items-center">
+                <span className="material-symbols-rounded" title="Floors" aria-label="Floors">
+                  layers
+                </span>
+                {lot?.lotDetails?.floors || '-'}
               </li>
             </ul>
           </li>
