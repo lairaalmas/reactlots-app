@@ -13,7 +13,7 @@ export const LOT_TYPES = [
   'playground',
   'pool',
   'vacation rental',
-  'veterinary Clinic',
+  'veterinary clinic',
   'wedding Venue',
 ] as const;
 
@@ -49,7 +49,7 @@ export type Lot = {
   };
 };
 
-export type LotSearchFilters = {
+export type LotFilters = {
   worldId: string;
   neighborhoodId: string;
 };
