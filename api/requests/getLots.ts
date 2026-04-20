@@ -1,6 +1,4 @@
 import type { LotDTO } from '../types/lotDTO';
-import { mockGetLotByIdResponse } from '../mocks/utils';
-import { mapLot } from '../mappers/lot';
 import { ENV } from '../config/env';
 
 type GetLotsParams = {
@@ -30,6 +28,17 @@ export const getLots = async (params?: GetLotsParams): Promise<LotDTO[]> => {
 };
 
 export const getLotById = async (id: string) => {
-  const response = mockGetLotByIdResponse(id);
-  return mapLot(response.data);
+  if (!ENV.BASE_URL) {
+    throw new Error('Missing BASE_URL');
+  }
+
+  const url = `${ENV.BASE_URL}/lots/${id}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch lot');
+  }
+
+  return response.json();
 };
