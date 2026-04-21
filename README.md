@@ -6,13 +6,13 @@
 
 **Author:** 🦖 [Laira Almas](https://github.com/lairaalmas) (2026)
 
-## 🚀 Tech Stack
+<!-- ## 🚀 Tech Stack
 
 - React
 - React Router
 - TypeScript
 - Vite
-- Bootstrap
+- Bootstrap -->
 
 ## 🧩 Project Structure
 
@@ -26,7 +26,15 @@ This project is part of a multi-repository setup:
 ### Install dependencies
 
 ```bash
-npm install
+npm i
+```
+
+### Setup environment variables
+
+Create a `.env` file on the root of the project based on the `.env.example`.
+
+```bash
+VITE_API_BASE_URL= # insert the react lots api base url here
 ```
 
 ### Run the app
@@ -37,9 +45,7 @@ npm run dev
 
 ## 📚 Documentation
 
-Detailed documentation available at:
-
-👉 [Project docs](./app/docs/README.md)
+More details? See [Project documentation](app/docs/README.md)
 
 ## 🔗 Useful links / references:
 
