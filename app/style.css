@@ -3,18 +3,20 @@
 
 /* base */
 :root {
-  --color-brand-blue: #2256A6;
-  --color-brand-blue-light: #00A7E2;
-  
-  --color-brand-green: #00994C;
-  --color-brand-green-light: #7AC142;
-  
-  --color-brand-blue-muted: #E0E3F0;
+  --color-brand-blue: #0A49AC;
+  --color-brand-blue-light: #4093E9;
 
+  --color-brand-blue-muted: #91ABC5;
+  --color-brand-blue-muted-light: #E7F1FF;
+  
+  --color-brand-green: #199A2B;
+  --color-brand-green-light: #94E55A;
+  --color-brand-green-dark: #26B704;
+  
+  --color-brand-white-transparent:#F2F4EFA1;
+  
   --color-light:#FFF;
-  --color-dark: #000;  
-  /* --color-white-200: #E0DEDD; */
-  /* --color-white-400: #6D747A; */
+  --color-dark: #787877;  
 }
 body {
   color: var(--color-brand-blue);
@@ -58,7 +60,7 @@ h1, h2, h3, h4, h5, h6, .sims-font {
   border-radius: 50%;
   line-height: 0;
   background-color: var(--color-light);
-  background: linear-gradient(to bottom, var(--color-light), var(--color-brand-blue-muted));
+  background: linear-gradient(to bottom, var(--color-light), var(--color-brand-blue-muted-light));
   color: var(--color-brand-blue);
   /* filter: drop-shadow(offset-x offset-y blur-radius color); */
   filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.6));
