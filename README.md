@@ -1,18 +1,16 @@
 # ReactLots App
 
+[![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
+[![React](https://img.shields.io/badge/React-v19.2-61DAFB?logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-v5.9-3178C6?logo=typescript&logoColor=3178C6)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-v8.0-646CFF?logo=vite&logoColor=646CFF)](https://vite.dev/guide/)
+![Status](https://img.shields.io/badge/status-in%20progress-orange)
+
 ⚠️ This is a fictional, fan-made project inspired by _The Sims 4_.
 
 **Reactlots** is a real estate web application where users can browse and explore lots from _The Sims 4_ as if they were part of the game world.
 
 **Author:** 🦖 [Laira Almas](https://github.com/lairaalmas) (2026)
-
-<!-- ## 🚀 Tech Stack
-
-- React
-- React Router
-- TypeScript
-- Vite
-- Bootstrap -->
 
 ## 🧩 Project Structure
 
