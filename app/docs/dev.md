@@ -1,5 +1,9 @@
 # Development
 
+This section provides the necessary information to run, maintain, and evolve the project locally.
+
+It includes setup instructions, tooling configuration, and guidelines for modifying the codebase.
+
 ## 🛠️ Tech Stack
 
 | Technology                                                                   | Version | Info                                                     |
@@ -9,7 +13,7 @@
 | [TypeScript](https://www.typescriptlang.org/)                                | 5.9.3   | Adds type checking to JavaScript                         |
 | [Vite](https://vite.dev/guide/)                                              | 8.0.1   | Fast building tool                                       |
 | [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) | 5.3.8   | CSS framework for responsive components using classNames |
-| [Node.js](https://nodejs.org/en/blog/release/v24.14.1)                       | 24.14.1 |
+| [Node.js](https://nodejs.org/en/blog/release/v24.14.1)                       | 24.14.1 | Runtime used for local development and tooling           |
 | ESLint                                                                       | 9.39.4  | Code linting with typescript validation                  |
 | Prettier                                                                     | 3.8.1   | Automated code formatting for consistency                |
 | [Bootstrap Icons](https://icons.getbootstrap.com/)                           | 1.13.1  | Bootstrap icon library                                   |
@@ -17,21 +21,29 @@
 
 ## ⚙️ Development Setup
 
-### Install project dependencies
+### Install dependencies
 
 ```bash
 npm i
 ```
 
-### Setup environment variables
+### Configure environment variables
 
 Create a `.env` file on the root of the project based on the `.env.example`.
 
 ```bash
-VITE_API_BASE_URL= # insert the react lots api base url here
+VITE_API_BASE_URL= # insert the Reactlots API base URL here
 ```
 
-### (Optional) Update local vscode config file to enforce lint/prettier:
+### Run the application
+
+```bash
+npm run dev
+```
+
+### (Optional) Recommended VSCode configuration
+
+Update local vscode config file to enforce lint/prettier:
 
 ```
 {
@@ -53,15 +65,18 @@ VITE_API_BASE_URL= # insert the react lots api base url here
 
 ### ESLint Configuration
 
-The project enforces code quality with strict ESLint rules:
+The project enforces code quality with rules focused on:
 
-- **Strict Equality:** All comparisons use `===` instead of `==`
-- **Type Safety:** TypeScript strict mode with `consistent-type-imports` and `no-explicit-any` warnings
-- **React Hooks Validation:** Ensures hooks are used correctly via `eslint-plugin-react-hooks`
-- **Code Organization:** No duplicate imports, no console statements in production code
-- **React Refresh Support:** Hot module replacement compatibility
+- strict equality (`===`)
+- TypeScript best practices
+- React Hooks validation
+- consistent imports and code organization
 
-Run linting with `npm run lint` to check for violations.
+Run linting with:
+
+```bash
+npm run lint
+```
 
 ### Available scripts
 
@@ -74,21 +89,31 @@ Run linting with `npm run lint` to check for violations.
 
 ## ✏️ File Modification Guide
 
+The following guidelines describe how to extend the project while keeping the current architecture consistent.
+
 ### Adding a new page
 
-1. Create page component in `app/pages/YourNewPage/index.tsx`
-2. Create a loader in `app/utils/loaders.tsx`
-3. Add route in `router.tsx`
-4. (Optional) import in header navigation links
+1. Create the page component in `app/pages/YourNewPage/index.tsx`
+2. Define the loader in `app/utils/loaders.tsx` (if data is required)
+3. Add the route in `router.tsx`
+4. Ensure the page consumes **domain data**, not DTOs
+5. (Optional) Add to header navigation
 
 ### Adding a new API endpoint
 
-1. Create DTO type in `api/types/entityDTO.ts`
-2. Create request function in `api/requests/entity.ts`
-3. Create mapper in `api/mappers/entity.ts`
-4. Use in loaders via `app/utils/loaders.tsx`
+1. Create the DTO in `api/types/entityDTO.ts`
+2. Create a request function in `api/requests/entity.ts`
+3. Create the mapper in `api/mappers/entity.ts`
+4. Use the request inside a loaders `app/utils/loaders.tsx`
 
 ### Modifying component styling
 
 1. Global styles: `app/style.css`
 2. Bootstrap utility classes in JSX
+
+## 🧠 Development Principles
+
+- Keep UI components focused on rendering, not data fetching
+- Always map API responses (DTO) to domain models before use
+- Centralize API calls inside the api/ layer
+- Prefer loaders for data fetching instead of component-level effects

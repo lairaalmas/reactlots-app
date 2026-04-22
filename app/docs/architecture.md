@@ -1,15 +1,15 @@
-# Architecture
+# System Architecture
 
 ## 🌱 Overview
 
-The application is structured into two main layers:
+The application is structured into 3 logic layers:
 
 - **Frontend layer**
+  - Diegetic UI Layer
   - **Folder:** `app/` with pages, components, layouts
-  - Diagetic UI Layer
 - **Backend-for-frontend layer**
-  - **Folder:** `api/` with request, mappers, DTOs, configs
   - Responsible for data transformation
+  - **Folder:** `api/` with request, mappers, DTOs, configs
   - Consumes data from the **Reactlot API**
     - Clone the [reactlots-api](https://github.com/lairaalmas/reactlots-api) project to run the backend service that provides data for this application.
 
@@ -22,6 +22,20 @@ flowchart LR
   UI --> BFF
   BFF --> API
 ```
+
+## 🧭 How to read this project
+
+If you're exploring the codebase for the first time, this is a recommended path:
+
+- Start from `app/router.tsx` to understand how routes are defined
+- **Loaders** (in `app/utils/loaders.tsx`) define data fetching
+- The `api/` layer is responsible for:
+  - calling the backend
+  - mapping DTO → domain
+- pages only consume **domain models**, never raw API responses
+- The `RootLayout` defines the shared structure (Header → Content → Footer)
+
+This structure ensures a clear separation between UI, data fetching, and data transformation.
 
 ## 📁 Folder Structure
 
@@ -65,18 +79,19 @@ flowchart LR
 
 - **Diegetic domain modeling** - concepts are adapted to the game universe instead of real-world conventions.
 - **URL as source of truth** - search state is driven by query parameters, enabling predictable navigation.
-- **Separation of concerns** - UI logic, data transformation and API communication are isolated. It helps with:
-  - **Maintainability** - Changes to API schema only affect the mapper layes
+- **Separation of concerns** - UI logic, data transformation and API communication are isolated into distinct layers (`app/` and `api/`). It helps with:
+  - **Maintainability** - Changes to API schema only affect the mapper layer
   - **Reusability** - BFF layer can be shared across different frontends
 - **Type Safety** - DTOs (Data Transfer Objects) map API schemas to domain types
 
   ```mermaid
   flowchart LR
-    API["API Response"]
+    API["API Response<br/>(DTO)"]
     Mapper["Mapper"]
+    Domain["Domain Model"]
     UI["UI"]
 
-    API -->|DTO| Mapper -->|Domain data| UI
+    API --> Mapper --> Domain --> UI
   ```
 
 ## 🎯 Key Design Patterns
@@ -100,7 +115,7 @@ flowchart LR
   - Data fetching happens **before** component rendering
   - URL query params drive data fetching (e.g., `?world=willow-creek&neighborhood=foundry-cove`)
 
-## 🔁 Routing and Loaders
+## 🔁 Routing and Data Loading
 
 **React Router** is responsible for both routing and data fetching. Loaders ensure data is available before rendering.
 
@@ -110,7 +125,7 @@ sequenceDiagram
     participant Router as Router<br/>app/router.tsx
     participant Loader as Loader<br/>app/utils/loaders.tsx
     participant API
-    participant Mapper as Mapper<br/>api/mappers/index.tsx
+    participant Mapper as Mapper<br/>api/mappers/
     participant UI as UI<br/>app/pages/
 
     User->>Router: Navigate
@@ -123,7 +138,7 @@ sequenceDiagram
     Router->>UI: Render
 ```
 
-## 🔁 Specific Flows
+## 🔁 Key user Flows
 
 #### Home page search flow
 
@@ -143,7 +158,7 @@ sequenceDiagram
   Loader->>API: getLots(filters?)
   API-->>Loader: DTOs
 
-  Loader->>Mapper: Calls DTO to Domain mapper
+  Loader->>Mapper: Map DTO → Domain
   Mapper-->>Loader: Domain data
 
   Loader->>UI: { lots, worlds, neighborhoods, filters }
@@ -163,12 +178,12 @@ sequenceDiagram
   participant Mapper as Mapper<br/>api/mappers/index.tsx
   participant UI as UI<br/>app/pages/LotPage/<br/>index.tsx
 
-  User->>Router: Click lot card<br/>or navigate to "/:id"
+  User->>Router: Click lot card<br/>or navigate to "/lots/:id"
   Router->>Loader: Trigger lotPageLoader
   Loader->>API: getLotsById(id)
   API-->>Loader: LotDTO
 
-  Loader->>Mapper: Calls DTO to Domain mapper
+  Loader->>Mapper: Map DTO → Domain
   Mapper-->>Loader: Lot
 
   Loader ->> UI: Lot data

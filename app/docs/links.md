@@ -1,15 +1,23 @@
 # Useful Links & References
 
-**The Sims 4 worlds**
+This section contains external references used as inspiration for both the product design and domain modeling of the application.
 
-- **Oasis Springs:**
-  - [The Sims Wiki - Oasis Springs](https://sims.fandom.com/wiki/Oasis_Springs)
-  - [The Sims fan page - Oasis Springs](https://www.teoalida.com/thesims/Oasis-springs/)
+**🌍 The Sims 4 worlds**
 
-- **Willow Creek:**
-  - [The Sims Wiki - Willow Creek](https://sims.fandom.com/wiki/Willow_Creek)
-  - [The Sims fan page - Willow Creek](https://www.teoalida.com/thesims/willow-creek/)
+These references were used to model the application's domain (worlds and neighborhoods) and ensure consistency with the game universe.
 
-**Legal**
+**Oasis Springs:**
 
-- [About requesting permission to use EA games content](https://help.ea.com/za/help/faq/how-to-request-permission-for-ea-games-content/)
+- [The Sims Wiki](https://sims.fandom.com/wiki/Oasis_Springs)
+- [The Sims fan page](https://www.teoalida.com/thesims/Oasis-springs/)
+
+**Willow Creek:**
+
+- [The Sims Wiki](https://sims.fandom.com/wiki/Willow_Creek)
+- [The Sims fan page](https://www.teoalida.com/thesims/willow-creek/)
+
+## ⚖️ Legal
+
+Reference for usage of game-related content:
+
+- [EA content usage guidelines](https://help.ea.com/za/help/faq/how-to-request-permission-for-ea-games-content/)

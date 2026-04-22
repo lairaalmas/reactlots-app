@@ -1,6 +1,12 @@
-# Frontend Layer
+# Frontend
+
+The frontend layer is responsible for rendering the UI and orchestrating user interactions.
+
+It consumes domain models provided by the BFF layer and never interacts directly with raw API responses.
 
 ## 📂 Folder structure
+
+The frontend is organized by responsibility, separating reusable components, pages, and layout structure.
 
 ```bash
 app/
@@ -33,7 +39,7 @@ app/
   └── loaders.tsx    # React Router loaders for data fetching
 ```
 
-## ⏳ Loading & Error Handling
+## ⏳ Rendering, Loading & Error Handling
 
 The application uses dedicated components to manage loading states and errors:
 
@@ -62,3 +68,10 @@ The application uses dedicated components to manage loading states and errors:
   - Failed requests throw errors that are caught by ErrorPage
   - Provides graceful fallback UI instead of blank screens
   - Includes navigation back to homepage or retry options
+
+## 🧠 Key Principles
+
+- UI components are focused on rendering, not data fetching
+- All data is provided by route loaders
+- Components consume domain models only
+- Layout structure is centralized in `RootLayout`

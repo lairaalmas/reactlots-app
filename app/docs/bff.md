@@ -1,12 +1,14 @@
-# Backend-for-frontend layer
+# Backend-for-frontend
 
-The `api/` folder acts as a frontend-oriented data layer.
+The `api/` folder acts as a Backend-for-Frontend (BFF) layer inside the frontend.
+
+It is responsible for isolating the UI from backend-specific concerns such as API contracts and data formats.
 
 Responsibilities:
 
-- fetching data
-- mapping DTO → domain
-- isolating backend changes
+- fetching data from the backend API
+- mapping DTO → domain models
+- isolating backend changes from the UI layer
 
 ## 📂 Folder structure
 
@@ -29,6 +31,20 @@ api/
     └── worldDTO.ts
 ```
 
+🔄 Data Flow
+
+Data flows through the BFF layer before reaching the UI. The UI never consumes DTOs directly.
+
+```mermaid
+flowchart LR
+API["API Response<br/>(DTO)"]
+Mapper["Mapper"]
+Domain["Domain Model"]
+UI["UI"]
+
+API --> Mapper --> Domain --> UI
+```
+
 ## 🔗 Endpoints
 
 The BFF layer consumes the following endpoints from the Reactlots API. For detailed information, see the [reactlots-api](https://github.com/lairaalmas/reactlots-api) repository.
@@ -43,7 +59,7 @@ The BFF layer consumes the following endpoints from the Reactlots API. For detai
 - **GET `/lots/:id`** - Fetch a single lot by ID
   - Path param (required): `id` (lot identifier)
   - Returns: `LotDTO`
-  - Used for: rendering lot detail page info
+  - Used for: rendering the lot detail page
 
 ### Neighborhoods
 
@@ -56,3 +72,10 @@ The BFF layer consumes the following endpoints from the Reactlots API. For detai
 - **GET `/worlds`** - Fetch all worlds
   - Returns: `WorldDTO[]`
   - Used for: setting dropdown options in world filter
+
+## 🧠 Key Principles
+
+- The UI never consumes raw API responses
+- All API interactions are centralized in `requests/`
+- Data transformation happens in `mappers/`
+- DTOs reflect backend contracts, while domain models - reflect UI needs
