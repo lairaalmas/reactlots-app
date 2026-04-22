@@ -1,12 +1,21 @@
 # Reactlots App - Project Documentation
 
-This project was created for portfolio and educational purposes. This documentation is not only intended for understanding the project, but the decisions behind it, specially if you are interested in building similar web apps. ❤️
-
 <!-- What is it? -->
 
 ## 🏠 Project overview
 
-**Reactlots** is a real estate web application where users can browse and explore lots from _The Sims 4_ as if they were part of the game world. Users can filter properties by worlds and neighborhoods, view detailed property information, and save favorite lots.
+**Reactlots** is a diegetic real estate web application inspired by _The Sims 4_, where users can browse and explore lots as if they were part of the game world itself.
+
+The application is intentionally designed to reflect how a character inside the game might experience a real estate platform. Because of that, real-world concepts are adapted to the game’s logic — for example, "cities" become "worlds", and neighborhoods follow the structure defined by the game.
+
+Beyond its thematic layer, the project is also built as a **frontend architecture exercise**, focusing on production-like patterns such as data modeling, separation of concerns, and scalable data fetching strategies.
+
+This means the project combines:
+
+- Product design decisions driven by a fictional universe
+- Technical decisions aligned with real-world frontend applications
+
+This approach helps explore how domain modeling and UI decisions change when the system is driven by narrative constraints instead of real-world conventions.
 
 **Key features**
 
@@ -17,23 +26,27 @@ This project was created for portfolio and educational purposes. This documentat
 
 <!-- How is it organized? -->
 
+## 🎯 Design Principles
+
+- Diegetic domain modeling
+  - Concepts are adapted to the game universe instead of real-world conventions.
+- Separation of concerns
+  - UI, data transformation, and API communication are clearly isolated.
+- URL as source of truth
+  - Search state is driven by query parameters, enabling predictable navigation.
+- Frontend as a system, not just UI
+  - The project includes a BFF layer to simulate real-world frontend architecture.
+
 ## 🧩 Architecture Overview
 
-```
-┌─────────────────────────────────────┐
-│         React Components            │  ← User Interface Layer
-│    (Components, Pages, Layouts)     │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│    Backend-for-Frontend (BFF)       │  ← Data transformation Layer
-│ (Requests, Mappers, DTOs, Config)   │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│      External REST API              │  ← Backend Service
-│  (Reactlots API - separate repo)    │
-└─────────────────────────────────────┘
+```mermaid
+flowchart LR
+  UI["React Components<br/>(Diagetic UI Layer)<br/>(pages, components, layouts)"]
+  BFF["Backend-for-Frontend (BFF)<br/>(Data transformation)<br/>(requests, mappers, DTOs, config)"]
+  API["External REST API<br/>(Data source)<br/>(reactlots-api)"]
+
+  UI -->|domain data| BFF
+  BFF -->|DTO| API
 ```
 
 **Why this structure?**
@@ -45,7 +58,7 @@ This project was created for portfolio and educational purposes. This documentat
 
 **Backend service**
 
-- Clone the [reactlots-api](https://github.com/lairaalmas/reactlots-api) project to access the static data used in this application
+- Clone the [reactlots-api](https://github.com/lairaalmas/reactlots-api) project to run the backend service that provides data for this application
 
 <!-- What was it build with? -->
 
@@ -233,7 +246,32 @@ api/
 
 ### Home page search flow
 
-1. **User** navigates to homepage (`/`)
+```mermaid
+sequenceDiagram
+  participant User
+  participant Router as Router<br/>app/router.tsx
+  participant Loader as Loader<br/>app/utils/loaders.tsx
+  participant API
+  participant Mapper as Mapper<br/>api/mappers/index.tsx
+  participant UI as UI<br/>app/pages/<br/>HomePage/index.tsx
+
+  User->>Router: Navigate to "/"
+  Router->>Loader: Trigger homePageLoader
+  Loader->>API: getWorlds()
+  Loader->>API: getNeighborhoods()
+  Loader->>API: getLots(filters?)
+  API-->>Loader: DTOs
+
+  Loader->>Mapper: Calls DTO to Domain mapper
+  Mapper-->>Loader: Domain data
+
+  Loader->>UI: { lots, worlds, neighborhoods, filters }
+  UI-->>User: Render page
+  User->>Router: Update filters<br/>("?world=&neighborhood=")
+  Router->>Loader: Re-run loader
+```
+
+<!-- 1. **User** navigates to homepage (`/`)
 2. **React Router** triggers `homePageLoader`
 3. **Loader** fetches data in parallel:
    - `getWorlds()` → API → Map `WorldDTO[]` → `World[]`
@@ -247,15 +285,36 @@ api/
    - `SearchResults` displays `Lot[]` as `Card` components
 
 7. **User** changes filters → `SearchForm` updates URL query params
-8. **Router** re-runs loader with new params → Data refreshes
+8. **Router** re-runs loader with new params → Data refreshes -->
 
 ### Lot detail page flow
 
-1. **User** clicks **lot card** or navigates to `/lots/:id`
+```mermaid
+sequenceDiagram
+  participant User
+  participant Router as Router<br/>app/router.tsx
+  participant Loader as Loader<br/>app/utils/loaders.tsx
+  participant API
+  participant Mapper as Mapper<br/>api/mappers/index.tsx
+  participant UI as UI<br/>app/pages/LotPage/<br/>index.tsx
+
+  User->>Router: Click lot card<br/>or navigate to "/:id"
+  Router->>Loader: Trigger lotPageLoader
+  Loader->>API: getLotsById(id)
+  API-->>Loader: LotDTO
+
+  Loader->>Mapper: Calls DTO to Domain mapper
+  Mapper-->>Loader: Lot
+
+  Loader ->> UI: Lot data
+  UI-->>User: Render page
+```
+
+<!-- 1. **User** clicks **lot card** or navigates to `/lots/:id`
 2. **React Router** triggers `lotPageLoader` with params
 3. **Loader** calls `getLotById(id)` → `API` → Map `LotDTO` → `Lot`
 4. `LotPage` receives `Lot` via `useLoaderData()` hook
-5. `LotPage` renders detailed property information
+5. `LotPage` renders detailed property information -->
 
 <!-- How it handles scenarios? -->
 
@@ -314,6 +373,12 @@ The application uses dedicated components to manage loading states and errors:
   - Improves initial page load performance
 
 <!-- Available endpoints -->
+
+## ⚖️ Trade-offs and Decisions
+
+- React Router loaders instead of React Query (intentional simplicity and control)
+- No generic API response wrapper (avoid premature abstraction)
+- BFF inside frontend instead of separate service (simplifies setup for portfolio)
 
 ## 🔗 API Endpoints Reference
 
@@ -424,3 +489,10 @@ Run linting with `npm run lint` to check for violations.
 
 1. Global styles: `app/style.css`
 2. Bootstrap utility classes in JSX
+
+## 🚀 Future Improvements
+
+- Introduce caching strategy
+- Add pagination strategy aligned with backend
+- Introduce error monitoring (metrics / logs)
+- Improve accessibility and keyboard navigation
