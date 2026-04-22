@@ -39,21 +39,14 @@ This approach helps explore how domain modeling and UI decisions change when the
 
 ## 🧩 Architecture Overview
 
-```
-┌─────────────────────────────────────┐
-│         React Components            │  ← User Interface Layer (diegetic experience)
-│    (Components, Pages, Layouts)     │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│    Backend-for-Frontend (BFF)       │  ← Data transformation Layer
-│ (Requests, Mappers, DTOs, Config)   │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│      External REST API              │  ← Backend Service
-│  (Reactlots API - separate repo)    │
-└─────────────────────────────────────┘
+```mermaid
+flowchart LR
+  UI["React Components<br/>(Diagetic UI Layer)<br/>(pages, components, layouts)"]
+  BFF["Backend-for-Frontend (BFF)<br/>(Data transformation)<br/>(requests, mappers, DTOs, config)"]
+  API["External REST API<br/>(Data source)<br/>(reactlots-api)"]
+
+  UI -->|domain data| BFF
+  BFF -->|DTO| API
 ```
 
 **Why this structure?**
@@ -253,7 +246,32 @@ api/
 
 ### Home page search flow
 
-1. **User** navigates to homepage (`/`)
+```mermaid
+sequenceDiagram
+  participant User
+  participant Router as Router<br/>app/router.tsx
+  participant Loader as Loader<br/>app/utils/loaders.tsx
+  participant API
+  participant Mapper as Mapper<br/>api/mappers/index.tsx
+  participant UI as UI<br/>app/pages/<br/>HomePage/index.tsx
+
+  User->>Router: Navigate to "/"
+  Router->>Loader: Trigger homePageLoader
+  Loader->>API: getWorlds()
+  Loader->>API: getNeighborhoods()
+  Loader->>API: getLots(filters?)
+  API-->>Loader: DTOs
+
+  Loader->>Mapper: Calls DTO to Domain mapper
+  Mapper-->>Loader: Domain data
+
+  Loader->>UI: { lots, worlds, neighborhoods, filters }
+  UI-->>User: Render page
+  User->>Router: Update filters<br/>("?world=&neighborhood=")
+  Router->>Loader: Re-run loader
+```
+
+<!-- 1. **User** navigates to homepage (`/`)
 2. **React Router** triggers `homePageLoader`
 3. **Loader** fetches data in parallel:
    - `getWorlds()` → API → Map `WorldDTO[]` → `World[]`
@@ -267,15 +285,36 @@ api/
    - `SearchResults` displays `Lot[]` as `Card` components
 
 7. **User** changes filters → `SearchForm` updates URL query params
-8. **Router** re-runs loader with new params → Data refreshes
+8. **Router** re-runs loader with new params → Data refreshes -->
 
 ### Lot detail page flow
 
-1. **User** clicks **lot card** or navigates to `/lots/:id`
+```mermaid
+sequenceDiagram
+  participant User
+  participant Router as Router<br/>app/router.tsx
+  participant Loader as Loader<br/>app/utils/loaders.tsx
+  participant API
+  participant Mapper as Mapper<br/>api/mappers/index.tsx
+  participant UI as UI<br/>app/pages/LotPage/<br/>index.tsx
+
+  User->>Router: Click lot card<br/>or navigate to "/:id"
+  Router->>Loader: Trigger lotPageLoader
+  Loader->>API: getLotsById(id)
+  API-->>Loader: LotDTO
+
+  Loader->>Mapper: Calls DTO to Domain mapper
+  Mapper-->>Loader: Lot
+
+  Loader ->> UI: Lot data
+  UI-->>User: Render page
+```
+
+<!-- 1. **User** clicks **lot card** or navigates to `/lots/:id`
 2. **React Router** triggers `lotPageLoader` with params
 3. **Loader** calls `getLotById(id)` → `API` → Map `LotDTO` → `Lot`
 4. `LotPage` receives `Lot` via `useLoaderData()` hook
-5. `LotPage` renders detailed property information
+5. `LotPage` renders detailed property information -->
 
 <!-- How it handles scenarios? -->
 
@@ -453,7 +492,7 @@ Run linting with `npm run lint` to check for violations.
 
 ## 🚀 Future Improvements
 
-- Introduce caching strategy (React Query or similar)
+- Introduce caching strategy
 - Add pagination strategy aligned with backend
-- Introduce error monitoring (Sentry / logs)
+- Introduce error monitoring (metrics / logs)
 - Improve accessibility and keyboard navigation
