@@ -1,22 +1,66 @@
 # ReactLots App
 
+<!-- badges -->
+
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![React](https://img.shields.io/badge/React-v19.2-61DAFB?logo=react&logoColor=61DAFB)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-v5.9-3178C6?logo=typescript&logoColor=3178C6)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-v8.0-646CFF?logo=vite&logoColor=646CFF)](https://vite.dev/guide/)
-![Status](https://img.shields.io/badge/status-in%20progress-orange)
+
+<!-- discalimer + intro -->
 
 ⚠️ This is a fictional, fan-made project inspired by _The Sims 4_.
 
-**Reactlots** is a real estate web application where users can browse and explore lots from _The Sims 4_ as if they were part of the game world.
+**Reactlots** is a diegetic real estate web application inspired by _The Sims 4_, where users can browse and explore lots as if they were part of the game world itself.
+
+The application is designed to reflect how a character inside the game might experience a real estate platform. Because of that, real-world concepts are adapted to the game’s logic — for example, "cities" become "worlds", and neighborhoods follow the structure defined by the game.
+
+Beyond its thematic layer, this project is also used as a **frontend architecture exercise**, focusing on production-like patterns such as data modeling, separation of concerns, and scalable data fetching.
 
 **Author:** 🦖 [Laira Almas](https://github.com/lairaalmas) (2026)
+
+## 🎯 What makes this project different
+
+- Diegetic product design (UI and domain follow in-game logic)
+- URL-driven search state using React Router loaders
+- Backend-for-Frontend (BFF) layer inside the frontend
+- Explicit DTO → Domain mapping (snake_case → camelCase)
+
+<!-- current status -->
+
+## 📌 Current Status ![Status](https://img.shields.io/badge/status-in%20progress-orange)
+
+### Implemented
+
+- Lot search with filters (world, neighborhood)
+- URL-driven filtering via query params
+- Lot detail page
+- Backend integration (Reactlots API)
+- BFF layer with DTO mapping
+
+### In Progress
+
+- Favorites feature
+- Mobile responsiveness improvements
+
+### Planned
+
+- Advanced filters (bathrooms, bedrooms, price, etc.)
+- Pagination
+- i18n
+- Error monitoring improvements
+
+## ⚖️ Trade-offs and Decisions
+
+- React Router loaders instead of React Query
+- No generic API response wrapper
+- BFF inside frontend for simplicity
 
 ## 🧩 Project Structure
 
 This project is part of a multi-repository setup:
 
-- [reactlots-api](https://github.com/lairaalmas/reactlots-api) → Static API (data source)
+- [reactlots-api](https://github.com/lairaalmas/reactlots-api) → REST API (data source for the frontend)
 - [reactlots-app](https://github.com/lairaalmas/reactlots-app) → Frontend application + BFF layer
 
 ## ▶️ Getting Started
