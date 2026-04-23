@@ -3,7 +3,7 @@
   "description": "Fictional, fan-made real state app for The Sims 4",
   "author": "lairaalmas",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
