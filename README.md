@@ -13,55 +13,54 @@
 
 **Reactlots** is a diegetic real estate web application inspired by _The Sims 4_, where users can browse and explore lots as if they were part of the game world itself.
 
-The application is designed to reflect how a character inside the game might experience a real estate platform. Because of that, real-world concepts are adapted to the game’s logic — for example, "cities" become "worlds", and neighborhoods follow the structure defined by the game.
+The application is intentionally designed to reflect how a character inside the game might experience a real estate platform. Because of that, real-world concepts are adapted to the game’s logic — for example, "cities" become "worlds", and neighborhoods follow the structure defined by the game.
 
-Beyond its thematic layer, this project is also used as a **frontend architecture exercise**, focusing on production-like patterns such as data modeling, separation of concerns, and scalable data fetching.
+Beyond its thematic layer, the project is also built as a **frontend architecture exercise**, focusing on production-like patterns such as data modeling, separation of concerns, and scalable data fetching strategies.
 
-**Author:** 🦖 [Laira Almas](https://github.com/lairaalmas) (2026)
+This means the project combines:
 
-## 🎯 What makes this project different
+- Product design decisions driven by a fictional universe
+- Technical decisions aligned with real-world frontend applications
 
-- Diegetic product design (UI and domain follow in-game logic)
-- URL-driven search state using React Router loaders
-- Backend-for-Frontend (BFF) layer inside the frontend
-- Explicit DTO → Domain mapping (snake_case → camelCase)
+This approach helps explore how domain modeling and UI decisions change when the system is driven by narrative constraints instead of real-world conventions.
 
-<!-- current status -->
+**Key features**
+
+- Filter lots by world and neighborhood
+- View individual lot detail pages
 
 ## 📌 Current Status ![Status](https://img.shields.io/badge/status-in%20progress-orange)
 
-### Implemented
+### ✅ Implemented
 
 - Lot search with filters (world, neighborhood)
+- Lot detail pegae
 - URL-driven filtering via query params
-- Lot detail page
-- Backend integration (Reactlots API)
+- Backend integration with [reactlots-api](https://github.com/lairaalmas/reactlots-api)
 - BFF layer with DTO mapping
 
-### In Progress
-
-- Favorites feature
-- Mobile responsiveness improvements
-
-### Planned
+### 🚧 In Progress
 
 - Advanced filters (bathrooms, bedrooms, price, etc.)
-- Pagination
-- i18n
-- Error monitoring improvements
 
-## ⚖️ Trade-offs and Decisions
+### 🚀 Future improvements
 
-- React Router loaders instead of React Query
-- No generic API response wrapper
-- BFF inside frontend for simplicity
+- Add favorites feature
+- Improve mobile responsiveness
+- Add pagination strategy aligned with backend
+- Add i18n
+- Introduce error monitoring (metrics / logs)
+- Introduce caching strategy
+- Improve accessibility and keyboard navigation
+
+## 🚀 Future Improvements
 
 ## 🧩 Project Structure
 
 This project is part of a multi-repository setup:
 
-- [reactlots-api](https://github.com/lairaalmas/reactlots-api) → REST API (data source for the frontend)
-- [reactlots-app](https://github.com/lairaalmas/reactlots-app) → Frontend application + BFF layer
+- [reactlots-api](https://github.com/lairaalmas/reactlots-api) → data source
+- [reactlots-app](https://github.com/lairaalmas/reactlots-app) → frontend + BFF
 
 ## ▶️ Getting Started
 
@@ -87,23 +86,11 @@ npm run dev
 
 ## 📚 Documentation
 
-More details? See [Project documentation](app/docs/README.md)
+See full documentation in: [app/docs/README.md](app/docs/README.md)
 
-## 🔗 Useful links / references:
+## 👤 Author
 
-### The Sims 4 worlds
-
-- **Oasis Springs:**
-  - [The Sims Wiki - Oasis Springs](https://sims.fandom.com/wiki/Oasis_Springs)
-  - [The Sims fan page - Oasis Springs](https://www.teoalida.com/thesims/Oasis-springs/)
-
-- **Willow Creek:**
-  - [The Sims Wiki - Willow Creek](https://sims.fandom.com/wiki/Willow_Creek)
-  - [The Sims fan page - Willow Creek](https://www.teoalida.com/thesims/willow-creek/)
-
-### Legal
-
-- [About requesting permission to use EA games content](https://help.ea.com/za/help/faq/how-to-request-permission-for-ea-games-content/)
+🦖 Laira Almas (2026) | [Github](https://github.com/lairaalmas)
 
 ## ⚖️ Disclaimer
 
