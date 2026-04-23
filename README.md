@@ -90,7 +90,7 @@ See full documentation in: [app/docs/README.md](app/docs/README.md)
 
 ## 👤 Author
 
-🦖 [Laira Almas](https://github.com/lairaalmas) (2026)
+🦖 Laira Almas (2026) | [Github](https://github.com/lairaalmas)
 
 ## ⚖️ Disclaimer
 
