@@ -88,6 +88,10 @@ npm run dev
 
 See full documentation in: [app/docs/README.md](app/docs/README.md)
 
+## 👤 Author
+
+🦖 [Laira Almas](https://github.com/lairaalmas) (2026)
+
 ## ⚖️ Disclaimer
 
 This is a fan-made, non-commercial project created for educational and portfolio purposes.
@@ -101,7 +105,3 @@ If you are a rights holder and would like any content to be removed, please cont
 ## 📄 License
 
 This project is licensed under the MIT License.
-
-## Author
-
-[Laira Almas](https://github.com/lairaalmas) (2026)
