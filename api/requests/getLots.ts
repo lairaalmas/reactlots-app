@@ -13,7 +13,7 @@ export const getLots = async (params?: GetLotsParams): Promise<LotDTO[]> => {
   if (params?.neighborhood) searchParams.append('neighborhood', params.neighborhood);
 
   if (!ENV.BASE_URL) {
-    throw new Error('Missing BASE_URL');
+    throw new Error('Missing env variable for BASE_URL');
   }
 
   const url = `${ENV.BASE_URL}/lots?${searchParams.toString()}`;
@@ -29,7 +29,7 @@ export const getLots = async (params?: GetLotsParams): Promise<LotDTO[]> => {
 
 export const getLotById = async (id: string) => {
   if (!ENV.BASE_URL) {
-    throw new Error('Missing BASE_URL');
+    throw new Error('Missing env variable for BASE_URL');
   }
 
   const url = `${ENV.BASE_URL}/lots/${id}`;

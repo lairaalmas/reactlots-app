@@ -32,28 +32,36 @@ export const lotPageLoader = async ({ request, params }: any): Promise<Lot> => {
 };
 
 export const homePageLoader = async ({ request, params }: any): Promise<HomePageLoaderData> => {
-  // read query params
-  const url = new URL(request.url);
-  const filters: LotFilters = {
-    worldId: url.searchParams.get('world') || '',
-    neighborhoodId: url.searchParams.get('neighborhood') || '',
-  };
+  try {
+    // read query params
+    const url = new URL(request.url);
+    const filters: LotFilters = {
+      worldId: url.searchParams.get('world') || '',
+      neighborhoodId: url.searchParams.get('neighborhood') || '',
+    };
 
-  // get all worlds - for filter options
-  const worlds: WorldDTO[] = await getWorlds();
+    // make all API calls in parallel
+    const [worlds, neighborhoods, lots] = await Promise.all([
+      getWorlds(),
+      getNeighborhoods(),
+      getLots({ world: filters.worldId, neighborhood: filters.neighborhoodId }),
+    ]);
 
-  // get all neighborhoods - for filter options
-  const neighborhoods: NeighborhoodDTO[] = await getNeighborhoods();
+    const mappedLots: Lot[] = mapLots(lots);
 
-  // get filtered lots - for lot result list
-  const lots: LotDTO[] = await getLots({ world: filters.worldId, neighborhood: filters.neighborhoodId });
-  const mappedLots: Lot[] = mapLots(lots);
+    // return fetched data and query params as filters
+    return {
+      lots: mappedLots || [],
+      worlds: worlds || [],
+      neighborhoods: neighborhoods || [],
+      filters: filters,
+    };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error loading home page data.', error);
 
-  // return fetched data and query params as filters
-  return {
-    lots: mappedLots || [],
-    worlds: worlds || [],
-    neighborhoods: neighborhoods || [],
-    filters: filters,
-  };
+    throw new Response('Error loading home page data.', {
+      status: 500,
+    });
+  }
 };
