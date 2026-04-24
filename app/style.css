@@ -28,7 +28,13 @@ h1, h2, h3, h4, h5, h6, .sims-font {
   font-family: 'Phudu', sans-serif;
 }
 .sims-green {
+  color: var(--color-brand-green)
+}
+.sims-green-light {
   color: var(--color-brand-green-light)
+}
+.sims-green-dark {
+  color: var(--color-brand-green-dark)
 }
 .sims-blue-light {
   color: var(--color-brand-blue-light)
@@ -45,6 +51,12 @@ h1, h2, h3, h4, h5, h6, .sims-font {
 
 a {
   color: var(--color-brand-blue);
+}
+a:hover {
+  color: var(--color-brand-green);
+}
+a img:hover {
+  opacity: .8;
 }
 
 /* Header */
