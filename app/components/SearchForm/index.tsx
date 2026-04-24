@@ -51,6 +51,12 @@ export const SearchForm = () => {
   const handleClear = () => {
     setSelectedWorldId('');
     setSelectedNeighborhoodId('');
+    setSelectedFloor('');
+    setSelectedBedroom('');
+    setSelectedBathroom('');
+    setSelectedBuildingStatus('');
+    setSelectedSortBy('price');
+    setSelectedSort('asc');
     navigate('/');
   };
   const handleSubmit = (event: any) => {
@@ -202,7 +208,7 @@ export const SearchForm = () => {
         <hr className="text-light mt-3" />
 
         {/* sort by */}
-        <div className="col-md-2">
+        <div className="col-md-4">
           <label htmlFor="field-sort-by">Sort by</label>
 
           <select
@@ -218,8 +224,9 @@ export const SearchForm = () => {
             ))}
           </select>
         </div>
-        {/* sort type */}
-        <div className="col-md-2">
+
+        {/* sort */}
+        <div className="col-md-4">
           <label htmlFor="field-sort">Sort type</label>
 
           <select
