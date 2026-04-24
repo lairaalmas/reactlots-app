@@ -3,9 +3,9 @@ import type { Lot } from '../../types/lot';
 import { Money } from '../Money';
 
 export const Card = ({ lot }: { lot: Lot }) => {
-  const availabilityClass = lot?.availability === 'available' ? 'fw-semibold' : 'text-danger';
-  const lotTypeClass = lot?.type === 'residential' ? 'fw-semibold' : 'text-danger';
-  const buildingTypeClass = lot?.buildingDetails?.type === 'house' ? 'fw-semibold' : 'text-danger';
+  const availabilityClass = lot?.availability === 'available' ? 'fw-semibold' : 'fw-semibold text-danger';
+  const lotTypeClass = lot?.type === 'residential' ? 'fw-semibold' : 'fw-semibold text-danger';
+  const buildingTypeClass = lot?.buildingDetails?.type === 'house' ? 'fw-semibold' : 'fw-semibold text-danger';
   const buildingStatusClass = 'fw-semibold';
 
   return (
