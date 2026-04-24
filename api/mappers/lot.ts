@@ -15,18 +15,19 @@ export const mapLot = (dto: LotDTO): Lot => {
     title: dto.title,
     description: dto.description,
     price: dto.price,
-    lotDetails: {
-      dimensions: {
-        width: dto.lot_details.dimensions.width,
-        depth: dto.lot_details.dimensions.depth,
-      },
-      bedrooms: dto.lot_details.bedrooms,
-      bathrooms: dto.lot_details.bathrooms,
-      floors: dto.lot_details.floors,
+    dimensions: {
+      width: dto.dimensions.width,
+      depth: dto.dimensions.depth,
     },
-    lotType: setFirstUpperCase(dto.lot_type),
-    buildingType: setFirstUpperCase(dto.building_type),
-    status: dto.status,
+    type: dto.type, // setFirstUpperCase(dto.type),
+    availability: dto.availability,
+    buildingDetails: {
+      type: dto.building_details.type, // setFirstUpperCase(dto.building_details.type),
+      status: dto.building_details.status,
+      bedrooms: dto.building_details.bedrooms,
+      bathrooms: dto.building_details.bathrooms,
+      floors: dto.building_details.floors,
+    },
     imageUrl: dto.image_url,
     world: {
       id: dto.world.id,

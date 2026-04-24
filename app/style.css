@@ -12,6 +12,9 @@
   --color-brand-green: #199A2B;
   --color-brand-green-light: #94E55A;
   --color-brand-green-dark: #26B704;
+
+  --color-brand-gray: #8191A9;
+  --color-brand-gray-light: #BEC1C8;
   
   --color-brand-white-transparent:#F2F4EFA1;
   
@@ -27,8 +30,21 @@ h1, h2, h3, h4, h5, h6, .sims-font {
 .sims-green {
   color: var(--color-brand-green-light)
 }
+.sims-blue-light {
+  color: var(--color-brand-blue-light)
+}
+.sims-gray {
+  color: var(--color-brand-gray)
+}
+.sims-gray-light {
+  color: var(--color-brand-gray)
+}
 .material-symbols-rounded{
   font-size: inherit;
+}
+
+a {
+  color: var(--color-brand-blue);
 }
 
 /* Header */

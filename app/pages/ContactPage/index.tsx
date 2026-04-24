@@ -20,7 +20,7 @@ const ContactPage = () => {
         {sectionInfo.map((item) => (
           <section className="mt-5" key={item.title}>
             <h3>
-              <span className="material-symbols-rounded me-2" aria-hidden="false">
+              <span className="material-symbols-rounded me-2" aria-hidden="true">
                 {item.icon}
               </span>
               {item.title}

@@ -6,9 +6,9 @@ const LotPage = () => {
   const lot = useLoaderData() as Lot;
 
   const infoList = [
-    { icon: 'hotel', value: lot.lotDetails.bedrooms, ariaLabel: 'Bedrooms' },
-    { icon: 'shower', value: lot.lotDetails.bathrooms, ariaLabel: 'Bathrooms' },
-    { icon: 'layers', value: lot.lotDetails.floors, ariaLabel: 'Floors' },
+    { icon: 'hotel', value: lot.buildingDetails?.bedrooms, ariaLabel: 'Bedrooms' },
+    { icon: 'shower', value: lot.buildingDetails?.bathrooms, ariaLabel: 'Bathrooms' },
+    { icon: 'layers', value: lot.buildingDetails?.floors, ariaLabel: 'Floors' },
   ];
 
   return (
@@ -17,7 +17,9 @@ const LotPage = () => {
         <div className="d-flex flex-column mb-2">
           <h2>{lot.title}</h2>
           <small className="d-flex align-items-center">
-            <span className="material-symbols-rounded">location_on</span>
+            <span className="material-symbols-rounded" aria-hidden="true">
+              location_on
+            </span>
             {lot.neighborhood.title} ({lot.world.title})
           </small>
         </div>
@@ -43,7 +45,7 @@ const LotPage = () => {
             ))}
           </div>
           <li>
-            {lot.lotDetails.dimensions.width} &times; {lot.lotDetails.dimensions.depth}
+            {lot.dimensions?.width} &times; {lot.dimensions?.depth}
           </li>
         </ul>
       </div>
