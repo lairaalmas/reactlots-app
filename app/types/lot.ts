@@ -38,8 +38,8 @@ export type Lot = {
 };
 
 export type LotFilters = {
-  worldId: string;
-  neighborhoodId: string;
+  world: string;
+  neighborhood: string;
   buildingType: string;
   bedrooms: string;
   bathrooms: string;
@@ -47,16 +47,4 @@ export type LotFilters = {
   sort: string;
   sortBy: string;
   transactionType: string;
-};
-
-export type GetLotsParams = {
-  world?: string;
-  neighborhood?: string;
-  buildingType?: string;
-  bedrooms?: string;
-  bathrooms?: string;
-  floors?: string;
-  sort?: string;
-  sortBy?: string;
-  transactionType?: string;
 };
