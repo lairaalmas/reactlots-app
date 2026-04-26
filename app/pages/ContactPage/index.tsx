@@ -1,4 +1,5 @@
 import { Banner } from '../../components/Banner';
+import { Icon } from '../../components/Icon';
 
 const ContactPage = () => {
   const sectionInfo = [
@@ -19,11 +20,8 @@ const ContactPage = () => {
         <h2>Interested in buying a lot?</h2>
         {sectionInfo.map((item) => (
           <section className="mt-5" key={item.title}>
-            <h3>
-              <span className="material-symbols-rounded me-2" aria-hidden="false">
-                {item.icon}
-              </span>
-              {item.title}
+            <h3 className="m2-2">
+              <Icon name={item.icon} ariaHidden={true} /> {item.title}
             </h3>
             <span className="sims-font">{item.content}</span>
           </section>

@@ -12,11 +12,32 @@
   --color-brand-green: #199A2B;
   --color-brand-green-light: #94E55A;
   --color-brand-green-dark: #26B704;
+
+  --color-brand-gray: #8191A9;
+  --color-brand-gray-light: #BEC1C8;
   
   --color-brand-white-transparent:#F2F4EFA1;
   
   --color-light:#FFF;
   --color-dark: #787877;  
+
+  --color-theme-red: #AD2325;
+  --color-theme-purple: #6E37A3;
+  --color-theme-light-blue: #2DA0CD;
+  --color-theme-blue: #1B4BA6;
+  --color-theme-teal: #028E8F;
+  --color-theme-green: #1F6256;
+  --color-theme-olive: #927D02;
+  --color-theme-orange: #EF723B;
+
+  --color-theme-red-dark: #822837;
+  --color-theme-purple-dark: #5D3482;
+  --color-theme-light-blue-dark: #377199;
+  --color-theme-blue-dark: #2D4083;
+  --color-theme-teal-dark: #1E6775;
+  --color-theme-green-dark: #2F4E54;
+  --color-theme-olive-dark: #735E22;
+  --color-theme-orange-dark: #A95744;
 }
 body {
   color: var(--color-brand-blue);
@@ -25,10 +46,36 @@ h1, h2, h3, h4, h5, h6, .sims-font {
   font-family: 'Phudu', sans-serif;
 }
 .sims-green {
+  color: var(--color-brand-green)
+}
+.sims-green-light {
   color: var(--color-brand-green-light)
 }
+.sims-green-dark {
+  color: var(--color-brand-green-dark)
+}
+.sims-blue-light {
+  color: var(--color-brand-blue-light)
+}
+.sims-gray {
+  color: var(--color-brand-gray)
+}
+.sims-gray-light {
+  color: var(--color-brand-gray)
+}
+
 .material-symbols-rounded{
   font-size: inherit;
+}
+
+a {
+  color: var(--color-brand-blue);
+}
+a:hover {
+  color: var(--color-brand-green);
+}
+a img:hover {
+  opacity: .8;
 }
 
 /* Header */
@@ -119,4 +166,35 @@ h1, h2, h3, h4, h5, h6, .sims-font {
 }
 .rlt-banner.-wc {
     background-image: url("./assets/map_wc.png");
+}
+
+.rlt-card--red {
+  color: var(--color-theme-red)
+}
+.rlt-card--purple {
+  color: var(--color-theme-purple)
+}
+.rlt-card--red {
+  color: var(--color-theme-light-blue)
+}
+.rlt-card--light_blue {
+  color: var(--color-theme-blue)
+}
+.rlt-card--blue {
+  color: var(--color-theme-blue)
+}
+.rlt-card--teal {
+  color: var(--color-theme-teal)
+}
+.rlt-card--green {
+  color: var(--color-theme-green)
+}
+.rlt-card--olive {
+  color: var(--color-theme-olive)
+}
+.rlt-card--orange {
+  color: var(--color-theme-orange)
+}
+.rlt-card--default {
+  color: var(--color-brand-gray-light)
 }

@@ -6,20 +6,26 @@ export const SearchResults = () => {
   const { lots } = useLoaderData();
 
   return (
-    <div>
-      {lots.length > 0 ? (
-        <ul className="list-unstyled">
-          {lots.map((lot: Lot) => (
-            <li className="border-bottom" key={`card-${lot.id}`}>
-              <Card lot={lot} />
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>
-          <p className="text-center mt-3">No lots found</p>
-        </div>
-      )}
-    </div>
+    <>
+      <header>
+        <p className="fw-bold">{`${lots.length} ${lots.length === 1 ? 'result' : 'results'}`}</p>
+        {/* TODO: sorting selections */}
+      </header>
+      <div>
+        {lots.length > 0 ? (
+          <ul className="list-unstyled">
+            {lots.map((lot: Lot, index: number) => (
+              <li className="border-bottom" key={`card-${lot.id}`}>
+                <Card lot={lot} index={index} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>
+            <p className="text-center mt-3">No lots found</p>
+          </div>
+        )}
+      </div>
+    </>
   );
 };

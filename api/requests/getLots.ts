@@ -1,21 +1,28 @@
 import type { LotDTO } from '../types/lotDTO';
+import type { GetLotsParams } from '../../app/types/lot';
 import { ENV } from '../config/env';
-
-type GetLotsParams = {
-  world?: string;
-  neighborhood?: string;
-};
 
 export const getLots = async (params?: GetLotsParams): Promise<LotDTO[]> => {
   const searchParams = new URLSearchParams();
 
+  // get query params from browser on function call
   if (params?.world) searchParams.append('world', params.world);
   if (params?.neighborhood) searchParams.append('neighborhood', params.neighborhood);
+  if (params?.buildingType) searchParams.append('building_type', params.buildingType);
+  if (params?.bedrooms) searchParams.append('bedrooms', params.bedrooms);
+  if (params?.bathrooms) searchParams.append('bathrooms', params.bathrooms);
+  if (params?.floors) searchParams.append('floors', params.floors);
+  if (params?.sort) searchParams.append('sort', params.sort);
+  if (params?.sortBy) searchParams.append('sort_by', params.sortBy);
+  if (params?.transactionType) searchParams.append('transaction_type', params.transactionType);
+  searchParams.append('type', 'residential');
+  searchParams.append('availability', 'available');
 
   if (!ENV.BASE_URL) {
-    throw new Error('Missing BASE_URL');
+    throw new Error('Missing env variable for BASE_URL');
   }
 
+  // send query params to api
   const url = `${ENV.BASE_URL}/lots?${searchParams.toString()}`;
 
   const response = await fetch(url);
@@ -29,7 +36,7 @@ export const getLots = async (params?: GetLotsParams): Promise<LotDTO[]> => {
 
 export const getLotById = async (id: string) => {
   if (!ENV.BASE_URL) {
-    throw new Error('Missing BASE_URL');
+    throw new Error('Missing env variable for BASE_URL');
   }
 
   const url = `${ENV.BASE_URL}/lots/${id}`;

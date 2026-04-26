@@ -4,7 +4,7 @@ export const Footer = () => {
       <div className="container my-3">
         <div className="border-bottom pb-3">
           <span className="d-flex gap-2">
-            <span className="bi bi-house-fill sims-green"></span>
+            <span className="bi bi-house-fill"></span>
             <span className="sims-font">REACTLOTS</span>
           </span>
         </div>

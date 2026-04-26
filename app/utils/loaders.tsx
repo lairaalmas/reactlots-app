@@ -3,8 +3,6 @@ import { getLotById, getLots } from '../../api/requests/getLots';
 import { getNeighborhoods } from '../../api/requests/getNeighborhoods';
 import { getWorlds } from '../../api/requests/getWorlds';
 import type { LotDTO } from '../../api/types/lotDTO';
-import type { WorldDTO } from '../../api/types/worldDTO';
-import type { NeighborhoodDTO } from '../../api/types/neighborhoodDTO';
 import type { Lot, LotFilters } from '../types/lot';
 import type { Neighborhood } from '../types/neighborhood';
 import type { World } from '../types/world';
@@ -32,28 +30,55 @@ export const lotPageLoader = async ({ request, params }: any): Promise<Lot> => {
 };
 
 export const homePageLoader = async ({ request, params }: any): Promise<HomePageLoaderData> => {
-  // read query params
-  const url = new URL(request.url);
-  const filters: LotFilters = {
-    worldId: url.searchParams.get('world') || '',
-    neighborhoodId: url.searchParams.get('neighborhood') || '',
-  };
+  try {
+    // read query params
+    const url = new URL(request.url);
+    // get query params in browser on load
+    const filters: LotFilters = {
+      worldId: url.searchParams.get('world') || '',
+      neighborhoodId: url.searchParams.get('neighborhood') || '',
+      buildingType: url.searchParams.get('building_type') || '',
+      bedrooms: url.searchParams.get('bedrooms') || '',
+      bathrooms: url.searchParams.get('bathrooms') || '',
+      floors: url.searchParams.get('floors') || '',
+      sort: url.searchParams.get('sort') || '',
+      sortBy: url.searchParams.get('sort_by') || '',
+      transactionType: url.searchParams.get('transaction_type') || '',
+    };
 
-  // get all worlds - for filter options
-  const worlds: WorldDTO[] = await getWorlds();
+    // make all API calls in parallel
+    const [worlds, neighborhoods, lots] = await Promise.all([
+      getWorlds(),
+      getNeighborhoods(),
+      // send query params in browser to bff
+      getLots({
+        world: filters.worldId,
+        neighborhood: filters.neighborhoodId,
+        buildingType: filters.buildingType,
+        bedrooms: filters.bedrooms,
+        bathrooms: filters.bathrooms,
+        floors: filters.floors,
+        sort: filters.sort,
+        sortBy: filters.sortBy,
+        transactionType: filters.transactionType,
+      }),
+    ]);
 
-  // get all neighborhoods - for filter options
-  const neighborhoods: NeighborhoodDTO[] = await getNeighborhoods();
+    const mappedLots: Lot[] = mapLots(lots);
 
-  // get filtered lots - for lot result list
-  const lots: LotDTO[] = await getLots({ world: filters.worldId, neighborhood: filters.neighborhoodId });
-  const mappedLots: Lot[] = mapLots(lots);
+    // return fetched data and query params as filters
+    return {
+      lots: mappedLots || [],
+      worlds: worlds || [],
+      neighborhoods: neighborhoods || [],
+      filters: filters,
+    };
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error loading home page data.', error);
 
-  // return fetched data and query params as filters
-  return {
-    lots: mappedLots || [],
-    worlds: worlds || [],
-    neighborhoods: neighborhoods || [],
-    filters: filters,
-  };
+    throw new Response('Error loading home page data.', {
+      status: 500,
+    });
+  }
 };

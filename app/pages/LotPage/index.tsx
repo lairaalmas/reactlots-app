@@ -1,14 +1,15 @@
 import { useLoaderData } from 'react-router-dom';
 import type { Lot } from '../../types/lot';
 import { CURRENCY_SYMBOL } from '../../utils/constants';
+import { Icon } from '../../components/Icon';
 
 const LotPage = () => {
   const lot = useLoaderData() as Lot;
 
   const infoList = [
-    { icon: 'hotel', value: lot.lotDetails.bedrooms, ariaLabel: 'Bedrooms' },
-    { icon: 'shower', value: lot.lotDetails.bathrooms, ariaLabel: 'Bathrooms' },
-    { icon: 'layers', value: lot.lotDetails.floors, ariaLabel: 'Floors' },
+    { icon: 'hotel', value: lot.buildingDetails?.bedrooms, ariaLabel: 'Bedrooms' },
+    { icon: 'shower', value: lot.buildingDetails?.bathrooms, ariaLabel: 'Bathrooms' },
+    { icon: 'layers', value: lot.buildingDetails?.floors, ariaLabel: 'Floors' },
   ];
 
   return (
@@ -17,7 +18,7 @@ const LotPage = () => {
         <div className="d-flex flex-column mb-2">
           <h2>{lot.title}</h2>
           <small className="d-flex align-items-center">
-            <span className="material-symbols-rounded">location_on</span>
+            <Icon name="location_on" ariaHidden={true} />
             {lot.neighborhood.title} ({lot.world.title})
           </small>
         </div>
@@ -35,15 +36,13 @@ const LotPage = () => {
           <div className="d-flex gap-3 list-unstyled">
             {infoList.map((info) => (
               <li key={info.icon} className="d-flex align-items-center gap-1">
-                <span className="material-symbols-rounded" title={info.ariaLabel} aria-label={info.ariaLabel}>
-                  {info.icon}
-                </span>
+                <Icon name={info.icon} ariaLabel={info.ariaLabel} />
                 <span>{info.value}</span>
               </li>
             ))}
           </div>
           <li>
-            {lot.lotDetails.dimensions.width} &times; {lot.lotDetails.dimensions.depth}
+            {lot.dimensions?.width} &times; {lot.dimensions?.depth}
           </li>
         </ul>
       </div>
