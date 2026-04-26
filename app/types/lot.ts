@@ -4,6 +4,15 @@ export type Lot = {
   title: string;
   description: string;
   price: number;
+  priceDetails: {
+    wiki?: number;
+    preGame?: number;
+    inGame?: number;
+    rent?: number;
+    deposit?: number;
+    furniture?: number;
+  };
+  transactionType: string;
   dimensions: {
     width: number;
     depth: number;
@@ -12,7 +21,6 @@ export type Lot = {
   availability: string;
   buildingDetails: {
     type: string;
-    status: string;
     bedrooms: number;
     bathrooms: number;
     floors: number;
@@ -25,27 +33,30 @@ export type Lot = {
   neighborhood: {
     id: string;
     title: string;
+    color: string;
   };
 };
 
 export type LotFilters = {
   worldId: string;
   neighborhoodId: string;
-  buildingStatus: string;
+  buildingType: string;
   bedrooms: string;
   bathrooms: string;
   floors: string;
   sort: string;
   sortBy: string;
+  transactionType: string;
 };
 
 export type GetLotsParams = {
   world?: string;
   neighborhood?: string;
-  buildingStatus?: string;
+  buildingType?: string;
   bedrooms?: string;
   bathrooms?: string;
   floors?: string;
   sort?: string;
   sortBy?: string;
+  transactionType?: string;
 };
