@@ -37,12 +37,13 @@ export const homePageLoader = async ({ request, params }: any): Promise<HomePage
     const filters: LotFilters = {
       worldId: url.searchParams.get('world') || '',
       neighborhoodId: url.searchParams.get('neighborhood') || '',
-      buildingStatus: url.searchParams.get('building_status') || '',
+      buildingType: url.searchParams.get('building_type') || '',
       bedrooms: url.searchParams.get('bedrooms') || '',
       bathrooms: url.searchParams.get('bathrooms') || '',
       floors: url.searchParams.get('floors') || '',
-      sort: url.searchParams.get('sort') || 'desc',
-      sortBy: url.searchParams.get('sort_by') || 'price',
+      sort: url.searchParams.get('sort') || '',
+      sortBy: url.searchParams.get('sort_by') || '',
+      transactionType: url.searchParams.get('transaction_type') || '',
     };
 
     // make all API calls in parallel
@@ -53,12 +54,13 @@ export const homePageLoader = async ({ request, params }: any): Promise<HomePage
       getLots({
         world: filters.worldId,
         neighborhood: filters.neighborhoodId,
-        buildingStatus: filters.buildingStatus,
+        buildingType: filters.buildingType,
         bedrooms: filters.bedrooms,
         bathrooms: filters.bathrooms,
         floors: filters.floors,
         sort: filters.sort,
         sortBy: filters.sortBy,
+        transactionType: filters.transactionType,
       }),
     ]);
 

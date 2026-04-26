@@ -12,9 +12,10 @@ export const SearchForm = () => {
   const [selectedFloor, setSelectedFloor] = useState(filters?.buildingDetail?.floors ?? '');
   const [selectedBathroom, setSelectedBathroom] = useState(filters?.buildingDetail?.bathrooms ?? '');
   const [selectedBedroom, setSelectedBedroom] = useState(filters?.buildingDetail?.bedrooms ?? '');
-  const [selectedBuildingStatus, setSelectedBuildingStatus] = useState(filters?.buildingDetail?.status ?? '');
+  const [selectedBuildingType, setSelectedBuildingType] = useState(filters?.buildingDetail?.type ?? '');
   const [selectedSortBy, setSelectedSortBy] = useState(filters?.sortBy ?? '');
   const [selectedSort, setSelectedSort] = useState(filters?.sort ?? '');
+  const [selectedTransactionType, setSelectedTransactionType] = useState(filters?.transactionType ?? '');
 
   const defaultSelection = 'All';
 
@@ -39,8 +40,8 @@ export const SearchForm = () => {
   const handleBathroomChange = (value: string) => {
     setSelectedBathroom(value);
   };
-  const handleBuildingStatusChange = (value: string) => {
-    setSelectedBuildingStatus(value);
+  const handleBuildingTypeChange = (value: string) => {
+    setSelectedBuildingType(value);
   };
   const handleSortChange = (value: string) => {
     setSelectedSort(value);
@@ -48,15 +49,19 @@ export const SearchForm = () => {
   const handleSortByChange = (value: string) => {
     setSelectedSortBy(value);
   };
+  const handleTransactionTypeChange = (value: string) => {
+    setSelectedTransactionType(value);
+  };
   const handleClear = () => {
     setSelectedWorldId('');
     setSelectedNeighborhoodId('');
     setSelectedFloor('');
     setSelectedBedroom('');
     setSelectedBathroom('');
-    setSelectedBuildingStatus('');
-    setSelectedSortBy('price');
-    setSelectedSort('asc');
+    setSelectedBuildingType('');
+    setSelectedSortBy('');
+    setSelectedSort('');
+    setSelectedTransactionType('');
     navigate('/');
   };
   const handleSubmit = (event: any) => {
@@ -66,12 +71,13 @@ export const SearchForm = () => {
     // set query params in browser on filter submit
     if (selectedWorldId) params.set('world', selectedWorldId);
     if (selectedNeighborhoodId) params.set('neighborhood', selectedNeighborhoodId);
-    if (selectedBuildingStatus) params.set('building_status', selectedBuildingStatus);
+    if (selectedBuildingType) params.set('building_type', selectedBuildingType);
     if (selectedBedroom) params.set('bedrooms', selectedBedroom);
     if (selectedBathroom) params.set('bathrooms', selectedBathroom);
     if (selectedFloor) params.set('floors', selectedFloor);
     if (selectedSortBy) params.set('sort_by', selectedSortBy);
     if (selectedSort) params.set('sort', selectedSort);
+    if (selectedTransactionType) params.set('transaction_type', selectedTransactionType);
 
     const queryString = params.toString();
     navigate(queryString ? `/?${queryString}` : '/');
@@ -80,25 +86,41 @@ export const SearchForm = () => {
   return (
     <form className="sims-font rlt-search container" onSubmit={handleSubmit}>
       <div className="row row-gap-3">
-        {/* Buy x rent - todo? */}
-        {/* Residential x community x special */}
-
-        {/* built x empty */}
         <div className="col-md-4">
-          <label htmlFor="field-building-status">Building type</label>
+          <label htmlFor="field-transaction-type">Transaction type</label>
 
           <select
             className="form-select"
-            id="field-building-status"
-            value={selectedBuildingStatus || ''}
-            onChange={(event) => handleBuildingStatusChange(event.target.value)}
+            id="field-transaction-type"
+            value={selectedTransactionType || ''}
+            onChange={(event) => handleTransactionTypeChange(event.target.value)}
+          >
+            <option value="">{defaultSelection}</option>
+            {['buy', 'rent']?.map((item: any) => (
+              <option key={`transaction-type-${item}`} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* built x empty */}
+        <div className="col-md-4">
+          <label htmlFor="field-building-type">Building type</label>
+
+          <select
+            className="form-select"
+            id="field-building-type"
+            value={selectedBuildingType || ''}
+            onChange={(event) => handleBuildingTypeChange(event.target.value)}
           >
             <option value="">{defaultSelection}</option>
             {[
-              { label: 'House', value: 'built' },
+              { label: 'House', value: 'house' },
+              { label: 'Apartment', value: 'apartment' },
               { label: 'Empty lot', value: 'empty' },
             ]?.map((item: any) => (
-              <option key={`building-status-${item.value}`} value={item.value}>
+              <option key={`building-type-${item.value}`} value={item.value}>
                 {item.label}
               </option>
             ))}
@@ -205,10 +227,10 @@ export const SearchForm = () => {
           </select>
         </div>
 
-        <hr className="text-light mt-3" />
+        {/* <hr className="text-light mt-3" /> */}
 
         {/* sort by */}
-        <div className="col-md-4">
+        {/* <div className="col-md-4">
           <label htmlFor="field-sort-by">Sort by</label>
 
           <select
@@ -217,16 +239,18 @@ export const SearchForm = () => {
             value={selectedSortBy || ''}
             onChange={(event) => handleSortByChange(event.target.value)}
           >
+            <option value="">{defaultSelection}</option>
+
             {['price', 'bedrooms', 'bathrooms', 'floors']?.map((item: any) => (
               <option key={`sort-by-${item}`} value={item}>
                 {item}
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
         {/* sort */}
-        <div className="col-md-4">
+        {/* <div className="col-md-4">
           <label htmlFor="field-sort">Sort type</label>
 
           <select
@@ -235,6 +259,8 @@ export const SearchForm = () => {
             value={selectedSort || ''}
             onChange={(event) => handleSortChange(event.target.value)}
           >
+            <option value="">{defaultSelection}</option>
+
             {[
               { label: 'low to high', value: 'asc' },
               { label: 'high to low', value: 'desc' },
@@ -244,7 +270,7 @@ export const SearchForm = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
       </div>
 
       <div className="d-flex justify-content-center">
