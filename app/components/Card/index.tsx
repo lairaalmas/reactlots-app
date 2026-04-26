@@ -39,7 +39,7 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
     <header>
       <div>
         <span className={neighborhoodTheme}>
-          <Icon icon="location_on" />
+          <Icon name="location_on" />
         </span>{' '}
         {lot?.neighborhood?.title} ({lot?.world?.title})
       </div>
@@ -113,17 +113,17 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
           <strong className="me-2">Caracteristics:</strong>
           <ul className="list-unstyled d-flex gap-2 fw-semibold">
             <li className="d-flex gap-1 align-items-center">
-              <Icon icon="hotel" ariaLabel="Berdooms" classNames="sims-gray" />
+              <Icon name="hotel" ariaLabel="Berdooms" classNames="sims-gray" />
               <span className="sims-blue-light">{parseNumber(lot?.buildingDetails?.bedrooms)}</span>
             </li>
 
             <li className="d-flex gap-1 align-items-center">
-              <Icon icon="shower" ariaLabel="Bathrooms" classNames="sims-gray" />
+              <Icon name="shower" ariaLabel="Bathrooms" classNames="sims-gray" />
               <span className="sims-blue-light">{parseNumber(lot?.buildingDetails?.bathrooms)}</span>
             </li>
 
             <li className="d-flex gap-1 align-items-center">
-              <Icon icon="layers" ariaLabel="Floors" classNames="sims-gray" />
+              <Icon name="layers" ariaLabel="Floors" classNames="sims-gray" />
               <span className="sims-blue-light">{parseNumber(lot?.buildingDetails?.floors)}</span>
             </li>
           </ul>

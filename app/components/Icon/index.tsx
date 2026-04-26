@@ -1,11 +1,11 @@
 type GetType = {
-  icon: string;
+  name: string;
   classNames?: string;
   ariaHidden?: boolean;
   ariaLabel?: string;
 };
 
-export const Icon = ({ icon, classNames, ariaHidden = false, ariaLabel }: GetType) => {
+export const Icon = ({ name, classNames, ariaHidden = false, ariaLabel }: GetType) => {
   return (
     <span
       className={`material-symbols-rounded ${classNames}`}
@@ -13,7 +13,7 @@ export const Icon = ({ icon, classNames, ariaHidden = false, ariaLabel }: GetTyp
       aria-label={ariaLabel}
       title={ariaLabel}
     >
-      {icon}
+      {name}
     </span>
   );
 };

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import type { Neighborhood } from '../../types/neighborhood';
 import type { World } from '../../types/world';
+import { Icon } from '../Icon';
 
 export const SearchForm = () => {
   const { worlds, neighborhoods, filters } = useLoaderData();
@@ -265,15 +266,11 @@ export const SearchForm = () => {
 
       <div className="d-flex justify-content-center">
         <button className="rlt-search__btn rlt-search__btn--primary" type="submit">
-          <span className="material-symbols-rounded" title="Search lots" aria-label="Search lots">
-            search
-          </span>
+          <Icon name="search" ariaLabel="Search lots" />
         </button>
 
         <button className="rlt-search__btn rlt-search__btn--secondary" type="button" onClick={handleClear}>
-          <span className="material-symbols-rounded" title="Clear filters" aria-label="Clear filters">
-            close
-          </span>
+          <Icon name="close" ariaLabel="Clear filters" />
         </button>
       </div>
     </form>
