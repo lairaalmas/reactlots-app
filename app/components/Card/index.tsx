@@ -4,7 +4,7 @@ import { Money } from '../Money';
 import { Icon } from '../Icon';
 
 export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
-  if (!lot) return <></>;
+  if (!lot) return <></>; // TODO: add error card
 
   const neighborhoodTheme = `rlt-card--${lot?.neighborhood?.color}`;
 

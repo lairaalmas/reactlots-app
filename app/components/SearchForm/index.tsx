@@ -44,12 +44,12 @@ export const SearchForm = () => {
   const handleBuildingTypeChange = (value: string) => {
     setSelectedBuildingType(value);
   };
-  const handleSortChange = (value: string) => {
-    setSelectedSort(value);
-  };
-  const handleSortByChange = (value: string) => {
-    setSelectedSortBy(value);
-  };
+  // const handleSortChange = (value: string) => {
+  //   setSelectedSort(value);
+  // };
+  // const handleSortByChange = (value: string) => {
+  //   setSelectedSortBy(value);
+  // };
   const handleTransactionTypeChange = (value: string) => {
     setSelectedTransactionType(value);
   };
@@ -166,7 +166,7 @@ export const SearchForm = () => {
         </div>
 
         <div className="col-md-4">
-          <label htmlFor="field-bedroom">Bedroom</label>
+          <label htmlFor="field-bedroom">Bedrooms</label>
 
           <select
             className="form-select"
@@ -185,7 +185,7 @@ export const SearchForm = () => {
         </div>
 
         <div className="col-md-4">
-          <label htmlFor="field-bathroom">Bathroom</label>
+          <label htmlFor="field-bathroom">Bathrooms</label>
 
           <select
             className="form-select"
