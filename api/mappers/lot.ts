@@ -1,13 +1,12 @@
 import type { Lot } from '../../app/types/lot';
 import type { LotDTO } from '../types/lotDTO';
 
-export const setFirstUpperCase = (txt: string) => {
-  if (!txt || typeof txt !== 'string') {
-    return '';
-  }
-
-  return txt.charAt(0).toUpperCase() + txt.slice(1);
-};
+// export const setFirstUpperCase = (txt: string) => {
+//   if (!txt || typeof txt !== 'string') {
+//     return '';
+//   }
+//   return txt.charAt(0).toUpperCase() + txt.slice(1);
+// };
 
 export const mapLot = (dto: LotDTO): Lot => {
   return {
@@ -28,10 +27,10 @@ export const mapLot = (dto: LotDTO): Lot => {
       width: dto.dimensions.width,
       depth: dto.dimensions.depth,
     },
-    type: dto.type, // setFirstUpperCase(dto.type),
+    type: dto.type,
     availability: dto.availability,
     buildingDetails: {
-      type: dto.building_details.type, // setFirstUpperCase(dto.building_details.type),
+      type: dto.building_details.type,
       bedrooms: dto.building_details.bedrooms,
       bathrooms: dto.building_details.bathrooms,
       floors: dto.building_details.floors,
