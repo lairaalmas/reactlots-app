@@ -1,16 +1,10 @@
 import type { LotFilters } from '../../../types/lot';
+import { FILTER_KEYS } from '../../../utils/constants';
 
-export const emptyFilter: LotFilters = {
-  world: '',
-  neighborhood: '',
-  floors: '',
-  bedrooms: '',
-  bathrooms: '',
-  buildingType: '',
-  sortBy: '',
-  sort: '',
-  transactionType: '',
-};
+export const emptyFilter = FILTER_KEYS.reduce((acc, n) => {
+  acc[n] = '';
+  return acc;
+}, {} as LotFilters);
 
 type Action =
   | { type: 'SET_WORLD'; payload?: string }
