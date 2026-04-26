@@ -70,6 +70,9 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
         <strong>Building type:</strong>{' '}
         <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.type)}</span>
       </li>
+      <li>
+        <strong>Transaction type:</strong> <span>{parseString(lot?.transactionType)}</span>
+      </li>
       {/* <li>
         Price History:
         <ul>
