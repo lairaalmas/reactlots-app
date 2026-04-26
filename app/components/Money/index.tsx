@@ -15,7 +15,7 @@ export const Money = ({ value }: MoneyComponent) => {
 
   return (
     <span className="h3 fw-bold d-flex gap-1">
-      <span className={'sims-green d-flex align-items-start'}>{CURRENCY_SYMBOL}</span>
+      <span className={'d-flex align-items-start'}>{CURRENCY_SYMBOL}</span>
       <span className="d-flex align-items-start">{parsedValue}</span>
     </span>
   );
