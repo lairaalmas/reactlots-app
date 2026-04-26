@@ -1,20 +1,16 @@
 import type { LotDTO } from '../types/lotDTO';
-import type { GetLotsParams } from '../../app/types/lot';
+import type { LotFilters } from '../../app/types/lot';
 import { ENV } from '../config/env';
+import { FILTER_KEYS, QUERY_PARAM_MAP } from '../../app/utils/constants';
 
-export const getLots = async (params?: GetLotsParams): Promise<LotDTO[]> => {
+export const getLots = async (params?: Partial<LotFilters>): Promise<LotDTO[]> => {
   const searchParams = new URLSearchParams();
 
   // get query params from browser on function call
-  if (params?.world) searchParams.append('world', params.world);
-  if (params?.neighborhood) searchParams.append('neighborhood', params.neighborhood);
-  if (params?.buildingType) searchParams.append('building_type', params.buildingType);
-  if (params?.bedrooms) searchParams.append('bedrooms', params.bedrooms);
-  if (params?.bathrooms) searchParams.append('bathrooms', params.bathrooms);
-  if (params?.floors) searchParams.append('floors', params.floors);
-  if (params?.sort) searchParams.append('sort', params.sort);
-  if (params?.sortBy) searchParams.append('sort_by', params.sortBy);
-  if (params?.transactionType) searchParams.append('transaction_type', params.transactionType);
+  FILTER_KEYS.forEach((key) => {
+    const curParam = params?.[key];
+    if (curParam) searchParams.append(QUERY_PARAM_MAP[key], curParam);
+  });
   searchParams.append('type', 'residential');
   searchParams.append('availability', 'available');
 

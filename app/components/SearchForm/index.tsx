@@ -1,84 +1,73 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useReducer, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import type { Neighborhood } from '../../types/neighborhood';
 import type { World } from '../../types/world';
 import { Icon } from '../Icon';
+import { filtersReducer } from './reducer/filterReducer';
+import type { LotFilters } from '../../types/lot';
+import { FILTER_KEYS, QUERY_PARAM_MAP } from '../../utils/constants';
+
+const LOT_FILTER_OPTIONS = {
+  buildingTypes: [
+    { label: 'House', value: 'house' },
+    { label: 'Apartment', value: 'apartment' },
+    { label: 'Empty lot', value: 'empty' },
+  ],
+  transactionTypes: [
+    { label: 'Buy', value: 'buy' },
+    { label: 'Rent', value: 'rent' },
+  ],
+  floors: [1, 2, 3],
+  bedrooms: [1, 2, 3, 4, 5],
+  bathrooms: [1, 2, 3, 4],
+  sortBy: ['price'],
+  sort: [
+    { label: 'Lower to higher', value: 'asc' },
+    { label: 'Higher to lower', value: 'desc' },
+  ],
+};
 
 export const SearchForm = () => {
-  const { worlds, neighborhoods, filters } = useLoaderData();
   const navigate = useNavigate();
+  const { worlds, neighborhoods, filters } = useLoaderData();
 
-  const [selectedWorldId, setSelectedWorldId] = useState(filters?.worldId ?? '');
-  const [selectedNeighborhoodId, setSelectedNeighborhoodId] = useState(filters?.neighborhoodId ?? '');
-  const [selectedFloor, setSelectedFloor] = useState(filters?.buildingDetail?.floors ?? '');
-  const [selectedBathroom, setSelectedBathroom] = useState(filters?.buildingDetail?.bathrooms ?? '');
-  const [selectedBedroom, setSelectedBedroom] = useState(filters?.buildingDetail?.bedrooms ?? '');
-  const [selectedBuildingType, setSelectedBuildingType] = useState(filters?.buildingDetail?.type ?? '');
-  const [selectedSortBy, setSelectedSortBy] = useState(filters?.sortBy ?? '');
-  const [selectedSort, setSelectedSort] = useState(filters?.sort ?? '');
-  const [selectedTransactionType, setSelectedTransactionType] = useState(filters?.transactionType ?? '');
+  const initialFilter = FILTER_KEYS.reduce((acc, key) => {
+    acc[key] = filters?.[key] || '';
+    return acc;
+  }, {} as LotFilters);
+
+  const [filter, dispatch] = useReducer(filtersReducer, initialFilter);
 
   const defaultSelection = 'All';
 
   const filteredNeighborhood = useMemo(() => {
-    if (!selectedWorldId) return neighborhoods;
-    return neighborhoods.filter((item: Neighborhood) => item.world.id === selectedWorldId);
-  }, [selectedWorldId, neighborhoods]);
+    if (!filter.world) return neighborhoods;
+    return neighborhoods.filter((item: Neighborhood) => item.world.id === filter.world);
+  }, [filter.world, neighborhoods]);
 
-  const handleWorldChange = (id: string) => {
-    setSelectedWorldId(id);
-    setSelectedNeighborhoodId('');
+  const handleWorldChange = (worldId: string) => {
+    dispatch({ type: 'SET_WORLD', payload: worldId });
   };
-  const handleNeighborgoodChange = (id: string) => {
-    setSelectedNeighborhoodId(id);
+
+  const handleFilterChange = (data: Partial<LotFilters>) => {
+    dispatch({ type: 'SET_FILTERS', payload: data });
   };
-  const handleFloorChange = (value: string) => {
-    setSelectedFloor(value);
-  };
-  const handleBedroomChange = (value: string) => {
-    setSelectedBedroom(value);
-  };
-  const handleBathroomChange = (value: string) => {
-    setSelectedBathroom(value);
-  };
-  const handleBuildingTypeChange = (value: string) => {
-    setSelectedBuildingType(value);
-  };
-  // const handleSortChange = (value: string) => {
-  //   setSelectedSort(value);
-  // };
-  // const handleSortByChange = (value: string) => {
-  //   setSelectedSortBy(value);
-  // };
-  const handleTransactionTypeChange = (value: string) => {
-    setSelectedTransactionType(value);
-  };
+
   const handleClear = () => {
-    setSelectedWorldId('');
-    setSelectedNeighborhoodId('');
-    setSelectedFloor('');
-    setSelectedBedroom('');
-    setSelectedBathroom('');
-    setSelectedBuildingType('');
-    setSelectedSortBy('');
-    setSelectedSort('');
-    setSelectedTransactionType('');
+    dispatch({ type: 'CLEAR_FILTERS' });
     navigate('/');
   };
-  const handleSubmit = (event: any) => {
+
+  const handleSubmit = (event?: any) => {
     event.preventDefault();
     const params = new URLSearchParams();
 
     // set query params in browser on filter submit
-    if (selectedWorldId) params.set('world', selectedWorldId);
-    if (selectedNeighborhoodId) params.set('neighborhood', selectedNeighborhoodId);
-    if (selectedBuildingType) params.set('building_type', selectedBuildingType);
-    if (selectedBedroom) params.set('bedrooms', selectedBedroom);
-    if (selectedBathroom) params.set('bathrooms', selectedBathroom);
-    if (selectedFloor) params.set('floors', selectedFloor);
-    if (selectedSortBy) params.set('sort_by', selectedSortBy);
-    if (selectedSort) params.set('sort', selectedSort);
-    if (selectedTransactionType) params.set('transaction_type', selectedTransactionType);
+    Object.entries(filter).forEach(([key, value]) => {
+      if (!value) return {};
+      const queryKey = QUERY_PARAM_MAP?.[key as keyof LotFilters];
+      if (queryKey) return params.set(queryKey, value);
+    });
 
     const queryString = params.toString();
     navigate(queryString ? `/?${queryString}` : '/');
@@ -88,52 +77,12 @@ export const SearchForm = () => {
     <form className="sims-font rlt-search container" onSubmit={handleSubmit}>
       <div className="row row-gap-3">
         <div className="col-md-4">
-          <label htmlFor="field-transaction-type">Transaction type</label>
-
-          <select
-            className="form-select"
-            id="field-transaction-type"
-            value={selectedTransactionType || ''}
-            onChange={(event) => handleTransactionTypeChange(event.target.value)}
-          >
-            <option value="">{defaultSelection}</option>
-            {['buy', 'rent']?.map((item: any) => (
-              <option key={`transaction-type-${item}`} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="col-md-4">
-          <label htmlFor="field-building-type">Building type</label>
-
-          <select
-            className="form-select"
-            id="field-building-type"
-            value={selectedBuildingType || ''}
-            onChange={(event) => handleBuildingTypeChange(event.target.value)}
-          >
-            <option value="">{defaultSelection}</option>
-            {[
-              { label: 'House', value: 'house' },
-              { label: 'Apartment', value: 'apartment' },
-              { label: 'Empty lot', value: 'empty' },
-            ]?.map((item: any) => (
-              <option key={`building-type-${item.value}`} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="col-md-4">
           <label htmlFor="field-world">World</label>
 
           <select
             className="form-select"
             id="field-world"
-            value={selectedWorldId || ''}
+            value={filter.world || ''}
             onChange={(event) => handleWorldChange(event.target.value)}
           >
             <option value="">{defaultSelection}</option>
@@ -152,32 +101,68 @@ export const SearchForm = () => {
           <select
             className="form-select"
             id="Neighborhood"
-            value={selectedNeighborhoodId || ''}
-            onChange={(event) => handleNeighborgoodChange(event.target.value)}
+            value={filter.neighborhood || ''}
+            onChange={(event) => handleFilterChange({ neighborhood: event.target.value })}
           >
             <option value="">{defaultSelection}</option>
 
             {(filteredNeighborhood || [])?.map((item: Neighborhood) => (
               <option key={item.id} value={item.id}>
-                {item.title} ({item.world.id})
+                {item.title} ({item.world?.id})
               </option>
             ))}
           </select>
         </div>
 
         <div className="col-md-4">
-          <label htmlFor="field-bedroom">Bedrooms</label>
+          <label htmlFor="field-building-type">Building type</label>
 
           <select
             className="form-select"
-            id="field-bedroom"
-            value={selectedBedroom || ''}
-            onChange={(event) => handleBedroomChange(event.target.value)}
+            id="field-building-type"
+            value={filter.buildingType || ''}
+            onChange={(event) => handleFilterChange({ buildingType: event.target.value })}
+          >
+            <option value="">{defaultSelection}</option>
+            {LOT_FILTER_OPTIONS?.buildingTypes?.map((item: { label: string; value: string }) => (
+              <option key={`building-type-${item.value}`} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="col-md-4">
+          <label htmlFor="field-transaction-type">Transaction type</label>
+
+          <select
+            className="form-select"
+            id="field-transaction-type"
+            value={filter.transactionType || ''}
+            onChange={(event) => handleFilterChange({ transactionType: event.target.value })}
+          >
+            <option value="">{defaultSelection}</option>
+            {LOT_FILTER_OPTIONS?.transactionTypes?.map((item) => (
+              <option key={`transaction-type-${item.value}`} value={item.value}>
+                {item.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="col-md-4">
+          <label htmlFor="field-bedrooms">Bedrooms</label>
+
+          <select
+            className="form-select"
+            id="field-bedrooms"
+            value={filter.bedrooms || ''}
+            onChange={(event) => handleFilterChange({ bedrooms: event.target.value })}
           >
             <option value="">{defaultSelection}</option>
 
-            {[1, 2, 3, 4, 5]?.map((item: any) => (
-              <option key={`bedroom-${item}`} value={item}>
+            {LOT_FILTER_OPTIONS?.bedrooms?.map((item: number) => (
+              <option key={`bedrooms-${item}`} value={item}>
                 {item}
               </option>
             ))}
@@ -185,18 +170,18 @@ export const SearchForm = () => {
         </div>
 
         <div className="col-md-4">
-          <label htmlFor="field-bathroom">Bathrooms</label>
+          <label htmlFor="field-bathrooms">Bathrooms</label>
 
           <select
             className="form-select"
-            id="field-bathroom"
-            value={selectedBathroom || ''}
-            onChange={(event) => handleBathroomChange(event.target.value)}
+            id="field-bathrooms"
+            value={filter.bathrooms || ''}
+            onChange={(event) => handleFilterChange({ bathrooms: event.target.value })}
           >
             <option value="">{defaultSelection}</option>
 
-            {[1, 2, 3, 4]?.map((item: any) => (
-              <option key={`bathroom-${item}`} value={item}>
+            {LOT_FILTER_OPTIONS?.bathrooms?.map((item: number) => (
+              <option key={`bathrooms-${item}`} value={item}>
                 {item}
               </option>
             ))}
@@ -209,59 +194,18 @@ export const SearchForm = () => {
           <select
             className="form-select"
             id="field-floors"
-            value={selectedFloor || ''}
-            onChange={(event) => handleFloorChange(event.target.value)}
+            value={filter.floors || ''}
+            onChange={(event) => handleFilterChange({ floors: event.target.value })}
           >
             <option value="">{defaultSelection}</option>
 
-            {[1, 2, 3]?.map((item: any) => (
+            {LOT_FILTER_OPTIONS?.floors?.map((item: number) => (
               <option key={`floors-${item}`} value={item}>
                 {item}
               </option>
             ))}
           </select>
         </div>
-
-        {/* <div className="col-md-4">
-          <label htmlFor="field-sort-by">Sort by</label>
-
-          <select
-            className="form-select"
-            id="field-sort-by"
-            value={selectedSortBy || ''}
-            onChange={(event) => handleSortByChange(event.target.value)}
-          >
-            <option value="">{defaultSelection}</option>
-
-            {['price', 'bedrooms', 'bathrooms', 'floors']?.map((item: any) => (
-              <option key={`sort-by-${item}`} value={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div> */}
-
-        {/* <div className="col-md-4">
-          <label htmlFor="field-sort">Sort type</label>
-
-          <select
-            className="form-select"
-            id="field-sort"
-            value={selectedSort || ''}
-            onChange={(event) => handleSortChange(event.target.value)}
-          >
-            <option value="">{defaultSelection}</option>
-
-            {[
-              { label: 'low to high', value: 'asc' },
-              { label: 'high to low', value: 'desc' },
-            ]?.map((item: any) => (
-              <option key={`sort-type-${item.value}`} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </select>
-        </div> */}
       </div>
 
       <div className="d-flex justify-content-center">

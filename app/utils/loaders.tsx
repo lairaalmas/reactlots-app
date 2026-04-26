@@ -6,6 +6,7 @@ import type { LotDTO } from '../../api/types/lotDTO';
 import type { Lot, LotFilters } from '../types/lot';
 import type { Neighborhood } from '../types/neighborhood';
 import type { World } from '../types/world';
+import { QUERY_PARAM_MAP, FILTER_KEYS } from './constants';
 
 type HomePageLoaderData = {
   lots: Lot[] | [];
@@ -33,35 +34,19 @@ export const homePageLoader = async ({ request, params }: any): Promise<HomePage
   try {
     // read query params
     const url = new URL(request.url);
+
     // get query params in browser on load
-    const filters: LotFilters = {
-      worldId: url.searchParams.get('world') || '',
-      neighborhoodId: url.searchParams.get('neighborhood') || '',
-      buildingType: url.searchParams.get('building_type') || '',
-      bedrooms: url.searchParams.get('bedrooms') || '',
-      bathrooms: url.searchParams.get('bathrooms') || '',
-      floors: url.searchParams.get('floors') || '',
-      sort: url.searchParams.get('sort') || '',
-      sortBy: url.searchParams.get('sort_by') || '',
-      transactionType: url.searchParams.get('transaction_type') || '',
-    };
+    const filters = FILTER_KEYS.reduce((acc, key) => {
+      acc[key] = url.searchParams.get(QUERY_PARAM_MAP[key]) || '';
+      return acc;
+    }, {} as LotFilters);
 
     // make all API calls in parallel
     const [worlds, neighborhoods, lots] = await Promise.all([
       getWorlds(),
       getNeighborhoods(),
       // send query params in browser to bff
-      getLots({
-        world: filters.worldId,
-        neighborhood: filters.neighborhoodId,
-        buildingType: filters.buildingType,
-        bedrooms: filters.bedrooms,
-        bathrooms: filters.bathrooms,
-        floors: filters.floors,
-        sort: filters.sort,
-        sortBy: filters.sortBy,
-        transactionType: filters.transactionType,
-      }),
+      getLots({ ...filters }),
     ]);
 
     const mappedLots: Lot[] = mapLots(lots);
