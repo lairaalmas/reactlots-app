@@ -8,7 +8,7 @@ It includes setup instructions, tooling configuration, and guidelines for modify
 
 | Technology                                                                   | Version | Info                                                     |
 | ---------------------------------------------------------------------------- | ------- | -------------------------------------------------------- |
-| [React](https://react.dev/)                                                  | 19.2.4  | JavaScript library for building component-based UI       |
+| [React](https://react.dev/)                                                  | 19.2.4  | JavaScript library for building user interfaces          |
 | [React Router](https://reactrouter.com/)                                     | 7.13.2  | Client-side routing with loader based data fetching      |
 | [TypeScript](https://www.typescriptlang.org/)                                | 5.9.3   | Adds type checking to JavaScript                         |
 | [Vite](https://vite.dev/guide/)                                              | 8.0.1   | Fast building tool                                       |
