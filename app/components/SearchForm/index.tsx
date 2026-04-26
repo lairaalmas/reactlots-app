@@ -104,7 +104,6 @@ export const SearchForm = () => {
           </select>
         </div>
 
-        {/* built x empty */}
         <div className="col-md-4">
           <label htmlFor="field-building-type">Building type</label>
 
@@ -127,7 +126,6 @@ export const SearchForm = () => {
           </select>
         </div>
 
-        {/* world */}
         <div className="col-md-4">
           <label htmlFor="field-world">World</label>
 
@@ -147,7 +145,6 @@ export const SearchForm = () => {
           </select>
         </div>
 
-        {/* neighborhood */}
         <div className="col-md-4">
           <label htmlFor="field-neigh">Neighborhood</label>
 
@@ -167,7 +164,6 @@ export const SearchForm = () => {
           </select>
         </div>
 
-        {/* bedroom */}
         <div className="col-md-4">
           <label htmlFor="field-bedroom">Bedroom</label>
 
@@ -187,7 +183,6 @@ export const SearchForm = () => {
           </select>
         </div>
 
-        {/* bathroom */}
         <div className="col-md-4">
           <label htmlFor="field-bathroom">Bathroom</label>
 
@@ -207,7 +202,6 @@ export const SearchForm = () => {
           </select>
         </div>
 
-        {/* floors */}
         <div className="col-md-4">
           <label htmlFor="field-floors">Floors</label>
 
@@ -227,9 +221,6 @@ export const SearchForm = () => {
           </select>
         </div>
 
-        {/* <hr className="text-light mt-3" /> */}
-
-        {/* sort by */}
         {/* <div className="col-md-4">
           <label htmlFor="field-sort-by">Sort by</label>
 
@@ -249,7 +240,6 @@ export const SearchForm = () => {
           </select>
         </div> */}
 
-        {/* sort */}
         {/* <div className="col-md-4">
           <label htmlFor="field-sort">Sort type</label>
 
