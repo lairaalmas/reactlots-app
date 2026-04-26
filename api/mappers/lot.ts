@@ -14,7 +14,16 @@ export const mapLot = (dto: LotDTO): Lot => {
     id: dto.id,
     title: dto.title,
     description: dto.description,
+    transactionType: dto.transaction_type,
     price: dto.price,
+    priceDetails: {
+      wiki: dto.price_details?.wiki,
+      preGame: dto.price_details?.pre_game,
+      inGame: dto.price_details?.in_game,
+      rent: dto.price_details?.rent,
+      deposit: dto.price_details?.deposit,
+      furniture: dto.price_details?.furniture,
+    },
     dimensions: {
       width: dto.dimensions.width,
       depth: dto.dimensions.depth,
@@ -23,7 +32,6 @@ export const mapLot = (dto: LotDTO): Lot => {
     availability: dto.availability,
     buildingDetails: {
       type: dto.building_details.type, // setFirstUpperCase(dto.building_details.type),
-      status: dto.building_details.status,
       bedrooms: dto.building_details.bedrooms,
       bathrooms: dto.building_details.bathrooms,
       floors: dto.building_details.floors,
@@ -36,6 +44,7 @@ export const mapLot = (dto: LotDTO): Lot => {
     neighborhood: {
       id: dto.neighborhood.id,
       title: dto.neighborhood.title,
+      color: dto.neighborhood.color,
     },
   };
 };
