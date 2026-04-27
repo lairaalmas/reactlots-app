@@ -1,11 +1,11 @@
-import { useMemo, useReducer, useState } from 'react';
+import { useMemo, useReducer } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import type { Neighborhood } from '../../types/neighborhood';
 import type { World } from '../../types/world';
 import { Icon } from '../Icon';
-import { filtersReducer } from './reducer/filterReducer';
+import { filtersReducer } from '../../hooks/reducers/filterReducer';
 import type { LotFilters } from '../../types/lot';
-import { FILTER_KEYS, QUERY_PARAM_MAP } from '../../utils/constants';
+import { QUERY_PARAM_MAP_KEYS, QUERY_PARAM_MAP } from '../../utils/constants';
 
 const LOT_FILTER_OPTIONS = {
   buildingTypes: [
@@ -31,7 +31,7 @@ export const SearchForm = () => {
   const navigate = useNavigate();
   const { worlds, neighborhoods, filters } = useLoaderData();
 
-  const initialFilter = FILTER_KEYS.reduce((acc, key) => {
+  const initialFilter = QUERY_PARAM_MAP_KEYS.reduce((acc, key) => {
     acc[key] = filters?.[key] || '';
     return acc;
   }, {} as LotFilters);

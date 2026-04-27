@@ -6,6 +6,7 @@ export const mapNeighborhood = (dto: NeighborhoodDTO): Neighborhood => {
     id: dto.id,
     title: dto.title,
     description: dto.description,
+    color: dto.color,
     world: {
       id: dto.world.id,
       title: dto.world.title,

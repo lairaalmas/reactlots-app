@@ -1,9 +1,12 @@
 import { useLoaderData } from 'react-router-dom';
 import type { Lot } from '../../types/lot';
 import { Card } from '../Card';
+import { useFavoriteLots } from '../../hooks/custom/useFavoriteLots';
 
 export const SearchResults = () => {
   const { lots } = useLoaderData();
+
+  const { isFavoriteLot, toggleFavoriteLot } = useFavoriteLots();
 
   return (
     <>
@@ -16,7 +19,7 @@ export const SearchResults = () => {
           <ul className="list-unstyled">
             {lots.map((lot: Lot, index: number) => (
               <li className="border-bottom" key={`card-${lot.id}`}>
-                <Card lot={lot} index={index} />
+                <Card lot={lot} index={index} isFavoriteLot={isFavoriteLot} toggleFavoriteLot={toggleFavoriteLot} />
               </li>
             ))}
           </ul>
