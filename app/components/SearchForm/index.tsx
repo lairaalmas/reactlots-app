@@ -1,9 +1,9 @@
-import { useMemo, useReducer, useState } from 'react';
+import { useMemo, useReducer } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import type { Neighborhood } from '../../types/neighborhood';
 import type { World } from '../../types/world';
 import { Icon } from '../Icon';
-import { filtersReducer } from './reducer/filterReducer';
+import { filtersReducer } from '../../hooks/reducers/filterReducer';
 import type { LotFilters } from '../../types/lot';
 import { QUERY_PARAM_MAP_KEYS, QUERY_PARAM_MAP } from '../../utils/constants';
 
