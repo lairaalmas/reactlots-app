@@ -2,8 +2,11 @@ import { Link } from 'react-router-dom';
 import type { Lot } from '../../types/lot';
 import { Money } from '../Money';
 import { Icon } from '../Icon';
+import { ButtonFavorite } from '../ButtonFavorite';
 
-export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
+type CardComponent = { lot: Lot; index: number; isFavoriteLot: any; toggleFavoriteLot: any };
+
+export const Card = ({ lot, index, isFavoriteLot, toggleFavoriteLot }: CardComponent) => {
   if (!lot) return <></>; // TODO: add error card
 
   const neighborhoodTheme = `rlt-card--${lot?.neighborhood?.color}`;
@@ -137,9 +140,13 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
 
   return (
     <div className="row my-4">
-      {/* <span>{index}.</span> */}
-      {lotImage()}
+      <div className="d-flex justify-content-end">
+        <ButtonFavorite lotId={lot.id} isFavorite={isFavoriteLot(lot.id)} onToggleFavorite={toggleFavoriteLot} />
+      </div>
 
+      {/* <span>{index}.</span> */}
+
+      {lotImage()}
       <div className="col-8">
         {headerInfo()}
 
