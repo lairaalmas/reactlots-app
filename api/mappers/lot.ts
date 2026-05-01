@@ -13,16 +13,19 @@ export const mapLot = (dto: LotDTO): Lot => {
     id: dto.id,
     title: dto.title,
     description: dto.description,
-    transactionType: dto.transaction_type,
     price: dto.price,
-    priceDetails: {
-      wiki: dto.price_details?.wiki,
-      preGame: dto.price_details?.pre_game,
-      inGame: dto.price_details?.in_game,
-      rent: dto.price_details?.rent,
-      deposit: dto.price_details?.deposit,
-      furniture: dto.price_details?.furniture,
+    priceHistory: {
+      wiki: dto.price_history?.wiki,
+      preGame: dto.price_history?.pre_game,
+      inGame: dto.price_history?.in_game,
     },
+    rentDetails: {
+      rent: dto.rent_details?.rent,
+      deposit: dto.rent_details?.deposit,
+      furniture: dto.rent_details?.furniture,
+      period: dto.rent_details?.period,
+    },
+    transactionType: dto.transaction_type,
     dimensions: {
       width: dto.dimensions.width,
       depth: dto.dimensions.depth,
@@ -35,6 +38,7 @@ export const mapLot = (dto: LotDTO): Lot => {
       bathrooms: dto.building_details.bathrooms,
       floors: dto.building_details.floors,
     },
+    owner: dto.owner,
     imageUrl: dto.image_url,
     world: {
       id: dto.world.id,

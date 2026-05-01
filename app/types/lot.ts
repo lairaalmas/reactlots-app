@@ -4,13 +4,16 @@ export type Lot = {
   title: string;
   description: string;
   price: number;
-  priceDetails: {
+  priceHistory: {
     wiki?: number;
     preGame?: number;
     inGame?: number;
+  };
+  rentDetails: {
     rent?: number;
     deposit?: number;
     furniture?: number;
+    period?: number;
   };
   transactionType: string;
   dimensions: {
@@ -25,6 +28,7 @@ export type Lot = {
     bathrooms: number;
     floors: number;
   };
+  owner?: string;
   imageUrl: string;
   world: {
     id: string;

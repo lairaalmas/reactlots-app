@@ -4,13 +4,16 @@ export type LotDTO = {
   title: string;
   description: string;
   price: number;
-  price_details: {
+  price_history: {
     wiki?: number;
     pre_game?: number;
     in_game?: number;
+  };
+  rent_details: {
     rent?: number;
     deposit?: number;
     furniture?: number;
+    period?: number;
   };
   transaction_type: string;
   dimensions: {
@@ -25,6 +28,7 @@ export type LotDTO = {
     bathrooms: number;
     floors: number;
   };
+  owner?: string;
   image_url: string;
   world: {
     id: string;

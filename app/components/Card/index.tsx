@@ -55,7 +55,8 @@ export const Card = ({ lot, index, isFavoriteLot, toggleFavoriteLot }: CardCompo
         </h3>
         <span className="d-flex align-items-center">
           {lot?.price > 0 ? <Money value={lot.price} /> : '-'}
-          {lot?.transactionType === 'rent' && <span>/week</span>}
+          {lot?.transactionType === 'rent' ||
+            (lot?.transactionType === 'both' && <span>/{lot?.rentDetails?.period}</span>)}
         </span>
       </div>
     </header>
@@ -76,26 +77,6 @@ export const Card = ({ lot, index, isFavoriteLot, toggleFavoriteLot }: CardCompo
       <li>
         <strong>Transaction type:</strong> <span>{parseString(lot?.transactionType)}</span>
       </li>
-      {/* <li>
-        Price History:
-        <ul>
-          <li
-            className={`fw-semibold ${lot?.price === -1 ? 'text-danger' : lot?.price === -2 ? 'text-secondary' : ''}`}
-          >
-            Price: {lot?.price}
-          </li>
-          <li
-            className={`fw-semibold ${lot?.priceDetails?.preGame === -1 ? 'text-danger' : lot?.priceDetails?.preGame === -2 ? 'text-secondary' : ''}`}
-          >
-            Pre game: {lot?.priceDetails?.preGame}
-          </li>
-          <li
-            className={`fw-semibold ${lot?.priceDetails?.inGame === -1 ? 'text-danger' : lot?.priceDetails?.inGame === -2 ? 'text-secondary' : ''}`}
-          >
-            In game: {lot?.priceDetails?.inGame}
-          </li>
-        </ul>
-      </li> */}
     </ul>
   );
 
