@@ -2,11 +2,14 @@ import { Link } from 'react-router-dom';
 import type { Lot } from '../../types/lot';
 import { Money } from '../Money';
 import { Icon } from '../Icon';
+import { ButtonFavorite } from '../ButtonFavorite';
 
-export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
+type CardComponent = { lot: Lot; isFavoriteLot: any; toggleFavoriteLot: any };
+
+export const Card = ({ lot, isFavoriteLot, toggleFavoriteLot }: CardComponent) => {
   if (!lot) return <></>; // TODO: add error card
 
-  const neighborhoodTheme = `rlt-card--${lot?.neighborhood?.color}`;
+  const neighborhoodTheme = ''; // `rlt-card--${lot?.neighborhood?.color}`;
 
   const buildingTypes = ['house', 'apartment', 'empty'];
   const buildingTypeClass = buildingTypes.includes(lot?.buildingDetails?.type) ? '' : 'text-danger';
@@ -28,22 +31,13 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
   };
 
   const lotImage = () => (
-    <div className="col-4">
-      <Link to={`/lots/${lot?.id}`}>
-        <img className="rlt-search-list__item__thumb" src={lot.imageUrl} alt={`${lot?.title} lot picture`} />
-      </Link>
-    </div>
+    <Link to={`/lots/${lot?.id}`}>
+      <img className="rlt-search-list__item__thumb" src={lot.imageUrl} alt={`${lot?.title} lot picture`} />
+    </Link>
   );
 
   const headerInfo = () => (
     <header>
-      <div>
-        <span className={neighborhoodTheme}>
-          <Icon name="location_on" />
-        </span>{' '}
-        {lot?.neighborhood?.title} ({lot?.world?.title})
-      </div>
-
       <div className="d-flex gap-2 justify-content-between">
         <h3>
           <Link className="link-underline link-underline-opacity-0" to={`/lots/${lot?.id}`}>
@@ -51,8 +45,16 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
           </Link>
         </h3>
         <span className="d-flex align-items-center">
-          {lot?.price > 0 ? <Money value={lot.price} /> : '-'}
-          {lot?.transactionType === 'rent' && <span>/week</span>}
+          {lot?.transaction?.mainPrice > 0 ? <Money value={lot.transaction?.mainPrice} /> : '-'}
+          {(lot?.transaction?.type === 'rent' || lot?.transaction?.type === 'both') && (
+            <span>/{lot?.transaction?.rent?.period || 'weekly'}</span>
+          )}
+        </span>
+      </div>
+      <div className="d-flex">
+        {lot?.neighborhood?.title} ({lot?.world?.title})
+        <span className={neighborhoodTheme}>
+          <Icon name="location_on" />
         </span>
       </div>
     </header>
@@ -71,38 +73,20 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
         <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.type)}</span>
       </li>
       <li>
-        <strong>Transaction type:</strong> <span>{parseString(lot?.transactionType)}</span>
+        <strong>Transaction type:</strong> <span>{parseString(lot?.transaction?.type)}</span>
       </li>
-      {/* <li>
-        Price History:
-        <ul>
-          <li
-            className={`fw-semibold ${lot?.price === -1 ? 'text-danger' : lot?.price === -2 ? 'text-secondary' : ''}`}
-          >
-            Price: {lot?.price}
-          </li>
-          <li
-            className={`fw-semibold ${lot?.priceDetails?.preGame === -1 ? 'text-danger' : lot?.priceDetails?.preGame === -2 ? 'text-secondary' : ''}`}
-          >
-            Pre game: {lot?.priceDetails?.preGame}
-          </li>
-          <li
-            className={`fw-semibold ${lot?.priceDetails?.inGame === -1 ? 'text-danger' : lot?.priceDetails?.inGame === -2 ? 'text-secondary' : ''}`}
-          >
-            In game: {lot?.priceDetails?.inGame}
-          </li>
-        </ul>
-      </li> */}
     </ul>
   );
 
   const buildingInfo = () => (
     <ul className="list-unstyled">
-      <li>
-        <p className="rlt-search-list__item__description m-0 mb-3">
-          <strong>Description:</strong> {parseString(lot?.description)}
-        </p>
-      </li>
+      {parseString(lot?.description) !== '-' && (
+        <li>
+          <p className="rlt-search-list__item__description m-0 mb-3">
+            <strong>Description:</strong> {parseString(lot?.description)}
+          </p>
+        </li>
+      )}
 
       <li>
         <strong>Dimensions:</strong>{' '}
@@ -137,8 +121,7 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
 
   return (
     <div className="row my-4">
-      {/* <span>{index}.</span> */}
-      {lotImage()}
+      <div className="col-3">{lotImage()}</div>
 
       <div className="col-8">
         {headerInfo()}
@@ -146,6 +129,10 @@ export const Card = ({ lot, index }: { lot: Lot; index: number }) => {
         {lotInfo()}
 
         {buildingInfo()}
+      </div>
+
+      <div className="col-1">
+        <ButtonFavorite lotId={lot.id} isFavorite={isFavoriteLot(lot.id)} onToggleFavorite={toggleFavoriteLot} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import type { LotFilters } from '../../../types/lot';
-import { FILTER_KEYS } from '../../../utils/constants';
+import type { LotFilters } from '../../types/lot';
+import { QUERY_PARAM_MAP_KEYS } from '../../utils/constants';
 
-export const emptyFilter = FILTER_KEYS.reduce((acc, n) => {
+export const emptyFilter = QUERY_PARAM_MAP_KEYS.reduce((acc, n) => {
   acc[n] = '';
   return acc;
 }, {} as LotFilters);
