@@ -1,11 +1,11 @@
-import { useMemo, useReducer, useState } from 'react';
+import { useMemo, useReducer } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import type { Neighborhood } from '../../types/neighborhood';
 import type { World } from '../../types/world';
 import { Icon } from '../Icon';
-import { filtersReducer } from './reducer/filterReducer';
+import { filtersReducer } from '../../hooks/reducers/filterReducer';
 import type { LotFilters } from '../../types/lot';
-import { FILTER_KEYS, QUERY_PARAM_MAP } from '../../utils/constants';
+import { QUERY_PARAM_MAP_KEYS, QUERY_PARAM_MAP } from '../../utils/constants';
 
 const LOT_FILTER_OPTIONS = {
   buildingTypes: [
@@ -31,7 +31,7 @@ export const SearchForm = () => {
   const navigate = useNavigate();
   const { worlds, neighborhoods, filters } = useLoaderData();
 
-  const initialFilter = FILTER_KEYS.reduce((acc, key) => {
+  const initialFilter = QUERY_PARAM_MAP_KEYS.reduce((acc, key) => {
     acc[key] = filters?.[key] || '';
     return acc;
   }, {} as LotFilters);
@@ -209,11 +209,11 @@ export const SearchForm = () => {
       </div>
 
       <div className="d-flex justify-content-center">
-        <button className="rlt-search__btn rlt-search__btn--primary" type="submit">
+        <button className="rlt-btn --lg --search" type="submit">
           <Icon name="search" ariaLabel="Search lots" />
         </button>
 
-        <button className="rlt-search__btn rlt-search__btn--secondary" type="button" onClick={handleClear}>
+        <button className="rlt-btn --sm --search" type="button" onClick={handleClear}>
           <Icon name="close" ariaLabel="Clear filters" />
         </button>
       </div>

@@ -14,5 +14,6 @@ export const QUERY_PARAM_MAP: LotFilters = {
   buildingType: 'building_type',
   transactionType: 'transaction_type',
 } as const;
+export const QUERY_PARAM_MAP_KEYS = Object.keys(QUERY_PARAM_MAP) as Array<keyof LotFilters>;
 
-export const FILTER_KEYS = Object.keys(QUERY_PARAM_MAP) as Array<keyof LotFilters>;
+export const FAVORITE_LOTS_STORAGE_KEY = 'reactlots:favorite-lots';

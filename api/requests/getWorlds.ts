@@ -3,7 +3,7 @@ import { ENV } from '../config/env';
 
 export const getWorlds = async (): Promise<WorldDTO[]> => {
   if (!ENV.BASE_URL) {
-    throw new Error('Missing env variable for BASE_URL');
+    throw new Error('Missing env variable for api BASE_URL');
   }
 
   const url = `${ENV.BASE_URL}/worlds`;

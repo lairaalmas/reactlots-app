@@ -1,30 +1,15 @@
+export type RentFields = {
+  rent?: number;
+  deposit?: number;
+  furniture?: number;
+  period?: string;
+};
+
 // Domain type (used by UI and business logic)
 export type Lot = {
   id: string;
   title: string;
   description: string;
-  price: number;
-  priceDetails: {
-    wiki?: number;
-    preGame?: number;
-    inGame?: number;
-    rent?: number;
-    deposit?: number;
-    furniture?: number;
-  };
-  transactionType: string;
-  dimensions: {
-    width: number;
-    depth: number;
-  };
-  type: string;
-  availability: string;
-  buildingDetails: {
-    type: string;
-    bedrooms: number;
-    bathrooms: number;
-    floors: number;
-  };
   imageUrl: string;
   world: {
     id: string;
@@ -34,6 +19,35 @@ export type Lot = {
     id: string;
     title: string;
     color: string;
+  };
+  type: string;
+  dimensions: {
+    width: number;
+    depth: number;
+  };
+  availability: string;
+  owner?: string;
+  transaction: {
+    type: string;
+    mainPrice: number;
+    rent?: RentFields;
+    rentDetails?: {
+      inGame?: RentFields;
+      preGame?: RentFields;
+    };
+    buy?: {
+      price?: number;
+    };
+    buyDetails?: {
+      preGame?: number;
+      inGame?: number;
+    };
+  };
+  buildingDetails: {
+    type: string;
+    bedrooms: number;
+    bathrooms: number;
+    floors: number;
   };
 };
 

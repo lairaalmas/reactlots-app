@@ -6,7 +6,7 @@ import type { LotDTO } from '../../api/types/lotDTO';
 import type { Lot, LotFilters } from '../types/lot';
 import type { Neighborhood } from '../types/neighborhood';
 import type { World } from '../types/world';
-import { QUERY_PARAM_MAP, FILTER_KEYS } from './constants';
+import { QUERY_PARAM_MAP, QUERY_PARAM_MAP_KEYS } from './constants';
 
 type HomePageLoaderData = {
   lots: Lot[] | [];
@@ -15,7 +15,8 @@ type HomePageLoaderData = {
   filters: LotFilters;
 };
 
-export const lotPageLoader = async ({ request, params }: any): Promise<Lot> => {
+// request, params
+export const lotPageLoader = async ({ params }: any): Promise<Lot> => {
   // read params
   const { id } = params;
 
@@ -30,39 +31,57 @@ export const lotPageLoader = async ({ request, params }: any): Promise<Lot> => {
   return mappedLot;
 };
 
-export const homePageLoader = async ({ request, params }: any): Promise<HomePageLoaderData> => {
+export const homePageLoader = async ({ request }: any): Promise<HomePageLoaderData> => {
   try {
     // read query params
     const url = new URL(request.url);
 
-    // get query params in browser on load
-    const filters = FILTER_KEYS.reduce((acc, key) => {
+    // get query params (from browser) on load
+    // map to camelCase
+    const queryParams = QUERY_PARAM_MAP_KEYS.reduce((acc, key) => {
       acc[key] = url.searchParams.get(QUERY_PARAM_MAP[key]) || '';
       return acc;
     }, {} as LotFilters);
 
     // make all API calls in parallel
-    const [worlds, neighborhoods, lots] = await Promise.all([
+    const [worldsDTO, neighborhoodsDTO, lotsDTO] = await Promise.all([
       getWorlds(),
       getNeighborhoods(),
-      // send query params in browser to bff
-      getLots({ ...filters }),
+      // send query params (camelCase) from browser to bff
+      getLots(queryParams),
     ]);
 
-    const mappedLots: Lot[] = mapLots(lots);
+    const lots: Lot[] = mapLots(lotsDTO);
 
     // return fetched data and query params as filters
     return {
-      lots: mappedLots || [],
-      worlds: worlds || [],
-      neighborhoods: neighborhoods || [],
-      filters: filters,
+      lots: lots || [],
+      worlds: worldsDTO || [],
+      neighborhoods: neighborhoodsDTO || [],
+      filters: queryParams,
     };
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error loading home page data.', error);
 
     throw new Response('Error loading home page data.', {
+      status: 500,
+    });
+  }
+};
+
+export const favoritesPageLoader = async (): Promise<Lot[]> => {
+  try {
+    const lotsDTO = await getLots();
+
+    const lots: Lot[] = mapLots(lotsDTO);
+
+    return lots;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error loading favorites page data.', error);
+
+    throw new Response('Error loading favorites page data.', {
       status: 500,
     });
   }
