@@ -9,7 +9,7 @@ type CardComponent = { lot: Lot; isFavoriteLot: any; toggleFavoriteLot: any };
 export const Card = ({ lot, isFavoriteLot, toggleFavoriteLot }: CardComponent) => {
   if (!lot) return <></>; // TODO: add error card
 
-  const neighborhoodTheme = `rlt-card--${lot?.neighborhood?.color}`;
+  const neighborhoodTheme = ''; // `rlt-card--${lot?.neighborhood?.color}`;
 
   const buildingTypes = ['house', 'apartment', 'empty'];
   const buildingTypeClass = buildingTypes.includes(lot?.buildingDetails?.type) ? '' : 'text-danger';
@@ -80,11 +80,13 @@ export const Card = ({ lot, isFavoriteLot, toggleFavoriteLot }: CardComponent) =
 
   const buildingInfo = () => (
     <ul className="list-unstyled">
-      <li>
-        <p className="rlt-search-list__item__description m-0 mb-3">
-          <strong>Description:</strong> {parseString(lot?.description)}
-        </p>
-      </li>
+      {parseString(lot?.description) !== '-' && (
+        <li>
+          <p className="rlt-search-list__item__description m-0 mb-3">
+            <strong>Description:</strong> {parseString(lot?.description)}
+          </p>
+        </li>
+      )}
 
       <li>
         <strong>Dimensions:</strong>{' '}
