@@ -4,9 +4,9 @@ import { Money } from '../Money';
 import { Icon } from '../Icon';
 import { ButtonFavorite } from '../ButtonFavorite';
 
-type CardComponent = { lot: Lot; index: number; isFavoriteLot: any; toggleFavoriteLot: any };
+type CardComponent = { lot: Lot; isFavoriteLot: any; toggleFavoriteLot: any };
 
-export const Card = ({ lot, index, isFavoriteLot, toggleFavoriteLot }: CardComponent) => {
+export const Card = ({ lot, isFavoriteLot, toggleFavoriteLot }: CardComponent) => {
   if (!lot) return <></>; // TODO: add error card
 
   const neighborhoodTheme = `rlt-card--${lot?.neighborhood?.color}`;

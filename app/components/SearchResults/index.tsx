@@ -17,9 +17,9 @@ export const SearchResults = () => {
       <div>
         {lots.length > 0 ? (
           <ul className="list-unstyled">
-            {lots.map((lot: Lot, index: number) => (
+            {lots.map((lot: Lot) => (
               <li className="border-bottom" key={`card-${lot.id}`}>
-                <Card lot={lot} index={index} isFavoriteLot={isFavoriteLot} toggleFavoriteLot={toggleFavoriteLot} />
+                <Card lot={lot} isFavoriteLot={isFavoriteLot} toggleFavoriteLot={toggleFavoriteLot} />
               </li>
             ))}
           </ul>
