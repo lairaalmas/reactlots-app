@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { RootLayout } from './layouts/RootLayout';
 import { ErrorPage } from './pages/ErrorPage';
-import { lotPageLoader, homePageLoader } from './utils/loaders';
+import { lotPageLoader, homePageLoader, favoritesPageLoader } from './utils/loaders';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -27,6 +27,8 @@ const router = createBrowserRouter([
       {
         path: 'favorites',
         element: <FavoritesPage />,
+        loader: favoritesPageLoader,
+        errorElement: <ErrorPage />,
       },
       {
         path: 'lots/:id',

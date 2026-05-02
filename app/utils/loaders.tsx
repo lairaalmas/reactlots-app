@@ -69,3 +69,20 @@ export const homePageLoader = async ({ request }: any): Promise<HomePageLoaderDa
     });
   }
 };
+
+export const favoritesPageLoader = async (): Promise<Lot[]> => {
+  try {
+    const lotsDTO = await getLots();
+
+    const lots: Lot[] = mapLots(lotsDTO);
+
+    return lots;
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error loading favorites page data.', error);
+
+    throw new Response('Error loading favorites page data.', {
+      status: 500,
+    });
+  }
+};
