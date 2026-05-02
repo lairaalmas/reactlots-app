@@ -43,5 +43,6 @@ export type LotDTO = {
     bedrooms: number;
     bathrooms: number;
     floors: number;
+    title?: string;
   };
 };

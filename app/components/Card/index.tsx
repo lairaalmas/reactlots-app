@@ -44,12 +44,15 @@ export const Card = ({ lot, isFavoriteLot, toggleFavoriteLot }: CardComponent) =
             {lot?.title}
           </Link>
         </h3>
-        <span className="d-flex align-items-center">
-          {lot?.transaction?.mainPrice > 0 ? <Money value={lot.transaction?.mainPrice} /> : '-'}
-          {(lot?.transaction?.type === 'rent' || lot?.transaction?.type === 'both') && (
-            <span>/{lot?.transaction?.rent?.period || 'weekly'}</span>
-          )}
-        </span>
+
+        <div>
+          <div className="d-flex align-items-center">
+            {lot?.transaction?.mainPrice > 0 ? <Money value={lot.transaction?.mainPrice} /> : '-'}
+            {(lot?.transaction?.type === 'rent' || lot?.transaction?.type === 'both') && (
+              <span>/{lot?.transaction?.rent?.period || 'weekly'}</span>
+            )}
+          </div>
+        </div>
       </div>
       <div className="d-flex">
         {lot?.neighborhood?.title} ({lot?.world?.title})
@@ -62,6 +65,23 @@ export const Card = ({ lot, isFavoriteLot, toggleFavoriteLot }: CardComponent) =
 
   const lotInfo = () => (
     <ul className="list-unstyled mb-3">
+      {lot?.buildingDetails?.title && (
+        <li>
+          <strong>Apartment title:</strong>{' '}
+          <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.title)}</span>
+        </li>
+      )}
+      <li>
+        <strong>Transaction type:</strong> <span>{parseString(lot?.transaction?.type)}</span>
+      </li>
+      {lot?.transaction?.rent?.deposit && (
+        <li>
+          <span className="d-flex align-items-center">
+            <strong>Deposit:</strong>&nbsp;
+            <Money value={lot.transaction?.rent?.deposit || 0} size="inherit" />
+          </span>
+        </li>
+      )}
       <li>
         <strong>Availability:</strong> <span className={availabilityClass}>{parseString(lot?.availability)}</span>
       </li>
@@ -71,9 +91,6 @@ export const Card = ({ lot, isFavoriteLot, toggleFavoriteLot }: CardComponent) =
       <li>
         <strong>Building type:</strong>{' '}
         <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.type)}</span>
-      </li>
-      <li>
-        <strong>Transaction type:</strong> <span>{parseString(lot?.transaction?.type)}</span>
       </li>
     </ul>
   );

@@ -44,6 +44,7 @@ export type Lot = {
     };
   };
   buildingDetails: {
+    title?: string;
     type: string;
     bedrooms: number;
     bathrooms: number;

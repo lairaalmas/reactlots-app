@@ -32,6 +32,7 @@ export const mapLot = (dto: LotDTO): Lot => {
       bedrooms: dto.building_details.bedrooms,
       bathrooms: dto.building_details.bathrooms,
       floors: dto.building_details.floors,
+      title: dto.building_details?.title,
     },
     owner: dto.owner,
     imageUrl: dto.image_url,
