@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-const FAVORITE_LOTS_STORAGE_KEY = 'reactlots:favorite-lots';
+import { FAVORITE_LOTS_STORAGE_KEY } from '../../utils/constants';
 
 export const useFavoriteLots = () => {
   // list of favorite lot ids in local storage
