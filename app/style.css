@@ -216,6 +216,5 @@ a img:hover {
 }
 /* Favorites button */
 .rlt-btn.--favorite.--sm {
-  padding: .2rem; 
-   /* // .25rem */
+  padding: .3rem .25rem  .15rem .25rem; 
 }
