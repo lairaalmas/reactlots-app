@@ -1,3 +1,5 @@
+import { Icon } from '../Icon';
+
 type FavoriteLotButtonProps = {
   lotId: string;
   isFavorite: boolean;
@@ -6,15 +8,23 @@ type FavoriteLotButtonProps = {
 
 export const ButtonFavorite = ({ lotId, isFavorite, onToggleFavorite }: FavoriteLotButtonProps) => {
   return (
-    <button
-      className="btn btn-outline-secondary"
-      type="button"
-      aria-pressed={isFavorite}
-      aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-      title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-      onClick={() => onToggleFavorite(lotId)}
-    >
-      {isFavorite ? '★' : '☆'}
-    </button>
+    <>
+      <button
+        className="rlt-btn --favorite --sm"
+        type="button"
+        aria-pressed={isFavorite}
+        aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+        title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+        onClick={() => onToggleFavorite(lotId)}
+      >
+        {isFavorite ? (
+          <Icon
+            name="favorite" //color="red"
+          />
+        ) : (
+          <Icon name="favorite" isOutlined />
+        )}
+      </button>
+    </>
   );
 };

@@ -209,11 +209,11 @@ export const SearchForm = () => {
       </div>
 
       <div className="d-flex justify-content-center">
-        <button className="rlt-search__btn rlt-search__btn--primary" type="submit">
+        <button className="rlt-btn --lg --search" type="submit">
           <Icon name="search" ariaLabel="Search lots" />
         </button>
 
-        <button className="rlt-search__btn rlt-search__btn--secondary" type="button" onClick={handleClear}>
+        <button className="rlt-btn --sm --search" type="button" onClick={handleClear}>
           <Icon name="close" ariaLabel="Clear filters" />
         </button>
       </div>

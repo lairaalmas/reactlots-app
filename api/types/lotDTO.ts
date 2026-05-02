@@ -1,34 +1,10 @@
+import type { RentFields } from '../../app/types/lot';
+
 // DTO (Data Transfer Object) - represent the shape returned by the API (snake_case)
 export type LotDTO = {
   id: string;
   title: string;
   description: string;
-  price: number;
-  price_history: {
-    wiki?: number;
-    pre_game?: number;
-    in_game?: number;
-  };
-  rent_details: {
-    rent?: number;
-    deposit?: number;
-    furniture?: number;
-    period?: number;
-  };
-  transaction_type: string;
-  dimensions: {
-    width: number;
-    depth: number;
-  };
-  type: string;
-  availability: string;
-  building_details: {
-    type: string;
-    bedrooms: number;
-    bathrooms: number;
-    floors: number;
-  };
-  owner?: string;
   image_url: string;
   world: {
     id: string;
@@ -38,5 +14,34 @@ export type LotDTO = {
     id: string;
     title: string;
     color: string;
+  };
+  type: string;
+  dimensions: {
+    width: number;
+    depth: number;
+  };
+  availability: string;
+  owner?: string;
+  transaction: {
+    type: string;
+    main_price: number;
+    rent?: RentFields;
+    rent_details?: {
+      in_game?: RentFields;
+      pre_game?: RentFields;
+    };
+    buy?: {
+      price: number;
+    };
+    buy_details?: {
+      pre_game?: number;
+      in_game?: number;
+    };
+  };
+  building_details: {
+    type: string;
+    bedrooms: number;
+    bathrooms: number;
+    floors: number;
   };
 };
