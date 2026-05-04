@@ -27,28 +27,34 @@ export type Lot = {
   };
   availability: string;
   owner?: string;
+  buildingDetails: {
+    type: string;
+    apartmentTitle?: string;
+    bedrooms: number;
+    bathrooms: number;
+    floors: number;
+  };
   transaction: {
     type: string;
     mainPrice: number;
     rent?: RentFields;
     rentDetails?: {
-      inGame?: RentFields;
-      preGame?: RentFields;
-    };
-    buy?: {
-      price?: number;
+      rent?: number;
+      deposit?: number;
+      furniture?: number;
+      period?: string;
+      priceHistory?: {
+        preGame?: { furniture: number };
+        inGame?: { furniture: number };
+      };
     };
     buyDetails?: {
-      preGame?: number;
-      inGame?: number;
+      price?: number;
+      priceHistory?: {
+        preGame?: number;
+        inGame?: number;
+      };
     };
-  };
-  buildingDetails: {
-    title?: string;
-    type: string;
-    bedrooms: number;
-    bathrooms: number;
-    floors: number;
   };
 };
 
