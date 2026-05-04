@@ -4,13 +4,26 @@ import { Card } from '../Card';
 import { useFavoriteLots } from '../../hooks/custom/useFavoriteLots';
 
 export const SearchResults = () => {
-  const { lots } = useLoaderData();
+  const { lots, filters } = useLoaderData();
+
+  const validFilters = Object.entries(filters)?.reduce((acc: string[], n) => {
+    const [key, value] = n;
+    return value !== '' ? [...acc, key] : acc;
+  }, []);
+
+  const filterText = validFilters.join(', ');
 
   const { isFavoriteLot, toggleFavoriteLot } = useFavoriteLots();
 
   return (
     <>
       <header>
+        {validFilters.length > 0 && (
+          <div className="d-flex gap-2">
+            <strong>Filtering by:</strong>
+            <ul className="list-inline">{filterText}</ul>
+          </div>
+        )}
         <p className="fw-bold">{`${lots.length} ${lots.length === 1 ? 'result' : 'results'}`}</p>
         {/* TODO: sorting selections */}
       </header>
