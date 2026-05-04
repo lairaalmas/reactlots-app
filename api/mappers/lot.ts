@@ -13,28 +13,6 @@ export const mapLot = (dto: LotDTO): Lot => {
     id: dto.id,
     title: dto.title,
     description: dto.description,
-    transaction: {
-      type: dto.transaction?.type,
-      mainPrice: dto.transaction?.main_price,
-      rent: dto.transaction?.rent,
-      // rentDetails: dto.transaction?.rent_details,
-      buy: dto.transaction?.buy,
-      // buyDetails: dto.transaction?.buy_details,
-    },
-    dimensions: {
-      width: dto.dimensions.width,
-      depth: dto.dimensions.depth,
-    },
-    type: dto.type,
-    availability: dto.availability,
-    buildingDetails: {
-      type: dto.building_details.type,
-      bedrooms: dto.building_details.bedrooms,
-      bathrooms: dto.building_details.bathrooms,
-      floors: dto.building_details.floors,
-      title: dto.building_details?.title,
-    },
-    owner: dto.owner,
     imageUrl: dto.image_url,
     world: {
       id: dto.world.id,
@@ -44,6 +22,26 @@ export const mapLot = (dto: LotDTO): Lot => {
       id: dto.neighborhood.id,
       title: dto.neighborhood.title,
       color: dto.neighborhood.color,
+    },
+    type: dto.type,
+    dimensions: {
+      width: dto.dimensions.width,
+      depth: dto.dimensions.depth,
+    },
+    availability: dto.availability,
+    owner: dto.owner,
+    buildingDetails: {
+      type: dto.building_details.type,
+      apartmentTitle: dto.building_details?.apartment_title,
+      bedrooms: dto.building_details.bedrooms,
+      bathrooms: dto.building_details.bathrooms,
+      floors: dto.building_details.floors,
+    },
+    transaction: {
+      type: dto.transaction?.type,
+      mainPrice: dto.transaction?.main_price,
+      rentDetails: dto.transaction?.rent_details,
+      buyDetails: dto.transaction?.buy_details,
     },
   };
 };

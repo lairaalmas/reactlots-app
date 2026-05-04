@@ -22,27 +22,32 @@ export type LotDTO = {
   };
   availability: string;
   owner?: string;
-  transaction: {
-    type: string;
-    main_price: number;
-    rent?: RentFields;
-    rent_details?: {
-      in_game?: RentFields;
-      pre_game?: RentFields;
-    };
-    buy?: {
-      price: number;
-    };
-    buy_details?: {
-      pre_game?: number;
-      in_game?: number;
-    };
-  };
   building_details: {
     type: string;
+    apartment_title?: string;
     bedrooms: number;
     bathrooms: number;
     floors: number;
-    title?: string;
+  };
+  transaction: {
+    type: string;
+    main_price: number;
+    rent_details?: {
+      rent?: number;
+      deposit?: number;
+      furniture?: number;
+      period?: string;
+      price_history?: {
+        pre_game?: { furniture: number };
+        in_game?: { furniture: number };
+      };
+    };
+    buy_details?: {
+      price?: number;
+      price_history?: {
+        pre_game?: number;
+        in_game?: number;
+      };
+    };
   };
 };
