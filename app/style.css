@@ -72,6 +72,10 @@ h1, h2, h3, h4, h5, h6, .sims-font {
   color: var(--color-brand-gray)
 }
 
+.sims-bg-muted {
+  background: #eee;
+}
+
 /* .material-symbols-rounded, .material-symbols-outlined{
   font-size: inherit;
 } */
@@ -167,6 +171,9 @@ a img:hover {
 .rlt-card--default {
   color: var(--color-brand-gray-light)
 }
+.rlt-card__img {
+  height: 160px
+}
 
 /* custom button */
 .rlt-btn {
@@ -180,6 +187,7 @@ a img:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 .rlt-btn:hover {
   color: var(--color-brand-green);
@@ -217,4 +225,13 @@ a img:hover {
 /* Favorites button */
 .rlt-btn.--favorite.--sm {
   padding: .3rem .25rem  .15rem .25rem; 
+}
+.rlt-favorite__container {
+  position: relative;
+  z-index: 1;
+}
+.rlt-favorite__container button {
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
 }
