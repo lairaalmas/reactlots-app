@@ -180,6 +180,7 @@ a img:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 .rlt-btn:hover {
   color: var(--color-brand-green);
@@ -217,4 +218,13 @@ a img:hover {
 /* Favorites button */
 .rlt-btn.--favorite.--sm {
   padding: .3rem .25rem  .15rem .25rem; 
+}
+.rlt-favorite__container {
+  position: relative;
+  z-index: 1;
+}
+.rlt-favorite__container button {
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
 }
