@@ -1,14 +1,12 @@
 import { useLoaderData } from 'react-router-dom';
-import { FAVORITE_LOTS_STORAGE_KEY } from '../../utils/constants';
 import { Card } from '../../components/Card';
 import { useFavoriteLots } from '../../hooks/custom/useFavoriteLots';
 import type { Lot } from '../../types/lot';
 
 const FavoritesPage = () => {
   const allLots = useLoaderData();
-  const favoriteLotIds = JSON.parse(localStorage.getItem(FAVORITE_LOTS_STORAGE_KEY) || '');
 
-  const { isFavoriteLot, toggleFavoriteLot } = useFavoriteLots();
+  const { isFavoriteLot, toggleFavoriteLot, favoriteLotIds } = useFavoriteLots();
 
   return (
     <section className="container mt-5">
