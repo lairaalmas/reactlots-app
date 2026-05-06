@@ -108,7 +108,7 @@ export const SearchForm = () => {
 
             {(filteredNeighborhood || [])?.map((item: Neighborhood) => (
               <option key={item.id} value={item.id}>
-                {item.title} ({item.world?.id})
+                {item.title}
               </option>
             ))}
           </select>
@@ -133,7 +133,7 @@ export const SearchForm = () => {
         </div>
 
         <div className="col-md-4">
-          <label htmlFor="field-transaction-type">Transaction type</label>
+          <label htmlFor="field-transaction-type">Objective</label>
 
           <select
             className="form-select"
