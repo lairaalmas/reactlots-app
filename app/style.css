@@ -72,6 +72,10 @@ h1, h2, h3, h4, h5, h6, .sims-font {
   color: var(--color-brand-gray)
 }
 
+.sims-bg-muted {
+  background: #eee;
+}
+
 /* .material-symbols-rounded, .material-symbols-outlined{
   font-size: inherit;
 } */
@@ -166,6 +170,9 @@ a img:hover {
 }
 .rlt-card--default {
   color: var(--color-brand-gray-light)
+}
+.rlt-card__img {
+  height: 160px
 }
 
 /* custom button */
