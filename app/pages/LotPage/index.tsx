@@ -52,10 +52,6 @@ const getRentInfo = (lot: Lot) => {
   return { rentPeriod, rentPrice, rentDeposit, renderRentDeposit, renderRentPrice };
 };
 
-const renderPipeSeparator = () => {
-  return <span className="opacity-25">|</span>;
-};
-
 const LotPage = () => {
   const lot = useLoaderData() as Lot;
   const { isFavoriteLot, toggleFavoriteLot } = useFavoriteLots();

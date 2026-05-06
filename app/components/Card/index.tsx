@@ -110,7 +110,7 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
         </li>
       )}
       <li className="d-flex gap-1 flex-wrap">{renderTags()}</li>
-      {renderSeparator}
+      <hr />
 
       <li>
         <strong>Address:</strong> {lot?.neighborhood?.title} ({lot?.world?.title})
