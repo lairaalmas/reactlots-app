@@ -173,7 +173,7 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
           </div>
 
           {/* img */}
-          <div className={`${variant === 'default' ? 'rlt-card__img' : 'col-4 p-0'}`}>{lotImage()}</div>
+          <div className={`rlt-card__img ${variant === 'default' ? '--grid' : 'col-4 p-0'}`}>{lotImage()}</div>
 
           {/* header + lot + building */}
           <div className={`p-3 pt-2 ${variant === 'default' ? '' : 'col-8'}`}>

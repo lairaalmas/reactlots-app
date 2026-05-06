@@ -85,7 +85,7 @@ const LotPage = () => {
 
   const lotImage = () => (
     <img
-      className={`rlt-search-list__item__thumb`}
+      className={`rlt-search-list__item__thumb rlt-card__img`}
       src={lot.imageUrl}
       alt={`${lot?.title} lot picture`}
       style={{ height: '400px' }}
