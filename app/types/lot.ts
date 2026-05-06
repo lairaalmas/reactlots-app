@@ -19,6 +19,7 @@ export type Lot = {
     id: string;
     title: string;
     color: string;
+    description: string;
   };
   type: string;
   dimensions: {
@@ -30,6 +31,7 @@ export type Lot = {
   buildingDetails: {
     type: string;
     apartmentTitle?: string;
+    apartmentNumber?: string;
     bedrooms: number;
     bathrooms: number;
     floors: number;

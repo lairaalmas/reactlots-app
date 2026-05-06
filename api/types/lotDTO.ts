@@ -1,5 +1,3 @@
-import type { RentFields } from '../../app/types/lot';
-
 // DTO (Data Transfer Object) - represent the shape returned by the API (snake_case)
 export type LotDTO = {
   id: string;
@@ -14,6 +12,7 @@ export type LotDTO = {
     id: string;
     title: string;
     color: string;
+    description: string;
   };
   type: string;
   dimensions: {
@@ -25,6 +24,7 @@ export type LotDTO = {
   building_details: {
     type: string;
     apartment_title?: string;
+    apartment_number?: string;
     bedrooms: number;
     bathrooms: number;
     floors: number;

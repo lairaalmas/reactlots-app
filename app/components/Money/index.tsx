@@ -1,8 +1,10 @@
 import { CURRENCY_SYMBOL } from '../../utils/constants';
 
+export type MoneyComponentSize = 'inherit' | 'lg';
+
 type MoneyComponent = {
   value: number;
-  size?: 'inherit' | 'lg';
+  size?: MoneyComponentSize;
 };
 
 export const Money = ({ value, size = 'lg' }: MoneyComponent) => {

@@ -172,7 +172,10 @@ a img:hover {
   color: var(--color-brand-gray-light)
 }
 .rlt-card__img {
-  height: 160px
+  background-color: var(--color-brand-gray-light);
+}
+.rlt-card__img.--grid {
+  height: 160px;
 }
 
 /* custom button */

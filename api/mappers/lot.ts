@@ -22,6 +22,7 @@ export const mapLot = (dto: LotDTO): Lot => {
       id: dto.neighborhood.id,
       title: dto.neighborhood.title,
       color: dto.neighborhood.color,
+      description: dto.neighborhood.description,
     },
     type: dto.type,
     dimensions: {
@@ -33,6 +34,7 @@ export const mapLot = (dto: LotDTO): Lot => {
     buildingDetails: {
       type: dto.building_details.type,
       apartmentTitle: dto.building_details?.apartment_title,
+      apartmentNumber: dto.building_details?.apartment_number,
       bedrooms: dto.building_details.bedrooms,
       bathrooms: dto.building_details.bathrooms,
       floors: dto.building_details.floors,

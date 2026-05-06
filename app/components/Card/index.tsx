@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import type { Lot } from '../../types/lot';
 import { Money } from '../Money';
 import { Icon } from '../Icon';
 import { ButtonFavorite } from '../ButtonFavorite';
+import { PipeSeparator } from '../PipeSeparator';
+import type { Lot } from '../../types/lot';
 
 export type CardDisplayStyle = 'default' | 'list';
 type CardComponent = {
@@ -18,11 +19,11 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
   const buildingTypes = ['house', 'apartment', 'empty'];
   const buildingTypeClass = buildingTypes.includes(lot?.buildingDetails?.type) ? '' : 'text-danger';
 
-  // const availabilityClass = lot?.availability === 'available' ? '' : 'text-danger';
+  const availabilityClass = lot?.availability === 'available' ? '' : 'text-danger';
   const lotTypeClass = lot?.type === 'residential' ? '' : 'text-danger';
 
   const parseString = (value: string) => {
-    const invalidValues = ['', 'UNKNOWN', 'TBD'];
+    const invalidValues = ['', 'UNKNOWN', 'TBD', undefined, null];
 
     if (invalidValues.includes(value)) return '-';
 
@@ -45,6 +46,24 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
   const rentDeposit = rentDetails?.deposit ? <Money value={rentDetails.deposit} size="inherit" /> : '-';
 
   const renderSeparator = variant === 'default' ? <hr /> : <></>;
+
+  const renderTags = () => {
+    const tags = [
+      lot?.availability !== 'available' ? <span className={availabilityClass}>{lot?.availability}</span> : undefined,
+      lot?.type === 'residential' ? <span>{parseString(lot?.transaction?.type)}</span> : undefined,
+      <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.type)}</span>,
+      lot?.type !== 'residential' ? <span className={lotTypeClass}>{parseString(lot?.type)} lot</span> : undefined,
+    ];
+    const filteredTags = tags.filter((item) => item);
+    return filteredTags.map((tag, index) => {
+      if (index === filteredTags.length - 1) return tag;
+      return (
+        <>
+          {tag} <PipeSeparator />
+        </>
+      );
+    });
+  };
 
   const lotImage = () => (
     <Link to={`/lots/${lot?.id}`}>
@@ -73,13 +92,13 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
     <ul className="list-unstyled">
       {(transactionType === 'rent' || transactionType === 'both') && (
         <>
-          <li>
-            <span className="d-flex align-items-center gap-1">
-              <strong>Deposit:</strong> {rentDeposit}
-            </span>
-          </li>
           <li className="d-flex align-items-center">
             <strong className="me-1">Rent:</strong> {rentPrice} <span>/{rentPeriod}</span>
+          </li>
+          <li>
+            <small className="d-flex align-items-center gap-1">
+              <strong>Deposit:</strong> {rentDeposit}
+            </small>
           </li>
         </>
       )}
@@ -90,32 +109,11 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
           </span>
         </li>
       )}
-      {renderSeparator}
-
-      {lot?.buildingDetails?.apartmentTitle && (
-        <li>
-          <strong>Apartment title:</strong>{' '}
-          <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.apartmentTitle)}</span>
-        </li>
-      )}
+      <li className="d-flex gap-1 flex-wrap">{renderTags()}</li>
+      <hr />
 
       <li>
-        <strong>World:</strong> {lot?.neighborhood?.title}
-      </li>
-      <li>
-        <strong>Neighborhood:</strong> {lot?.world?.title}
-        {/* <Icon name="location_on" /> */}
-      </li>
-
-      <li>
-        <strong>Transaction:</strong> <span>{parseString(lot?.transaction?.type)}</span>
-      </li>
-      <li>
-        <strong>Lot type:</strong> <span className={lotTypeClass}>{parseString(lot?.type)}</span>
-      </li>
-      <li>
-        <strong>Building type:</strong>{' '}
-        <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.type)}</span>
+        <strong>Address:</strong> {lot?.neighborhood?.title} ({lot?.world?.title})
       </li>
     </ul>
   );
@@ -139,7 +137,7 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
       </li>
 
       {lot?.buildingDetails?.type !== 'empty' && (
-        <li className="d-flex">
+        <li className="d-flex flex-wrap">
           <strong className="me-2">Caracteristics:</strong>
           <ul className="list-unstyled d-flex gap-2 fw-semibold flex-wrap">
             <li className="d-flex gap-1 align-items-center">
@@ -175,7 +173,7 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
           </div>
 
           {/* img */}
-          <div className={`${variant === 'default' ? 'rlt-card__img' : 'col-4 p-0'}`}>{lotImage()}</div>
+          <div className={`rlt-card__img ${variant === 'default' ? '--grid' : 'col-4 p-0'}`}>{lotImage()}</div>
 
           {/* header + lot + building */}
           <div className={`p-3 pt-2 ${variant === 'default' ? '' : 'col-8'}`}>
