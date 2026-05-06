@@ -44,8 +44,7 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
   const rentPrice = rentDetails?.rent ? <Money value={rentDetails.rent} size="inherit" /> : '-';
   const rentDeposit = rentDetails?.deposit ? <Money value={rentDetails.deposit} size="inherit" /> : '-';
 
-  const showLines = false;
-  const renderLines = showLines ? <hr /> : <></>;
+  const renderSeparator = variant === 'default' ? <hr /> : <></>;
 
   const lotImage = () => (
     <Link to={`/lots/${lot?.id}`}>
@@ -91,7 +90,7 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
           </span>
         </li>
       )}
-      <hr />
+      {renderSeparator}
 
       {lot?.buildingDetails?.apartmentTitle && (
         <li>
@@ -99,7 +98,6 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
           <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.apartmentTitle)}</span>
         </li>
       )}
-      {renderLines}
 
       <li>
         <strong>World:</strong> {lot?.neighborhood?.title}
@@ -108,14 +106,10 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
         <strong>Neighborhood:</strong> {lot?.world?.title}
         {/* <Icon name="location_on" /> */}
       </li>
-      {renderLines}
 
       <li>
         <strong>Transaction:</strong> <span>{parseString(lot?.transaction?.type)}</span>
       </li>
-      {/* <li>
-        <strong>Availability:</strong> <span className={availabilityClass}>{parseString(lot?.availability)}</span>
-      </li> */}
       <li>
         <strong>Lot type:</strong> <span className={lotTypeClass}>{parseString(lot?.type)}</span>
       </li>
@@ -123,7 +117,6 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
         <strong>Building type:</strong>{' '}
         <span className={buildingTypeClass}>{parseString(lot?.buildingDetails?.type)}</span>
       </li>
-      {renderLines}
     </ul>
   );
 
@@ -136,7 +129,7 @@ export const Card = ({ lot, variant = 'default', isFavoriteLot, toggleFavoriteLo
           </p>
         </li>
       )}
-      <hr />
+      {renderSeparator}
 
       <li>
         <strong>Dimensions:</strong>{' '}
