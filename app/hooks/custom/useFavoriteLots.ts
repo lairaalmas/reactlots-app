@@ -6,33 +6,27 @@ export const useFavoriteLots = () => {
   const [favoriteLotIds, setFavoriteLotIds] = useState<string[]>(() => {
     const storedFavoriteLots = localStorage.getItem(FAVORITE_LOTS_STORAGE_KEY);
 
-    if (!storedFavoriteLots) {
-      return [];
-    }
+    if (!storedFavoriteLots) return [];
 
     return JSON.parse(storedFavoriteLots);
   });
 
   const toggleFavoriteLot = (lotId: string) => {
-    setFavoriteLotIds((currentFavoriteLotIds) => {
-      const isFavorite = currentFavoriteLotIds.includes(lotId);
+    setFavoriteLotIds((curFavoriteIds) => {
+      const isFavorite = curFavoriteIds.includes(lotId);
 
-      const nextFavoriteLotIds = isFavorite
-        ? // removes favorite
-          currentFavoriteLotIds.filter((currentLotId) => currentLotId !== lotId)
-        : // adds new favorite
-          [...currentFavoriteLotIds, lotId];
+      const nextFavoriteIds = isFavorite
+        ? curFavoriteIds.filter((curId) => curId !== lotId)
+        : [...curFavoriteIds, lotId];
 
       // updates local storage with new state
-      localStorage.setItem(FAVORITE_LOTS_STORAGE_KEY, JSON.stringify(nextFavoriteLotIds));
+      localStorage.setItem(FAVORITE_LOTS_STORAGE_KEY, JSON.stringify(nextFavoriteIds));
 
-      return nextFavoriteLotIds;
+      return nextFavoriteIds;
     });
   };
 
-  function isFavoriteLot(lotId: string) {
-    return favoriteLotIds.includes(lotId);
-  }
+  const isFavoriteLot = (lotId: string) => favoriteLotIds.includes(lotId);
 
   return {
     favoriteLotIds,

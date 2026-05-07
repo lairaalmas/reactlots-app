@@ -1,7 +1,7 @@
 import { useLoaderData } from 'react-router-dom';
 import type { Lot } from '../../types/lot';
 import { Icon } from '../../components/Icon';
-import { useFavoriteLots } from '../../hooks/custom/useFavoriteLots';
+import { useFavoriteLotsContext } from '../../context/FavoriteLotsContext';
 import { ButtonFavorite } from '../../components/ButtonFavorite';
 import { Money, type MoneyComponentSize } from '../../components/Money';
 import { PipeSeparator } from '../../components/PipeSeparator';
@@ -54,7 +54,7 @@ const getRentInfo = (lot: Lot) => {
 
 const LotPage = () => {
   const lot = useLoaderData() as Lot;
-  const { isFavoriteLot, toggleFavoriteLot } = useFavoriteLots();
+  const { isFavoriteLot, toggleFavoriteLot } = useFavoriteLotsContext();
 
   const isAvailable = lot?.availability === 'available';
 

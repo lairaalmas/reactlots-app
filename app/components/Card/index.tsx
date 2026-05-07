@@ -8,7 +8,7 @@ import type { Lot } from '../../types/lot';
 export type CardDisplayStyle = 'default' | 'list';
 type CardComponent = {
   lot: Lot;
-  variant: CardDisplayStyle;
+  variant?: CardDisplayStyle;
   isFavoriteLot: any;
   toggleFavoriteLot: any;
 };
