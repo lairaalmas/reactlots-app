@@ -11,6 +11,7 @@ const LOT_FILTER_OPTIONS = {
   buildingTypes: [
     { label: 'House', value: 'house' },
     { label: 'Apartment', value: 'apartment' },
+    { label: 'Penthouse', value: 'penthouse' },
     { label: 'Empty lot', value: 'empty' },
   ],
   transactionTypes: [
