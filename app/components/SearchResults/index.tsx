@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { Card, type CardDisplayStyle } from '../Card';
-import { useFavoriteLots } from '../../hooks/custom/useFavoriteLots';
+import { useFavoriteLotsContext } from '../../context/FavoriteLotsContext';
 import { Icon } from '../Icon';
 import type { Lot } from '../../types/lot';
 
 export const SearchResults = () => {
   const { lots, filters } = useLoaderData();
-  const { isFavoriteLot, toggleFavoriteLot } = useFavoriteLots();
+  const { isFavoriteLot, toggleFavoriteLot } = useFavoriteLotsContext();
   const [lotDisplayStyle, setLotDisplayStyle] = useState<CardDisplayStyle>('default');
 
   const validFilters = Object.entries(filters)?.reduce((acc: string[], n) => {
